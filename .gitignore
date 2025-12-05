@@ -97,3 +97,6 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# AssetStore製のサードパーティーアセットは管理しない
+/[Aa]ssets/Thirdparty
