@@ -32,8 +32,7 @@ public class TitleUIManager : MonoBehaviour
         if (NetworkManager.Singleton.StartHost())
         {
             Debug.Log("ホストの開始に成功");
-            hostButton.SetEnabled(false);
-            clientButton.SetEnabled(false);
+            OnConnected();
             NetworkManager.Singleton.SceneManager.LoadScene(GameSceneString, UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
         else
@@ -47,14 +46,15 @@ public class TitleUIManager : MonoBehaviour
         if (NetworkManager.Singleton.StartClient())
         {
             Debug.Log("クライアント接続に成功");
-            hostButton.SetEnabled(false);
-            clientButton.SetEnabled(false);
+            OnConnected();
         }
     }
 
-    void SwithLobby()
+    void OnConnected()
     {
         connectingMessageLabel.style.display = DisplayStyle.Flex;
-        titleElements.AddToClassList(LobbyString);
+        hostButton.SetEnabled(false);
+        clientButton.SetEnabled(false);
+        // titleElements.AddToClassList(LobbyString);
     }
 }

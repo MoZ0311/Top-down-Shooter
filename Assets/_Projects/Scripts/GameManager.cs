@@ -22,7 +22,6 @@ public class GameManager : NetworkBehaviour
 
     void OnClientConnected(ulong clientID)
     {
-        Debug.Log($"{clientID}: connected!");
         var spawnPosition = spawnPositions[clientID].position;
         NetworkObject playerObject = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
         playerObject.SpawnAsPlayerObject(clientID);

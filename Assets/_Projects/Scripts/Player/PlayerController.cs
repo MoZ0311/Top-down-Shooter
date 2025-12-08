@@ -7,7 +7,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
-
+    [SerializeField] PlayerShot playerShot;
     Vector2 inputAxis;
 
     public override void OnNetworkSpawn()
@@ -25,28 +25,44 @@ public class PlayerController : NetworkBehaviour
         {
             // クライアントのマウス座標を取得
             Vector2 mousePosition = Mouse.current.position.ReadValue();
-            UpdateServerRpc(inputAxis, mousePosition);
+            playerMovement.HandleMovement(inputAxis);
+            playerRotation.HandleRotation(mousePosition);
+        }
+
+        if (IsServer)
+        {
+            playerShot.HandleShot();
         }
     }
 
     void FixedUpdate()
     {
         // 速度を適用
-        if (IsServer)
+        if (IsOwner)
         {
-            playerMovement.ApplyVelocity();
+            playerMovement.ApplyMovement();
         }
-    }
-
-    [ServerRpc]
-    void UpdateServerRpc(Vector2 inputAxis, Vector2 mousePosition)
-    {
-        playerMovement.HandleMovement(inputAxis);
-        playerRotation.HandleRotation(mousePosition);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        inputAxis = context.ReadValue<Vector2>();
+        if (IsOwner)
+        {
+            inputAxis = context.ReadValue<Vector2>();
+        }
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (IsOwner)
+        {
+            SetShootingServerRpc(context.performed);
+        }
+    }
+
+    [ServerRpc]
+    void SetShootingServerRpc(bool isShooting)
+    {
+        playerShot.IsShooting = isShooting;
     }
 }

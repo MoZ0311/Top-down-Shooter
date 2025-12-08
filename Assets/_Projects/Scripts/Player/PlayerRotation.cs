@@ -12,7 +12,7 @@ public class PlayerRotation : MonoBehaviour
         // 渡されたマウス座標からレイを計算
         Ray ray = PlayerCamera.MainCamera.ScreenPointToRay(mousePosition);
 
-        // PlaneとRayの交点を求め、そこに向けて回転する
+        // PlaneとRayの交点を求め、そこに向けるQuatenion作成
         if (plane.Raycast(ray, out float hitDistance))
         {
             Vector3 targetPoint = ray.GetPoint(hitDistance);

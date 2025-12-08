@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity = movementVector.normalized * movementSpeed;
     }
 
-    public void ApplyVelocity()
+    public void ApplyMovement()
     {
         playerRigidbody.linearVelocity = new(playerVelocity.x, playerRigidbody.linearVelocity.y, playerVelocity.z);
     }
