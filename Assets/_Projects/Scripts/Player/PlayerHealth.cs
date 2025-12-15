@@ -3,22 +3,23 @@ using Unity.Netcode;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    [SerializeField] int maxHealth = 100;
+    [Header("Ref Status")]
+    [SerializeField] PlayerStatus status;
 
-    readonly NetworkVariable<int> currentHealth = new();
+    readonly NetworkVariable<float> currentHitPoint = new();
 
     public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
-            currentHealth.Value = maxHealth;
+            currentHitPoint.Value = status.HitPoint;
         }
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
-        currentHealth.Value -= damageAmount;
-        if (currentHealth.Value <= 0)
+        currentHitPoint.Value -= damageAmount;
+        if (currentHitPoint.Value <= 0)
         {
             NetworkObject.Despawn();
         }

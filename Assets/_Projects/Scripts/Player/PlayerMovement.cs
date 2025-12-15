@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 5.0f;
+    [Header("Ref Status")]
+    [SerializeField] PlayerStatus status;
+
+    [Header("Components")]
     [SerializeField] Rigidbody playerRigidbody;
     Vector3 playerVelocity;
 
@@ -20,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forward = cameraTransform.forward * inputAxis.y;
         Vector3 movementVector = right + forward;
         movementVector.y = 0.0f;
-        playerVelocity = movementVector.normalized * movementSpeed;
+        playerVelocity = movementVector.normalized * status.MoveSpeed;
     }
 
     public void ApplyMovement()

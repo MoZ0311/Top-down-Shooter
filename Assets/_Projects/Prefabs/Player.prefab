@@ -411,8 +411,9 @@ GameObject:
   - component: {fileID: 592241378921301912}
   - component: {fileID: 5658308068482905778}
   - component: {fileID: 8558193196619362266}
-  - component: {fileID: 5110636988497126679}
   - component: {fileID: 2465876239786021620}
+  - component: {fileID: 8368296585955674004}
+  - component: {fileID: 5110636988497126679}
   - component: {fileID: 908646962397091450}
   - component: {fileID: 3906543006659855296}
   - component: {fileID: 6490495897612930547}
@@ -657,6 +658,31 @@ MonoBehaviour:
   playerMovement: {fileID: 908646962397091450}
   playerRotation: {fileID: 3906543006659855296}
   playerShot: {fileID: 6490495897612930547}
+--- !u!114 &2465876239786021620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155733073600828020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c337a950d748345b6af54be51c65d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+--- !u!114 &8368296585955674004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155733073600828020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a26045268f2c945b35e65ad8091618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  defaultParameter: {fileID: 11400000, guid: 7c9e1f1f331b84f4f84ccd38fad0599d, type: 2}
 --- !u!114 &5110636988497126679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,19 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth: 100
---- !u!114 &2465876239786021620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8155733073600828020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c337a950d748345b6af54be51c65d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+  status: {fileID: 8368296585955674004}
 --- !u!114 &908646962397091450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44a26090951d41488195ea5d0d47289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  movementSpeed: 5
+  status: {fileID: 8368296585955674004}
   playerRigidbody: {fileID: 2351934119235140492}
 --- !u!114 &3906543006659855296
 MonoBehaviour:
@@ -725,8 +739,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   bulletPrefab: {fileID: 3280762441610361324, guid: b952cbc8f071ca64f8563fcfd77f33c0, type: 3}
   muzzlePosition: {fileID: 2067315220957644082}
-  fireRate: 3
-  canRapidFire: 1
+  status: {fileID: 8368296585955674004}
 --- !u!1 &8319804918328426855
 GameObject:
   m_ObjectHideFlags: 0

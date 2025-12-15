@@ -4,10 +4,12 @@ using Unity.Netcode;
 
 public class PlayerController : NetworkBehaviour
 {
+    [Header("Scripts")]
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
     [SerializeField] PlayerShot playerShot;
+
     Vector2 inputAxis;
 
     public override void OnNetworkSpawn()

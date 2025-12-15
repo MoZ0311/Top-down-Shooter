@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] float rotationSpeed = 10.0f;
 
     public void HandleRotation(Vector2 mousePosition)
