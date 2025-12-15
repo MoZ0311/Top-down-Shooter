@@ -1,16 +1,27 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] int maxHealth = 100;
+
+    readonly NetworkVariable<int> currentHealth = new();
+
+    public override void OnNetworkSpawn()
     {
-        
+        if (IsServer)
+        {
+            currentHealth.Value = maxHealth;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damageAmount)
     {
-        
+        currentHealth.Value -= damageAmount;
+        if (currentHealth.Value <= 0)
+        {
+            NetworkObject.Despawn();
+        }
+        Debug.Log($"Player{OwnerClientId}: took {damageAmount} damage");
     }
 }
