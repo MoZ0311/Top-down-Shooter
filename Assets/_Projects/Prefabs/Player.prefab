@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 592241378921301912}
   - component: {fileID: 5658308068482905778}
   - component: {fileID: 8558193196619362266}
+  - component: {fileID: 5110636988497126679}
   - component: {fileID: 2465876239786021620}
   - component: {fileID: 908646962397091450}
   - component: {fileID: 3906543006659855296}
@@ -656,6 +657,20 @@ MonoBehaviour:
   playerMovement: {fileID: 908646962397091450}
   playerRotation: {fileID: 3906543006659855296}
   playerShot: {fileID: 6490495897612930547}
+--- !u!114 &5110636988497126679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155733073600828020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1513cedd38a40504d882aa399c217c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxHealth: 100
 --- !u!114 &2465876239786021620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,7 +724,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShot
   ShowTopMostFoldoutHeaderGroup: 1
   bulletPrefab: {fileID: 3280762441610361324, guid: b952cbc8f071ca64f8563fcfd77f33c0, type: 3}
-  localBulletPrefab: {fileID: 6276615624924852898, guid: 9d2c6fa07e0e7c14189bbcc879cef9a7, type: 3}
   muzzlePosition: {fileID: 2067315220957644082}
   fireRate: 3
   canRapidFire: 1

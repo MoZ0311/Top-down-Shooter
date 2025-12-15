@@ -3,6 +3,7 @@ using Unity.Netcode;
 
 public class BulletMovement : NetworkBehaviour
 {
+    [SerializeField] int damage = 35;
     [SerializeField] float moveSpeed = 10.0f;
     [SerializeField] float lifeTime = 3.0f;
     [SerializeField] Rigidbody bulletRigidbody;
@@ -32,6 +33,10 @@ public class BulletMovement : NetworkBehaviour
     {
         if (IsServer)
         {
+            if (other.TryGetComponent(out PlayerHealth playerHealth))
+            {
+                playerHealth.TakeDamage(damage);
+            }
             Despawn();
         }
     }
