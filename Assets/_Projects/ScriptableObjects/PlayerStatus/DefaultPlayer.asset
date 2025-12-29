@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4532ca8e4a224344d862bf013c3769e4, type: 3}
-  m_Name: Inventor
+  m_Name: DefaultPlayer
   m_EditorClassIdentifier: Assembly-CSharp::PlayerParameterSO
   <HitPoint>k__BackingField: 100
-  <MoveSpeed>k__BackingField: 15
-  <AttackPower>k__BackingField: 35
-  <BulletSpeed>k__BackingField: 10
-  <FireRate>k__BackingField: 2
-  <CanRapidFire>k__BackingField: 0
-  <ReloadTime>k__BackingField: 3.5
+  <MoveSpeed>k__BackingField: 5
+  <AttackPower>k__BackingField: 20
+  <BulletSpeed>k__BackingField: 5
+  <FireRate>k__BackingField: 5
+  <CanRapidFire>k__BackingField: 1
+  <ReloadTime>k__BackingField: 2
