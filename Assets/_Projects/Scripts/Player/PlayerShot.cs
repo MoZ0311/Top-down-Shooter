@@ -3,12 +3,16 @@ using Unity.Netcode;
 
 public class PlayerShot : NetworkBehaviour
 {
+    [Header("Prefab")]
     [SerializeField] NetworkObject bulletPrefab;
+
+    [Header("Settings")]
     [SerializeField] Transform muzzlePosition;
-    [SerializeField] float fireRate = 5.0f;
-    [SerializeField] bool canRapidFire;
+
+    [Header("Ref Status")]
+    [SerializeField] PlayerStatus status;
+
     public bool IsShooting { private get; set; }
-    public bool CanCreateLocalBullet { get; private set; }
     float fireRateTimer;
 
     public void HandleShot()
@@ -20,9 +24,10 @@ public class PlayerShot : NetworkBehaviour
             // 弾の生成処理
             Debug.Log("server shot");
             NetworkObject bulletObject = Instantiate(bulletPrefab, muzzlePosition.position, transform.rotation);
+            bulletObject.GetComponent<BulletMovement>().SetParameter(status.AttackPower, status.MoveSpeed);
             bulletObject.Spawn();
-            fireRateTimer = 1.0f / fireRate;
-            if (!canRapidFire)
+            fireRateTimer = 1.0f / status.FireRate;
+            if (!status.CanRapidFire)
             {
                 IsShooting = false;
             }

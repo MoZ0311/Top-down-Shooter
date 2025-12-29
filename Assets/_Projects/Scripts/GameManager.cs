@@ -3,7 +3,10 @@ using Unity.Netcode;
 
 public class GameManager : NetworkBehaviour
 {
+    [Header("Prefab")]
     [SerializeField] NetworkObject playerPrefab;
+
+    [Header("Settings")]
     [SerializeField] Transform[] spawnPositions;
     public override void OnNetworkSpawn()
     {

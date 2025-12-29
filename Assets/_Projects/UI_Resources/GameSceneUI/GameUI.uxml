@@ -1,5 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label text="03:00" name="TimeLabel" style="width: 400px; height: 128px; align-self: center; background-color: rgba(0, 0, 0, 0.8); margin-top: 32px; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=6f34368e4dce6cd49a4a6ec368ab6cea&amp;type=3#NotInter-Regular&quot;); color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 88px;"/>
         <ui:VisualElement name="Crosshair" style="position: absolute; background-image: url(&quot;project://database/Assets/_Projects/Images/crosshair.png?fileID=2800000&amp;guid=ae7557fa3cc298143835115cfaea0ad1&amp;type=3#crosshair&quot;); width: 128px; height: 128px; left: -64px; bottom: -64px;"/>
     </ui:VisualElement>
+    <ui:VisualElement name="DamageEffect" style="background-color: rgba(184, 0, 0, 0.72); opacity: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"/>
 </ui:UXML>

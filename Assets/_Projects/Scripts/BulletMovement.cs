@@ -3,10 +3,13 @@ using Unity.Netcode;
 
 public class BulletMovement : NetworkBehaviour
 {
-    [SerializeField] int damage = 35;
-    [SerializeField] float moveSpeed = 10.0f;
+    [Header("Settings")]
     [SerializeField] float lifeTime = 3.0f;
+
+    [Header("Components")]
     [SerializeField] Rigidbody bulletRigidbody;
+    float damage;
+    float moveSpeed;
     float spawnTime;
 
     public override void OnNetworkSpawn()
@@ -44,5 +47,11 @@ public class BulletMovement : NetworkBehaviour
     void Despawn()
     {
         NetworkObject.Despawn();
+    }
+
+    public void SetParameter(float attackPower, float bulletSpeed)
+    {
+        damage = attackPower;
+        moveSpeed = bulletSpeed;
     }
 }
