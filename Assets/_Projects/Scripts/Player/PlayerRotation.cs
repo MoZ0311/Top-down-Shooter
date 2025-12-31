@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] float rotationSpeed = 10.0f;
+    // [SerializeField] float rotationSpeed = 10.0f;
     [SerializeField] LayerMask targetLayers;
     [SerializeField] Transform muzzle;
 
@@ -18,6 +17,10 @@ public class PlayerRotation : MonoBehaviour
         // Physics.Raycastでコライダーとの衝突を検知
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, targetLayers))
         {
+            if (hitInfo.collider.gameObject == this)
+            {
+                return;
+            }
             targetPoint = hitInfo.point;
         }
         else

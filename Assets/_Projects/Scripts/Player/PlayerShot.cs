@@ -7,7 +7,7 @@ public class PlayerShot : NetworkBehaviour
     [SerializeField] NetworkObject bulletPrefab;
 
     [Header("Settings")]
-    [SerializeField] Transform muzzlePosition;
+    [SerializeField] Transform muzzle;
 
     [Header("Ref Status")]
     [SerializeField] PlayerStatus status;
@@ -22,10 +22,7 @@ public class PlayerShot : NetworkBehaviour
         if (IsShooting && fireRateTimer <= 0)
         {
             // 弾の生成処理
-            Debug.Log("server shot");
-            NetworkObject bulletObject = Instantiate(bulletPrefab, muzzlePosition.position, transform.rotation);
-            bulletObject.GetComponent<BulletMovement>().SetParameter(status.AttackPower, status.MoveSpeed);
-            bulletObject.Spawn();
+            BulletPoolManager.Instance.GetBullet(muzzle.position, transform.rotation).SetParameter(status.AttackPower, status.MoveSpeed);
             fireRateTimer = 1.0f / status.FireRate;
             if (!status.CanRapidFire)
             {
