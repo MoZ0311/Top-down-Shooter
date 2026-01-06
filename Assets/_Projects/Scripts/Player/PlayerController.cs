@@ -5,6 +5,7 @@ using Unity.Netcode;
 public class PlayerController : NetworkBehaviour
 {
     [Header("Scripts")]
+    [SerializeField] PlayerAnimation playerAnimation;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
@@ -25,10 +26,15 @@ public class PlayerController : NetworkBehaviour
     {
         if (IsOwner)
         {
-            // クライアントのマウス座標を取得
+            // クライアントのマウス座標を取得し、回転に適用
             Vector2 mousePosition = Mouse.current.position.ReadValue();
-            playerMovement.HandleMovement(inputAxis);
             playerRotation.HandleRotation(mousePosition);
+
+            // プレイヤーの移動を実行
+            playerMovement.HandleMovement(inputAxis);
+
+            // アニメーションを制御/再生
+            playerAnimation.HandleAnimation(inputAxis);
         }
 
         if (IsServer)

@@ -4,12 +4,15 @@ public class PlayerAnimation : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] Animator animator;
-    [SerializeField] Rigidbody playerRigidbody;
 
-    const string IsIdling = "isIdling";
-    void Update()
+    const string MoveX = "moveX";
+    const string MoveZ = "moveZ";
+
+    public void HandleAnimation(Vector2 inputAxis)
     {
-        Vector2 horizontalVector = new(playerRigidbody.linearVelocity.x, playerRigidbody.linearVelocity.z);
-        animator.SetBool(IsIdling, horizontalVector == Vector2.zero);
+        Vector3 inputDirection = new(inputAxis.x, 0, inputAxis.y);
+        Vector3 localDirection = transform.InverseTransformDirection(inputDirection);
+        animator.SetFloat(MoveX, localDirection.x);
+        animator.SetFloat(MoveZ, localDirection.z);
     }
 }

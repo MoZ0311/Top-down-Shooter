@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1748000445
+  GlobalObjectIdHash: 3059226043
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   ShowTopMostFoldoutHeaderGroup: 1
+  playerAnimation: {fileID: 5516260866301083895}
   playerCamera: {fileID: 9000585345077933029}
   playerMovement: {fileID: 6350062861719173228}
   playerRotation: {fileID: 4465895823274918086}
@@ -537,7 +538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
   animator: {fileID: 5261090577319137638}
-  playerRigidbody: {fileID: 7058168512282946537}
 --- !u!114 &5857056511951518487
 MonoBehaviour:
   m_ObjectHideFlags: 0
