@@ -32,7 +32,8 @@ public class BulletManager : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerHealth playerHealth))
         {
-            playerHealth.TakeDamage(damage);
+            // playerHealth.TakeDamage(damage);
+            Debug.Log("hit player");
         }
         objectPool.Release(this);
     }
