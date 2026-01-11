@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TreasureHunter
   m_EditorClassIdentifier: Assembly-CSharp::PlayerParameterSO
   <HitPoint>k__BackingField: 100
-  <MoveSpeed>k__BackingField: 5
+  <MoveSpeed>k__BackingField: 3
   <AttackPower>k__BackingField: 35
-  <BulletSpeed>k__BackingField: 20
+  <BulletSpeed>k__BackingField: 10
   <FireRate>k__BackingField: 4
   <CanRapidFire>k__BackingField: 1
   <ReloadTime>k__BackingField: 2

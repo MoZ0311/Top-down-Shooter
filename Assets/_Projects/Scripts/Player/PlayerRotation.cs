@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     [Header("Settings")]
-    // [SerializeField] float rotationSpeed = 10.0f;
+    [SerializeField] float rotationSpeed;
     [SerializeField] LayerMask targetLayers;
     [SerializeField] Transform muzzle;
 
@@ -15,9 +15,9 @@ public class PlayerRotation : MonoBehaviour
         Ray ray = PlayerCamera.MainCamera.ScreenPointToRay(mousePosition);
 
         // Physics.Raycastでコライダーとの衝突を検知
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, targetLayers))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, targetLayers, QueryTriggerInteraction.Ignore))
         {
-            if (hitInfo.collider.gameObject == this)
+            if (hitInfo.collider.gameObject == gameObject)
             {
                 return;
             }
@@ -46,8 +46,7 @@ public class PlayerRotation : MonoBehaviour
         {
             // Quaternionに適用
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = targetRotation;
-            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 }

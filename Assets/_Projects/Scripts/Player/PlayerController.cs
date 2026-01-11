@@ -9,7 +9,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
-    [SerializeField] PlayerShot playerShot;
+    [SerializeField] PlayerShoot playerShot;
 
     Vector2 inputAxis;
 
@@ -35,11 +35,9 @@ public class PlayerController : NetworkBehaviour
 
             // アニメーションを制御/再生
             playerAnimation.HandleAnimation(inputAxis);
-        }
 
-        if (IsServer)
-        {
-            playerShot.HandleShot();
+            // 射撃制御
+            playerShot.HandleShoot();
         }
     }
 
@@ -64,13 +62,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (IsOwner)
         {
-            SetShootingServerRpc(context.performed);
+            playerShot.IsShooting = context.performed;
         }
-    }
-
-    [ServerRpc]
-    void SetShootingServerRpc(bool isShooting)
-    {
-        playerShot.IsShooting = isShooting;
     }
 }
