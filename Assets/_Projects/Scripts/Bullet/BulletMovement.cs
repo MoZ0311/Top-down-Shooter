@@ -10,7 +10,6 @@ public class BulletMovement : MonoBehaviour
     [Header("Components")]
     [SerializeField] TrailRenderer trailRenderer;
     IObjectPool<BulletMovement> objectPool;
-    float damage;
     float moveSpeed;
     float timer;
 
@@ -27,7 +26,8 @@ public class BulletMovement : MonoBehaviour
         // 対象とするレイヤーにぶつかった時
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, moveDistance, targetLayer, QueryTriggerInteraction.Ignore))
         {
-            // 命中時の処理
+            // 命中判定時、位置を補正
+            transform.position = hit.point;
 
             // 自身を消去
             objectPool.Release(this);
@@ -44,10 +44,9 @@ public class BulletMovement : MonoBehaviour
         }
     }
 
-    public void SetParameter(float attackPower, float bulletSpeed)
+    public void InitializeBullet(float bulletSpeed)
     {
         timer = lifeTime;
-        damage = attackPower;
         moveSpeed = bulletSpeed;
         trailRenderer.Clear();
     }

@@ -18,7 +18,7 @@ public class PlayerShoot : NetworkBehaviour
 
         if (IsShooting && fireRateTimer <= 0)
         {
-            ShootBullet(muzzle.position, transform.rotation, status.AttackPower, status.BulletSpeed);
+            ShootBullet(muzzle.position, transform.rotation, status.BulletSpeed);
             ShootServerRpc();
             fireRateTimer = 1.0f / status.FireRate;
             if (!status.CanRapidFire)
@@ -29,9 +29,9 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     // 弾の発射処理
-    void ShootBullet(Vector3 muzzlePosition, Quaternion rotation, float attackPower, float bulletSpeed)
+    void ShootBullet(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {
-        BulletPoolManager.Instance.GetBullet(muzzlePosition, rotation).SetParameter(attackPower, bulletSpeed);
+        BulletPoolManager.Instance.GetBullet(muzzlePosition, rotation).InitializeBullet(bulletSpeed);
     }
 
     [ServerRpc]
@@ -41,11 +41,11 @@ public class PlayerShoot : NetworkBehaviour
         BulletCollisionManager.Instance.AddBullet(muzzle.position, transform.forward, status.BulletSpeed, status.AttackPower);
 
         // 自分以外のクライアントを対象として、自分のステータスを参照する弾を生成
-        ShootClientRpc(muzzle.position, transform.rotation, status.AttackPower, status.BulletSpeed);
+        ShootClientRpc(muzzle.position, transform.rotation, status.BulletSpeed);
     }
 
     [ClientRpc]
-    void ShootClientRpc(Vector3 muzzlePosition, Quaternion rotation, float attackPower, float bulletSpeed)
+    void ShootClientRpc(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {
         // Owner(弾の発射主)であれば、早期return
         if (IsOwner)
@@ -54,6 +54,6 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         // 自分以外のクライアントに、弾を生成させる
-        ShootBullet(muzzlePosition, rotation, attackPower, bulletSpeed);
+        ShootBullet(muzzlePosition, rotation, bulletSpeed);
     }
 }

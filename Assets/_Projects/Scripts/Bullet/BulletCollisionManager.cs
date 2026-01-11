@@ -16,7 +16,7 @@ public class BulletCollisionManager : NetworkBehaviour
         public float damageAmount;
         public float lifeTime;
     }
-    List<Bullet> bulletList = new();
+    readonly List<Bullet> bulletList = new();
 
     void Awake()
     {
@@ -48,6 +48,13 @@ public class BulletCollisionManager : NetworkBehaviour
             // 対象とするレイヤーにぶつかった時
             if (Physics.Raycast(bullet.position, bullet.direction, out RaycastHit hit, moveDistance, targetLayer, QueryTriggerInteraction.Ignore))
             {
+                // TryGetComponentでHP管理スクリプト取得/アクセスを試みる
+                if (hit.collider.TryGetComponent<PlayerHealth>(out var playerHealth))
+                {
+                    // プレイヤーのダメージ処理呼び出し
+                    playerHealth.TakeDamage(bullet.damageAmount);
+                }
+
                 // 自身をリストから消去してcontinue
                 bulletList.RemoveAt(i);
                 continue;
