@@ -603,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b653dbfe609e882499221f57f751490a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRotation
+  rotationSpeed: 25
   targetLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -619,6 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2570ee0bed3b41a4287f4659119c3e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShot
+  ShowTopMostFoldoutHeaderGroup: 1
   muzzle: {fileID: 8064630663020514160}
   status: {fileID: 5857056511951518487}
 --- !u!1 &3954349350822581839

@@ -4,8 +4,8 @@ using UnityEngine.Pool;
 public class BulletPoolManager : MonoBehaviour
 {
     public static BulletPoolManager Instance = null;
-    [SerializeField] BulletManager bulletPrefab;
-    IObjectPool<BulletManager> objectPool;
+    [SerializeField] BulletMovement bulletPrefab;
+    IObjectPool<BulletMovement> objectPool;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class BulletPoolManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        objectPool = new ObjectPool<BulletManager>(
+        objectPool = new ObjectPool<BulletMovement>(
             createFunc: () => Instantiate(bulletPrefab),
             actionOnGet: (bullet) => bullet.gameObject.SetActive(true),
             actionOnRelease: (bullet) => bullet.gameObject.SetActive(false),
@@ -27,9 +27,9 @@ public class BulletPoolManager : MonoBehaviour
         );
     }
 
-    public BulletManager GetBullet(Vector3 position, Quaternion rotation)
+    public BulletMovement GetBullet(Vector3 position, Quaternion rotation)
     {
-        BulletManager bullet = objectPool.Get();
+        BulletMovement bullet = objectPool.Get();
         bullet.transform.SetPositionAndRotation(position, rotation);
         bullet.SetPool(objectPool);
         return bullet;

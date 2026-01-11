@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BulletManager : MonoBehaviour
+public class BulletMovement : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] float lifeTime = 3.0f;
@@ -9,12 +9,12 @@ public class BulletManager : MonoBehaviour
     [Header("Components")]
     [SerializeField] Rigidbody bulletRigidbody;
     [SerializeField] TrailRenderer trailRenderer;
-    IObjectPool<BulletManager> objectPool;
+    IObjectPool<BulletMovement> objectPool;
     float damage;
     float moveSpeed;
     float timer;
 
-    public void SetPool(IObjectPool<BulletManager> pool)
+    public void SetPool(IObjectPool<BulletMovement> pool)
     {
         objectPool = pool;
     }
