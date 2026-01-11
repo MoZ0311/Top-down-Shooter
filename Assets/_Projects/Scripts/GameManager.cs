@@ -10,7 +10,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] Transform[] spawnPositions;
     public override void OnNetworkSpawn()
     {
-        if (!IsHost)
+        if (!IsServer)
         {
             return;
         }

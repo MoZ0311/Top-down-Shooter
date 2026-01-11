@@ -15,7 +15,7 @@ public class PlayerRotation : MonoBehaviour
         Ray ray = PlayerCamera.MainCamera.ScreenPointToRay(mousePosition);
 
         // Physics.Raycastでコライダーとの衝突を検知
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, targetLayers))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, targetLayers, QueryTriggerInteraction.Ignore))
         {
             if (hitInfo.collider.gameObject == gameObject)
             {

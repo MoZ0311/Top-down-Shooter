@@ -37,7 +37,8 @@ public class PlayerShoot : NetworkBehaviour
     [ServerRpc]
     void ShootServerRpc()
     {
-        // 当たり判定の実装
+        // サーバー側で当たり判定計算
+        BulletCollisionManager.Instance.AddBullet(muzzle.position, transform.forward, status.BulletSpeed, status.AttackPower);
 
         // 自分以外のクライアントを対象として、自分のステータスを参照する弾を生成
         ShootClientRpc(muzzle.position, transform.rotation, status.AttackPower, status.BulletSpeed);
