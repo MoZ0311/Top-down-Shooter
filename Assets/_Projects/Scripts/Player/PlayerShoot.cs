@@ -9,6 +9,9 @@ public class PlayerShoot : NetworkBehaviour
     [Header("Ref Status")]
     [SerializeField] PlayerStatus status;
 
+    [Header("Components")]
+    [SerializeField] ParticleSystem muzzleFlash;
+
     public bool IsShooting { private get; set; }
     float fireRateTimer;
 
@@ -18,9 +21,19 @@ public class PlayerShoot : NetworkBehaviour
 
         if (IsShooting && fireRateTimer <= 0)
         {
+            // マズルフラッシュのパーティクル再生
+            muzzleFlash.Play();
+
+            // ローカル側で即座に生成
             ShootBullet(muzzle.position, transform.rotation, status.BulletSpeed);
+
+            // サーバー側にも生成依頼
             ShootServerRpc();
+
+            // 秒間FireRate発になるよう計算
             fireRateTimer = 1.0f / status.FireRate;
+
+            // オート連射可能でなければ、都度射撃フラグを折る
             if (!status.CanRapidFire)
             {
                 IsShooting = false;
@@ -31,7 +44,7 @@ public class PlayerShoot : NetworkBehaviour
     // 弾の発射処理
     void ShootBullet(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {
-        BulletPoolManager.Instance.GetBullet(muzzlePosition, rotation).InitializeBullet(bulletSpeed);
+        BulletPoolManager.Instance.GetBullet(muzzlePosition, rotation, bulletSpeed);
     }
 
     [ServerRpc]
