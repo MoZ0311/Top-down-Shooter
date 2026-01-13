@@ -21,7 +21,8 @@ public class PlayerHealth : NetworkBehaviour
         currentHitPoint.Value -= damageAmount;
         if (currentHitPoint.Value <= 0)
         {
-            NetworkObject.Despawn();
+            // NetworkObject.Despawn();
+            Debug.Log("死");
         }
         Debug.Log($"Player{OwnerClientId}: took {damageAmount} damage");
     }

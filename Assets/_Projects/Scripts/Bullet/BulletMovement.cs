@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class BulletMovement : MonoBehaviour
 {
@@ -9,14 +8,8 @@ public class BulletMovement : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] TrailRenderer trailRenderer;
-    IObjectPool<BulletMovement> objectPool;
     float moveSpeed;
     float timer;
-
-    public void SetPool(IObjectPool<BulletMovement> pool)
-    {
-        objectPool = pool;
-    }
 
     void Update()
     {
@@ -29,8 +22,11 @@ public class BulletMovement : MonoBehaviour
             // 命中判定時、位置を補正
             transform.position = hit.point;
 
+            // エフェクト再生
+            BulletPoolManager.Instance.GetEffect(hit.point);
+
             // 自身を消去
-            objectPool.Release(this);
+            BulletPoolManager.Instance.BulletPool.Release(this);
         }
 
         // ぶつからなかったので、データを更新
@@ -40,7 +36,7 @@ public class BulletMovement : MonoBehaviour
         if (timer < 0)
         {
             // 時間切れで消滅
-            objectPool.Release(this);
+            BulletPoolManager.Instance.BulletPool.Release(this);
         }
     }
 
