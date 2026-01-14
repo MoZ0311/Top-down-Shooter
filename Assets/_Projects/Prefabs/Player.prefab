@@ -5128,6 +5128,7 @@ GameObject:
   - component: {fileID: 3461111436869055948}
   - component: {fileID: 2203710092060421660}
   - component: {fileID: 6223391031887819690}
+  - component: {fileID: 6981879774206076393}
   - component: {fileID: 7058168512282946537}
   - component: {fileID: 5311448528682513380}
   - component: {fileID: 433139547000152491}
@@ -5233,6 +5234,34 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 1
+--- !u!114 &6981879774206076393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668533559629828234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkAnimator
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkAnimatorExpanded: 0
+  AuthorityMode: 1
+  m_Animator: {fileID: 5261090577319137638}
+  TransitionStateInfoList: []
+  AnimatorParameterEntries:
+    ParameterEntries:
+    - name: moveX
+      NameHash: -377228942
+      Synchronize: 1
+      ParameterType: 1
+    - name: moveZ
+      NameHash: 126718046
+      Synchronize: 1
+      ParameterType: 1
+  AnimatorParametersExpanded: 0
 --- !u!54 &7058168512282946537
 Rigidbody:
   m_ObjectHideFlags: 0
