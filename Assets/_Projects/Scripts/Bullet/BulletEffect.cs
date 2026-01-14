@@ -4,6 +4,6 @@ public class BulletEffect : MonoBehaviour
 {
     void OnParticleSystemStopped()
     {
-        BulletPoolManager.Instance.EffectPool.Release(this);
+        PoolManager.Instance.EffectPool.Release(this);
     }
 }
