@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7092743997442572575}
   - component: {fileID: 1498278118120323575}
-  - component: {fileID: 375754570436905674}
-  - component: {fileID: 7637483106494163845}
+  - component: {fileID: 3225523137357486985}
+  - component: {fileID: 7607036583084010840}
   m_Layer: 0
   m_Name: HitEffect
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23186d1df48a12c458cdef25f699ce8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletEffect
---- !u!199 &375754570436905674
+--- !u!199 &3225523137357486985
 ParticleSystemRenderer:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!198 &7637483106494163845
+--- !u!198 &7607036583084010840
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0.1
+    scalar: 0
     minScalar: 0.1
     maxCurve:
       serializedVersion: 2

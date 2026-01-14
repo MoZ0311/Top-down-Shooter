@@ -44,7 +44,7 @@ public class PlayerShoot : NetworkBehaviour
     // 弾の発射処理
     void ShootBullet(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {
-        BulletPoolManager.Instance.GetBullet(muzzlePosition, rotation, bulletSpeed);
+        PoolManager.Instance.GetBullet(muzzlePosition, rotation, bulletSpeed);
     }
 
     [ServerRpc]

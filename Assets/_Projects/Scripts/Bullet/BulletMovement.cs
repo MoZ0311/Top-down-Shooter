@@ -23,10 +23,10 @@ public class BulletMovement : MonoBehaviour
             transform.position = hit.point;
 
             // エフェクト再生
-            BulletPoolManager.Instance.GetEffect(hit.point);
+            PoolManager.Instance.GetEffect(hit.point);
 
             // 自身を消去
-            BulletPoolManager.Instance.BulletPool.Release(this);
+            PoolManager.Instance.BulletPool.Release(this);
         }
 
         // ぶつからなかったので、データを更新
@@ -36,7 +36,7 @@ public class BulletMovement : MonoBehaviour
         if (timer < 0)
         {
             // 時間切れで消滅
-            BulletPoolManager.Instance.BulletPool.Release(this);
+            PoolManager.Instance.BulletPool.Release(this);
         }
     }
 
