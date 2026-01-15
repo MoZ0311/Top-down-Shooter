@@ -19,9 +19,12 @@ public class PlayerRotation : MonoBehaviour
         {
             if (hitInfo.collider.gameObject == gameObject)
             {
+                // 自身に照準している時、return
                 return;
             }
-            targetPoint = hitInfo.point;
+
+            // 他オブジェクトに照準している時、その中心に補正
+            targetPoint = hitInfo.collider.bounds.center;
         }
         else
         {

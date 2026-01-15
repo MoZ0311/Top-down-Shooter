@@ -4,22 +4,26 @@ using System.Collections.Generic;
 
 public class BulletCollisionManager : NetworkBehaviour
 {
+    // シングルトン用のインスタンス
     public static BulletCollisionManager Instance = null;
 
     [Header("Settings")]
-    [SerializeField] LayerMask targetLayer;
+    [SerializeField] LayerMask targetLayer; // 弾が接触できるレイヤー
+
+    // サーバー側で計算する、仮想の弾丸構造体
     struct Bullet
     {
-        public Vector3 position;
-        public Vector3 direction;
-        public float moveSpeed;
-        public float damageAmount;
-        public float lifeTime;
+        public Vector3 position;    // 位置
+        public Vector3 direction;   // 方向
+        public float moveSpeed;     // 弾速
+        public float damageAmount;  // ダメージ量
+        public float lifeTime;      // 残り時間
     }
-    readonly List<Bullet> bulletList = new();
+    readonly List<Bullet> bulletList = new();   // 計算する仮想弾丸のリスト
 
     void Awake()
     {
+        // シングルトン設計
         if (Instance == null)
         {
             Instance = this;
@@ -32,6 +36,7 @@ public class BulletCollisionManager : NetworkBehaviour
 
     void Update()
     {
+        // ダメージを与える弾の当たり判定は、サーバーでのみ計算する
         if (!IsServer)
         {
             return;
@@ -77,6 +82,13 @@ public class BulletCollisionManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// サーバー側で計算する弾を追加する
+    /// </summary>
+    /// <param name="pos">発射した座標</param>
+    /// <param name="dir">発射した方向</param>
+    /// <param name="speed">弾速</param>
+    /// <param name="damage">ダメージ量</param>
     public void AddBullet(Vector3 pos, Vector3 dir, float speed, float damage)
     {
         bulletList.Add(new Bullet {

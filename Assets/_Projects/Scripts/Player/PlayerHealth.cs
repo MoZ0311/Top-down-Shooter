@@ -24,6 +24,5 @@ public class PlayerHealth : NetworkBehaviour
             // NetworkObject.Despawn();
             Debug.Log("死");
         }
-        Debug.Log($"Player{OwnerClientId}: took {damageAmount} damage");
     }
 }

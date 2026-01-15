@@ -1644,7 +1644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletPoolManager
   bulletPrefab: {fileID: 5798651723171112025, guid: b7f07d5689eb65a46bcebc8af02b6596, type: 3}
-  effectPrefab: {fileID: 1498278118120323575, guid: 4f04800482753814894796964be4b462, type: 3}
+  effectPrefab: {fileID: 1944906065728028768, guid: dffe7ad76aa42f84cbd8b59744d2e0a1, type: 3}
   defaultBulletCapacity: 30
   defaultEffectCapacity: 10
   maxSize: 1000

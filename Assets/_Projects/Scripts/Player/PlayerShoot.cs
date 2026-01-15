@@ -17,6 +17,7 @@ public class PlayerShoot : NetworkBehaviour
 
     public void HandleShoot()
     {
+        // 念のため0以上の範囲になるようにタイマーを減算
         fireRateTimer = Mathf.Max(0, fireRateTimer - Time.deltaTime);
 
         if (IsShooting && fireRateTimer <= 0)
@@ -41,7 +42,12 @@ public class PlayerShoot : NetworkBehaviour
         }
     }
 
-    // 弾の発射処理
+    /// <summary>
+    /// 弾の発射処理
+    /// </summary>
+    /// <param name="muzzlePosition">銃口の位置</param>
+    /// <param name="rotation">回転</param>
+    /// <param name="bulletSpeed">弾速</param>
     void ShootBullet(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {
         PoolManager.Instance.GetBullet(muzzlePosition, rotation, bulletSpeed);
