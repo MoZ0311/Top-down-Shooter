@@ -4,18 +4,18 @@ using UnityEngine.UIElements;
 public class GameTimer : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] int timerLimit = 180;
-    [SerializeField] int redThredhouldTime = 30;
+    [SerializeField] int timerLimit;        // 制限時間
+    [SerializeField] int redThredhouldTime; // タイマーを赤色にする閾値
 
     [Header("Components")]
     [SerializeField] UIDocument gameUI;
 
     Label timerLabel;
-    float remainingTime;
-    int displayTime;
-    int prevDisplayTime;
+    float remainingTime;                    // 残り時間
+    int displayTime;                        // ラベルに表示する時間
+    int prevDisplayTime;                    // ラベルに直前まで表示されていた時間
 
-    const int UnitPerMinute = 60;
+    const int UnitPerMinute = 60;           // 一分の定義(秒)
     const string TimerLabelString = "TimerLabel";
 
     void Awake()
@@ -58,6 +58,8 @@ public class GameTimer : MonoBehaviour
         // タイマーの分と秒を算出
         int min = time / UnitPerMinute;
         int sec = time % UnitPerMinute;
+
+        // Labelに反映
         timerLabel.text = $"{min:00}:{sec:00}";
     }
 }

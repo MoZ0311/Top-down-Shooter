@@ -3,13 +3,13 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] float lifeTime = 3.0f;
-    [SerializeField] LayerMask targetLayer;
+    [SerializeField] float lifeTime;
+    [SerializeField] LayerMask targetLayer;         // 衝突判定を取るレイヤー
 
     [Header("Components")]
-    [SerializeField] TrailRenderer trailRenderer;
-    float moveSpeed;
-    float timer;
+    [SerializeField] TrailRenderer trailRenderer;   // 弾の軌跡を描くTrail
+    float moveSpeed;                                // 弾速
+    float remainingTime;                            // 残り時間
 
     void Update()
     {
@@ -31,18 +31,22 @@ public class BulletMovement : MonoBehaviour
 
         // ぶつからなかったので、データを更新
         transform.position += transform.forward * moveDistance;
-        timer -= Time.deltaTime;
+        remainingTime -= Time.deltaTime;
 
-        if (timer < 0)
+        if (remainingTime < 0)
         {
             // 時間切れで消滅
             PoolManager.Instance.BulletPool.Release(this);
         }
     }
 
+    /// <summary>
+    /// 弾の初期化処理。残り時間と弾速の設定
+    /// </summary>
+    /// <param name="bulletSpeed">弾速</param>
     public void InitializeBullet(float bulletSpeed)
     {
-        timer = lifeTime;
+        remainingTime = lifeTime;
         moveSpeed = bulletSpeed;
         trailRenderer.Clear();
     }

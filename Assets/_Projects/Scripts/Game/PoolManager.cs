@@ -3,24 +3,26 @@ using UnityEngine.Pool;
 
 public class PoolManager : MonoBehaviour
 {
+    // シングルトン用のインスタンス
     public static PoolManager Instance = null;
 
     [Header("Prefab")]
-    [SerializeField] BulletMovement bulletPrefab;
-    [SerializeField] BulletEffect effectPrefab;
+    [SerializeField] BulletMovement bulletPrefab;   // 弾のプレハブ
+    [SerializeField] BulletEffect effectPrefab;     // エフェクト(ParticleSystem)のプレハブ
 
     [Header("Settings")]
-    [SerializeField] int defaultBulletCapacity;
-    [SerializeField] int defaultEffectCapacity;
-    [SerializeField] int maxSize;
-    [SerializeField] Transform bulletParent;
-    [SerializeField] Transform effectParent;
+    [SerializeField] int defaultBulletCapacity;     // 事前に生成する弾の数
+    [SerializeField] int defaultEffectCapacity;     // 事前に生成するエフェクトの数
+    [SerializeField] int maxSize;                   // 確保できる数
+    [SerializeField] Transform bulletParent;        // 弾の親
+    [SerializeField] Transform effectParent;        // エフェクトの親
 
-    public IObjectPool<BulletMovement> BulletPool { get; private set; }
-    public IObjectPool<BulletEffect> EffectPool { get; private set; }
+    public IObjectPool<BulletMovement> BulletPool { get; private set; } // 弾用のオブジェクトプール
+    public IObjectPool<BulletEffect> EffectPool { get; private set; }   // エフェクト用のオブジェクトプール
 
     void Awake()
     {
+        // シングルトン用
         if (Instance == null)
         {
             Instance = this;
@@ -30,6 +32,18 @@ public class PoolManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // 各プールの初期化
+        InitializePool();
+    }
+
+    void Start()
+    {
+        Prewarm(BulletPool, defaultBulletCapacity);
+        Prewarm(EffectPool, defaultEffectCapacity);
+    }
+
+    void InitializePool()
+    {
         BulletPool = new ObjectPool<BulletMovement>(
             createFunc: () => Instantiate(bulletPrefab, bulletParent),
             actionOnGet: (bullet) => bullet.gameObject.SetActive(true),
@@ -45,12 +59,6 @@ public class PoolManager : MonoBehaviour
             defaultCapacity: defaultEffectCapacity,
             maxSize: maxSize
         );
-    }
-
-    void Start()
-    {
-        Prewarm(BulletPool, defaultBulletCapacity);
-        Prewarm(EffectPool, defaultEffectCapacity);
     }
 
     void Prewarm<T>(IObjectPool<T> objectPool, int count) where T : Component
@@ -84,7 +92,10 @@ public class PoolManager : MonoBehaviour
 
     public BulletEffect GetEffect(Vector3 position)
     {
+        // プールからエフェクトのインスタンスを取得
         BulletEffect effect = EffectPool.Get();
+
+        // 渡された座標にエフェクトを出す
         effect.transform.SetPositionAndRotation(position, Quaternion.identity);
         return effect;
     }
