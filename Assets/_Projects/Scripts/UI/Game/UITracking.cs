@@ -16,7 +16,7 @@ public class UITracking : MonoBehaviour
         healthGauge = root.Q<VisualElement>(HealthGauge);
     }
 
-    void Update()
+    void LateUpdate()
     {
         // 追従するオブジェクトの座標をスクリーン座標に変換
         Vector2 targetPosition = Camera.main.WorldToScreenPoint(target.position);
