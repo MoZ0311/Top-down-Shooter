@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerParameterSO : ScriptableObject
 {
     [Header("Player Settings")]
-    [field:SerializeField] public float HitPoint { get; private set; }      // 体力
+    [field:SerializeField] public float Health { get; private set; }        // 体力
     [field:SerializeField] public float MoveSpeed { get; private set; }     // 移動速度
 
     [Header("Bullet Settings")]

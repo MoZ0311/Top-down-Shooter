@@ -6,20 +6,22 @@ public class PlayerHealth : NetworkBehaviour
     [Header("Ref Status")]
     [SerializeField] PlayerStatus status;
 
-    readonly NetworkVariable<float> currentHitPoint = new();
+    readonly NetworkVariable<float> currentHealth = new();
+    public float HealthRatio { get; private set; } = 1;
 
     public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
-            currentHitPoint.Value = status.HitPoint;
+            currentHealth.Value = status.Health;
         }
     }
 
     public void TakeDamage(float damageAmount)
     {
-        currentHitPoint.Value -= damageAmount;
-        if (currentHitPoint.Value <= 0)
+        currentHealth.Value -= damageAmount;
+        HealthRatio = currentHealth.Value / status.Health;
+        if (currentHealth.Value <= 0)
         {
             // NetworkObject.Despawn();
             Debug.Log("死");
