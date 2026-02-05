@@ -4,7 +4,7 @@ public class PlayerStatus : MonoBehaviour
 {
     [Header("ParameterSO")]
     [SerializeField] PlayerParameterSO defaultParameter;    // 参照する初期値
-    public float HitPoint { get; private set; }             // 体力
+    public float Health { get; private set; }               // 体力
     public float MoveSpeed { get; private set; }            // 移動速度
     public float AttackPower { get; private set; }          // 攻撃力
     public float BulletSpeed { get; private set; }          // 弾速
@@ -13,7 +13,7 @@ public class PlayerStatus : MonoBehaviour
     public float ReloadTime { get; private set; }           // リロード時間
     void Awake()
     {
-        HitPoint = defaultParameter.HitPoint;
+        Health = defaultParameter.Health;
         MoveSpeed = defaultParameter.MoveSpeed;
         AttackPower = defaultParameter.AttackPower;
         BulletSpeed = defaultParameter.BulletSpeed;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4532ca8e4a224344d862bf013c3769e4, type: 3}
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: Assembly-CSharp::PlayerParameterSO
-  <HitPoint>k__BackingField: 100
+  <Health>k__BackingField: 100
   <MoveSpeed>k__BackingField: 5
   <AttackPower>k__BackingField: 20
   <BulletSpeed>k__BackingField: 5
