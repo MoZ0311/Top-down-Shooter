@@ -1,24 +1,21 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using Unity.Netcode;
 
 public class TitleUIManager : MonoBehaviour
 {
     [SerializeField] UIDocument titleUI;
-    VisualElement titleElements;
+    [SerializeField] MatchingManager matchingManager;
     Button hostButton;
     Button clientButton;
     Label connectingMessageLabel;
-    const string TitleElementsString = "TitleElements";
     const string HostButtonString = "HostButton";
     const string ClientButtonString = "ClientButton";
-    const string GameSceneString = "GameScene";
     const string ConnectingMessageLabelString = "ConnectingMessageLabel";
-    const string LobbyString = "lobby";
+    const string ConnectingText = "接続中…";
+    const string FailedText = "接続に失敗しました";
     void Awake()
     {
         var root = titleUI.rootVisualElement;
-        titleElements = root.Q<VisualElement>(TitleElementsString);
         hostButton = root.Q<Button>(HostButtonString);
         clientButton = root.Q<Button>(ClientButtonString);
         connectingMessageLabel = root.Q<Label>(ConnectingMessageLabelString);
@@ -27,34 +24,36 @@ public class TitleUIManager : MonoBehaviour
         clientButton.clicked += OnClickedClientButton;
     }
 
-    void OnClickedHostButton()
+    async void OnClickedHostButton()
     {
-        if (NetworkManager.Singleton.StartHost())
+        OnConnected();
+        if (!await matchingManager.StartHost())
         {
-            Debug.Log("ホストの開始に成功");
-            OnConnected();
-            NetworkManager.Singleton.SceneManager.LoadScene(GameSceneString, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        }
-        else
-        {
-            Debug.LogError("ホストの開始に失敗");
+            OnFailedConnection();
         }
     }
 
-    void OnClickedClientButton()
+    async void OnClickedClientButton()
     {
-        if (NetworkManager.Singleton.StartClient())
+        OnConnected();
+        if (!await matchingManager.StartClient())
         {
-            Debug.Log("クライアント接続に成功");
-            OnConnected();
+            OnFailedConnection();
         }
     }
 
     void OnConnected()
     {
         connectingMessageLabel.style.display = DisplayStyle.Flex;
+        connectingMessageLabel.text = ConnectingText;
         hostButton.SetEnabled(false);
         clientButton.SetEnabled(false);
-        // titleElements.AddToClassList(LobbyString);
+    }
+
+    void OnFailedConnection()
+    {
+        connectingMessageLabel.text = FailedText;
+        hostButton.SetEnabled(true);
+        clientButton.SetEnabled(true);
     }
 }

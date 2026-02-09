@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Projects/UI_Resources/DefaultUSS.uss?fileID=7433441132597879392&amp;guid=2abd62f70e737bb4a94f6e6c04e87a92&amp;type=3#DefaultUSS"/>
+    <ui:VisualElement style="flex-grow: 1; background-color: rgb(0, 150, 136);">
+        <ui:Label style="font-size: 48px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/MoralerspaceArgon-Regular.ttf?fileID=12800000&amp;guid=2c67d41702d10384ba1e83e54c499d95&amp;type=3#MoralerspaceArgon-Regular&quot;); -unity-font-style: normal;"/>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center;">
+            <ui:VisualElement class="matchPlayerWindow" style="flex-grow: 1;"/>
+            <ui:VisualElement class="matchPlayerWindow" style="flex-grow: 1;"/>
+            <ui:VisualElement class="matchPlayerWindow" style="flex-grow: 1;"/>
+            <ui:VisualElement class="matchPlayerWindow" style="flex-grow: 1;"/>
+        </ui:VisualElement>
+        <ui:Button text="はじめる" enabled="false" class="button" style="align-self: center; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); display: none;"/>
+    </ui:VisualElement>
+</ui:UXML>

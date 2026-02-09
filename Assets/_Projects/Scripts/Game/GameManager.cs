@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Unity.Netcode;
+using System;
+using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour
 {
@@ -16,13 +19,16 @@ public class GameManager : NetworkBehaviour
             return;
         }
 
-        // クライアント接続時のイベント追加
-        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        // シーン遷移後のイベント追加
+        NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+    }
 
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    private void OnSceneLoaded(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    {
+        // 読み込みが完了したクライアント全員に対してプレイヤーを生成
+        foreach (var clientId in clientsCompleted)
         {
-            // サーバー接続前に接続済みのクライアントに処理を適用
-            OnClientConnected(client.ClientId);
+            SpawnPlayer(clientId);
         }
     }
 
@@ -30,9 +36,10 @@ public class GameManager : NetworkBehaviour
     /// 接続しているクライアントのプレイヤーをスポーンさせる処理
     /// </summary>
     /// <param name="clientID">接続したクライアントのID</param>
-    void OnClientConnected(ulong clientID)
+    void SpawnPlayer(ulong clientID)
     {
-        var spawnPosition = spawnPositions[clientID].position;
+        int index = (int)clientID % spawnPositions.Length;
+        var spawnPosition = spawnPositions[index].position;
         NetworkObject playerObject = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
         playerObject.SpawnAsPlayerObject(clientID);
     }
