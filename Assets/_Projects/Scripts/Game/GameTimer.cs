@@ -50,6 +50,10 @@ public class GameTimer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// タイマーUIの更新処理
+    /// </summary>
+    /// <param name="time">現在の残り時間(秒)</param>
     void UpdateTimerText(int time)
     {
         // タイマー描画用のフォントの色を設定(閾値以下: 赤色 / それ以外: 白色)

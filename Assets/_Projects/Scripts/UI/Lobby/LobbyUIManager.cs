@@ -4,20 +4,17 @@ using Unity.Netcode;
 
 public class LobbyUIManager : NetworkBehaviour
 {
-    [SerializeField] int minPlayersToStart = 2;
     [SerializeField] UIDocument lobbyUI;
-    Label joinCodeLabel;
+    Label playerCountLabel;
     Button startButton;
-    const string LobbyIDString = "ロビーID:";
+    const int MinPlayerToStart = 2;
 
     void Awake()
     {
+        // UI要素の検索/取得
         var root = lobbyUI.rootVisualElement;
-        joinCodeLabel = root.Q<Label>();
+        playerCountLabel = root.Q<Label>();
         startButton = root.Q<Button>();
-
-        // ロビーIDを表示
-        joinCodeLabel.text = LobbyIDString + RelayManager.JoinCode;
 
         // ホストでない場合は、早期return
         if (!NetworkManager.Singleton.IsHost)
@@ -44,7 +41,10 @@ public class LobbyUIManager : NetworkBehaviour
         int playerCount = NetworkManager.Singleton.ConnectedClients.Count;
 
         // 規定人数以上ならボタンを有効化
-        startButton.enabledSelf = playerCount >= minPlayersToStart;
+        startButton.enabledSelf = playerCount >= MinPlayerToStart;
+
+        // プレイヤーの数を表示
+        playerCountLabel.text = $"参加者{playerCount}/4";
     }
 
     void OnClickedStart()

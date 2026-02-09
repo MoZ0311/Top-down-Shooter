@@ -42,6 +42,9 @@ public class PoolManager : MonoBehaviour
         Prewarm(EffectPool, defaultEffectCapacity);
     }
 
+    /// <summary>
+    /// プールの初期化処理
+    /// </summary>
     void InitializePool()
     {
         BulletPool = new ObjectPool<BulletMovement>(
@@ -61,6 +64,11 @@ public class PoolManager : MonoBehaviour
         );
     }
 
+    /// <summary>
+    /// プールをあらかじめ埋める処理
+    /// </summary>
+    /// <param name="objectPool">対象のオブジェクトプール</param>
+    /// <param name="count">オブジェクトの生成数</param>
     void Prewarm<T>(IObjectPool<T> objectPool, int count) where T : Component
     {
         // 要素数がcount個のインスタンス配列を定義
@@ -79,6 +87,13 @@ public class PoolManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 弾をプールから取り出して、初期化する処理
+    /// </summary>
+    /// <param name="position">位置</param>
+    /// <param name="rotation">向き</param>
+    /// <param name="bulletSpeed">速度</param>
+    /// <returns>初期化された弾のインスタンス</returns>
     public BulletMovement GetBullet(Vector3 position, Quaternion rotation, float bulletSpeed)
     {
         // プールから弾のインスタンスを取得
@@ -90,6 +105,11 @@ public class PoolManager : MonoBehaviour
         return bullet;
     }
 
+    /// <summary>
+    /// エフェクトをプールから呼び出して、初期化する処理
+    /// </summary>
+    /// <param name="position">位置</param>
+    /// <returns>初期化されたエフェクトのインスタンス</returns>
     public BulletEffect GetEffect(Vector3 position)
     {
         // プールからエフェクトのインスタンスを取得

@@ -1,36 +1,25 @@
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using System.Threading.Tasks;
 
 public class RelayManager : MonoBehaviour
 {
-    [SerializeField] int maxConnections;
-    [SerializeField] string code;
-    public static string JoinCode = "dummy";
     const string LobbySceneString = "LobbyScene";
 
-    private async void Start()
-    {
-        await UnityServices.InitializeAsync();
-
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed In " + AuthenticationService.Instance.PlayerId);
-        };
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-
-    public async Task<bool> CreateRelay()
+    /// <summary>
+    /// リレー通信の開始処理
+    /// </summary>
+    /// <param name="maxConnections">プレイヤーの最大接続数</param>
+    /// <returns>リレーのID</returns>
+    public async Task<string> CreateRelay(int maxConnections)
     {
         try
         {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
-            JoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(
                 allocation.RelayServer.IpV4,
@@ -43,23 +32,26 @@ public class RelayManager : MonoBehaviour
             if (NetworkManager.Singleton.StartHost())
             {
                 NetworkManager.Singleton.SceneManager.LoadScene(LobbySceneString, UnityEngine.SceneManagement.LoadSceneMode.Single);
-                return true;
+                return joinCode;
             }
         }
         catch (RelayServiceException e)
         {
             Debug.Log(e);
-            return false;
         }
-        return false;
+        return null;
     }
 
-    public async Task<bool> JoinRelay()
+    /// <summary>
+    /// リレーに参加する処理
+    /// </summary>
+    /// <param name="joinCode">参加用のID</param>
+    /// <returns>参加できたかどうか</returns>
+    public async Task<bool> JoinRelay(string joinCode)
     {
         try
         {
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(code);
-            JoinCode = code;
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetClientRelayData(
                 joinAllocation.RelayServer.IpV4,
@@ -75,7 +67,7 @@ public class RelayManager : MonoBehaviour
         catch (RelayServiceException e)
         {
             Debug.Log(e);
-            return false;
         }
+        return false;
     }
 }

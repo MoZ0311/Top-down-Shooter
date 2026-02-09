@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 public class TitleUIManager : MonoBehaviour
 {
     [SerializeField] UIDocument titleUI;
-    [SerializeField] RelayManager relayManager;
+    [SerializeField] MatchingManager matchingManager;
     Button hostButton;
     Button clientButton;
     Label connectingMessageLabel;
@@ -27,7 +27,7 @@ public class TitleUIManager : MonoBehaviour
     async void OnClickedHostButton()
     {
         OnConnected();
-        if (!await relayManager.CreateRelay())
+        if (!await matchingManager.StartHost())
         {
             OnFailedConnection();
         }
@@ -36,7 +36,7 @@ public class TitleUIManager : MonoBehaviour
     async void OnClickedClientButton()
     {
         OnConnected();
-        if (!await relayManager.JoinRelay())
+        if (!await matchingManager.StartClient())
         {
             OnFailedConnection();
         }
