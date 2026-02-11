@@ -1,6 +1,5 @@
-using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class MatchingManager : MonoBehaviour
 {

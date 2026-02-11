@@ -53,6 +53,9 @@ public class PlayerShoot : NetworkBehaviour
         PoolManager.Instance.GetBullet(muzzlePosition, rotation, bulletSpeed);
     }
 
+    /// <summary>
+    /// サーバー側で弾道を計算する処理
+    /// </summary>
     [ServerRpc]
     void ShootServerRpc()
     {
@@ -63,6 +66,12 @@ public class PlayerShoot : NetworkBehaviour
         ShootClientRpc(muzzle.position, transform.rotation, status.BulletSpeed);
     }
 
+    /// <summary>
+    /// クライアント側で弾を生成する処理
+    /// </summary>
+    /// <param name="muzzlePosition">発射位置</param>
+    /// <param name="rotation">向き</param>
+    /// <param name="bulletSpeed">弾速</param>
     [ClientRpc]
     void ShootClientRpc(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {

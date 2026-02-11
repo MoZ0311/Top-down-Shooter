@@ -1177,7 +1177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec71b2ceef667445821e18ddd6ec8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
-  timerLimit: 5
+  ShowTopMostFoldoutHeaderGroup: 1
+  timerLimit: 180
   redThredhouldTime: 30
   gameUI: {fileID: 220061774}
 --- !u!1 &1184239917

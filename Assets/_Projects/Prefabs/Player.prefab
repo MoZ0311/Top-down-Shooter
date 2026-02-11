@@ -5405,6 +5405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659dbced4756cc14a8349b36312ae6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  dampTime: 0.1
   animator: {fileID: 5261090577319137638}
 --- !u!114 &5857056511951518487
 MonoBehaviour:
