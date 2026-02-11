@@ -9,11 +9,11 @@ public class UITracking : MonoBehaviour
     [Header("Components")]
     [SerializeField] UIDocument gameUI;
     VisualElement healthGauge;
-    const string HealthGauge = "HealthGauge";
+    const string HealthGaugeString = "HealthGauge";
     void Awake()
     {
         var root = gameUI.rootVisualElement;
-        healthGauge = root.Q<VisualElement>(HealthGauge);
+        healthGauge = root.Q<VisualElement>(HealthGaugeString);
     }
 
     void LateUpdate()

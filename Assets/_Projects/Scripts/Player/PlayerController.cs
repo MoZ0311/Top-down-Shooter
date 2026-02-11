@@ -20,6 +20,9 @@ public class PlayerController : NetworkBehaviour
             // スポーン時の処理
             playerCamera.InitializePlayerCamera();
         }
+
+        // シーン破棄と同時に自信を破壊するように設定
+        NetworkObject.DestroyWithScene = true;
     }
 
     void Update()

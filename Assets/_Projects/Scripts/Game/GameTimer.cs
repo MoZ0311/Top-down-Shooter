@@ -5,19 +5,20 @@ using Unity.Netcode;
 public class GameTimer : NetworkBehaviour
 {
     [Header("Settings")]
-    [SerializeField] int timerLimit;            // 制限時間(秒)
-    [SerializeField] int redThredhouldTime;     // タイマーを赤色にする閾値
+    [SerializeField] int timerLimit;                    // 制限時間(秒)
+    [SerializeField] int redThredhouldTime;             // タイマーを赤色にする閾値
 
     [Header("Components")]
     [SerializeField] UIDocument gameUI;
 
     Label timerLabel;
-    readonly NetworkVariable<double> endTime = new(0);   // ゲームの終了時刻
-    int displayTime;                            // ラベルに表示する時間
-    int prevDisplayTime;                        // ラベルに直前まで表示されていた時間
+    readonly NetworkVariable<double> endTime = new(0);  // ゲームの終了時刻
+    int displayTime;                                    // ラベルに表示する時間
+    int prevDisplayTime;                                // ラベルに直前まで表示されていた時間
 
-    const int UnitPerMinute = 60;               // 一分の定義(秒)
+    const int UnitPerMinute = 60;                       // 一分の定義(秒)
     const string TimerLabelString = "TimerLabel";
+    const string ResultScene = "ResultScene";
 
     void Awake()
     {
@@ -40,7 +41,14 @@ public class GameTimer : NetworkBehaviour
         {
             remainingTime = 0;
             // 必要に応じてここでホストがシーン遷移などの終了処理を行う
-            Time.timeScale = 0.5f;
+            if (IsServer)
+            {
+                if (Time.timeScale == 1)
+                {
+                    //Time.timeScale = 0.5f;
+                    Invoke(nameof(ChangeToResultScene), 0.1f);
+                }
+            }
         }
 
         // タイマー描画用のint型の値を作成
@@ -69,6 +77,11 @@ public class GameTimer : NetworkBehaviour
 
         // Labelに反映
         timerLabel.text = $"{min:00}:{sec:00}";
+    }
+
+    void ChangeToResultScene()
+    {
+        NetworkManager.Singleton.SceneManager.LoadScene(ResultScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     public override void OnNetworkSpawn()

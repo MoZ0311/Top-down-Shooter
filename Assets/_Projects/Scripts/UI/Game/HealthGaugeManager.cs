@@ -5,12 +5,12 @@ public class HealthGaugeManager : MonoBehaviour
 {
     [SerializeField] UIDocument gameUI;
     [SerializeField] PlayerHealth playerHealth;
-    const string Fill = "Fill";
+    const string FillString = "Fill";
     VisualElement fill;
     void Awake()
     {
         var root = gameUI.rootVisualElement;
-        fill = root.Q<VisualElement>(Fill);
+        fill = root.Q<VisualElement>(FillString);
     }
 
     void OnHealthChanged(float prevValue, float newValue)
