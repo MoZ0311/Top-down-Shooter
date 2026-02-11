@@ -19,9 +19,6 @@ public class TitleUIManager : MonoBehaviour
         hostButton = root.Q<Button>(HostButtonString);
         clientButton = root.Q<Button>(ClientButtonString);
         connectingMessageLabel = root.Q<Label>(ConnectingMessageLabelString);
-
-        hostButton.clicked += OnClickedHostButton;
-        clientButton.clicked += OnClickedClientButton;
     }
 
     async void OnClickedHostButton()
@@ -55,5 +52,17 @@ public class TitleUIManager : MonoBehaviour
         connectingMessageLabel.text = FailedText;
         hostButton.SetEnabled(true);
         clientButton.SetEnabled(true);
+    }
+
+    void OnEnable()
+    {
+        hostButton.clicked += OnClickedHostButton;
+        clientButton.clicked += OnClickedClientButton;
+    }
+
+    void OnDisable()
+    {
+        hostButton.clicked -= OnClickedHostButton;
+        clientButton.clicked -= OnClickedClientButton;
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
-using System;
 using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour

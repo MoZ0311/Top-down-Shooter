@@ -5,7 +5,6 @@ public class HealthGaugeManager : MonoBehaviour
 {
     [SerializeField] UIDocument gameUI;
     [SerializeField] PlayerHealth playerHealth;
-    [SerializeField] float interpolate = 10;
     const string Fill = "Fill";
     VisualElement fill;
     void Awake()
@@ -14,12 +13,23 @@ public class HealthGaugeManager : MonoBehaviour
         fill = root.Q<VisualElement>(Fill);
     }
 
-    void Update()
+    void OnHealthChanged(float prevValue, float newValue)
     {
-        fill.style.flexGrow = Mathf.Lerp(
-            fill.style.flexGrow.value,
-            playerHealth.HealthRatio,
-            interpolate * Time.deltaTime
-        );
+        UpdateHealthGauge(newValue);
+    }
+
+    void UpdateHealthGauge(float currentHealth)
+    {
+        fill.style.flexGrow = currentHealth / playerHealth.MaxHealth;
+    }
+
+    void OnEnable()
+    {
+        playerHealth.CurrentHealth.OnValueChanged += OnHealthChanged;
+    }
+
+    void OnDisable()
+    {
+        playerHealth.CurrentHealth.OnValueChanged -= OnHealthChanged;
     }
 }
