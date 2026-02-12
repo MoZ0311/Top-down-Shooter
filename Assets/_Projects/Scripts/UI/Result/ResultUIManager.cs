@@ -1,8 +1,8 @@
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.Netcode;
 
-public class ResultUIManager : MonoBehaviour
+public class ResultUIManager : NetworkBehaviour
 {
     [Header("Components")]
     [SerializeField] UIDocument resultUI;
@@ -13,28 +13,30 @@ public class ResultUIManager : MonoBehaviour
     Label deathCountLabel;
     Label maxLevelLabel;
     Label finishLevelLabel;
+    Label rankLabel;
+    Label waitingTextLabel;
     Button okButton;
     const string KillCountLabel = "KillCountLabel";
     const string DeathCountLabel = "DeathCountLabel";
     const string MaxLevelLabel = "MaxLevelLabel";
     const string FinishLevelLabel = "FinishLevelLabel";
+    const string RankLabel = "RankLabel";
+    const string WaitingTextLabel = "WaitingTextLabel";
 
     void Awake()
     {
         // カーソルを表示する
         UnityEngine.Cursor.visible = true;
 
+        // 各UI要素の取得
         var root = resultUI.rootVisualElement;
         killCountLabel = root.Q<Label>(KillCountLabel);
         deathCountLabel = root.Q<Label>(DeathCountLabel);
         maxLevelLabel = root.Q<Label>(MaxLevelLabel);
         finishLevelLabel = root.Q<Label>(FinishLevelLabel);
+        rankLabel = root.Q<Label>(RankLabel);
+        waitingTextLabel = root.Q<Label>(WaitingTextLabel);
         okButton = root.Q<Button>();
-
-        killCountLabel.text = playerScore.killCount.ToString();
-        deathCountLabel.text = playerScore.deathCount.ToString();
-        maxLevelLabel.text = playerScore.maxLevel.ToString();
-        finishLevelLabel.text = playerScore.finishLevel.ToString();
     }
 
     void OnClickedOK()
@@ -42,13 +44,26 @@ public class ResultUIManager : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("LobbyScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
-    void OnEnable()
+    public override void OnNetworkSpawn()
     {
-        okButton.clicked += OnClickedOK;
+        if (IsServer)
+        {
+            waitingTextLabel.style.display = DisplayStyle.None;
+            okButton.style.display = DisplayStyle.Flex;
+            okButton.clicked += OnClickedOK;
+        }
+
+        killCountLabel.text = playerScore.killCount.ToString();
+        deathCountLabel.text = playerScore.deathCount.ToString();
+        maxLevelLabel.text = playerScore.maxLevel.ToString();
+        finishLevelLabel.text = playerScore.finishLevel.ToString();
     }
 
-    void OnDisable()
+    public override void OnNetworkDespawn()
     {
-        okButton.clicked -= OnClickedOK;
+        if (IsServer)
+        {
+            okButton.clicked -= OnClickedOK;
+        }
     }
 }
