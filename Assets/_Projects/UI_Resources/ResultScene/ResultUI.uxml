@@ -7,11 +7,11 @@
         <ui:VisualElement style="width: 50%;">
             <ui:VisualElement style="flex-grow: 1; margin-left: 64px; margin-top: 64px;">
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                    <ui:Label text="やられた数" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                    <ui:Label text="倒した数" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
                     <ui:Label text="99" name="KillCountLabel" class="score-label"/>
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                    <ui:Label text="倒した数" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                    <ui:Label text="やられた数" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
                     <ui:Label text="99" name="DeathCountLabel" class="score-label"/>
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row;">

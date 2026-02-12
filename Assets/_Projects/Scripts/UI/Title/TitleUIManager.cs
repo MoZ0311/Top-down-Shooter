@@ -8,17 +8,17 @@ public class TitleUIManager : MonoBehaviour
     Button hostButton;
     Button clientButton;
     Label connectingMessageLabel;
-    const string HostButtonString = "HostButton";
-    const string ClientButtonString = "ClientButton";
-    const string ConnectingMessageLabelString = "ConnectingMessageLabel";
+    const string HostButton = "HostButton";
+    const string ClientButton = "ClientButton";
+    const string ConnectingMessageLabel = "ConnectingMessageLabel";
     const string ConnectingText = "接続中…";
     const string FailedText = "接続に失敗しました";
     void Awake()
     {
         var root = titleUI.rootVisualElement;
-        hostButton = root.Q<Button>(HostButtonString);
-        clientButton = root.Q<Button>(ClientButtonString);
-        connectingMessageLabel = root.Q<Label>(ConnectingMessageLabelString);
+        hostButton = root.Q<Button>(HostButton);
+        clientButton = root.Q<Button>(ClientButton);
+        connectingMessageLabel = root.Q<Label>(ConnectingMessageLabel);
     }
 
     async void OnClickedHostButton()

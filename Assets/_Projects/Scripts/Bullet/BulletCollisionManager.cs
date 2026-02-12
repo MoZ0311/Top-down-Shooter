@@ -13,6 +13,7 @@ public class BulletCollisionManager : NetworkBehaviour
     // サーバー側で計算する、仮想の弾丸構造体
     struct Bullet
     {
+        public ulong ownerID;       // 弾の所有者のID
         public Vector3 position;    // 位置
         public Vector3 direction;   // 方向
         public float moveSpeed;     // 弾速
@@ -57,7 +58,7 @@ public class BulletCollisionManager : NetworkBehaviour
                 if (hit.collider.TryGetComponent<PlayerHealth>(out var playerHealth))
                 {
                     // プレイヤーのダメージ処理呼び出し
-                    playerHealth.TakeDamage(bullet.damageAmount);
+                    playerHealth.TakeDamage(bullet.damageAmount, bullet.ownerID);
                 }
 
                 // 自身をリストから消去してcontinue
@@ -85,13 +86,15 @@ public class BulletCollisionManager : NetworkBehaviour
     /// <summary>
     /// サーバー側で計算する弾を追加する
     /// </summary>
+    /// <param name="id">発射したプレイヤーのID</param>
     /// <param name="pos">発射した座標</param>
     /// <param name="dir">発射した方向</param>
     /// <param name="speed">弾速</param>
     /// <param name="damage">ダメージ量</param>
-    public void AddBullet(Vector3 pos, Vector3 dir, float speed, float damage)
+    public void AddBullet(ulong id, Vector3 pos, Vector3 dir, float speed, float damage)
     {
         bulletList.Add(new Bullet {
+            ownerID = id,
             position = pos,
             direction = dir,
             moveSpeed = speed,

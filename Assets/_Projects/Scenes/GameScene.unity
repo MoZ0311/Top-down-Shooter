@@ -1081,8 +1081,8 @@ GameObject:
   - component: {fileID: 1162908846}
   - component: {fileID: 1162908847}
   - component: {fileID: 1162908848}
-  - component: {fileID: 1162908849}
   - component: {fileID: 1162908850}
+  - component: {fileID: 1162908849}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1178,7 +1178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   ShowTopMostFoldoutHeaderGroup: 1
-  timerLimit: 3
+  timerLimit: 10
   redThredhouldTime: 30
   gameUI: {fileID: 220061774}
 --- !u!1 &1184239917
