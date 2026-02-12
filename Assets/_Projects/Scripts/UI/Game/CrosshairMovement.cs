@@ -6,13 +6,13 @@ public class CrosshairMovement : MonoBehaviour
 {
     [SerializeField] UIDocument gameUI;
     VisualElement crosshair;
-    const string CrosshairString = "Crosshair";
+    const string Crosshair = "Crosshair";
 
     void Awake()
     {
         // カーソルを非表示にする
         UnityEngine.Cursor.visible = false;
-        crosshair = gameUI.rootVisualElement.Q<VisualElement>(CrosshairString);
+        crosshair = gameUI.rootVisualElement.Q<VisualElement>(Crosshair);
     }
 
     void Update()

@@ -5135,6 +5135,7 @@ GameObject:
   - component: {fileID: 3261482043759231847}
   - component: {fileID: 5516260866301083895}
   - component: {fileID: 5857056511951518487}
+  - component: {fileID: 7413666008391702455}
   - component: {fileID: 4622178445958425396}
   - component: {fileID: 9000585345077933029}
   - component: {fileID: 6350062861719173228}
@@ -5420,6 +5421,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
   defaultParameter: {fileID: 11400000, guid: 95972bb61ead64e40855d5d3d0edf7a4, type: 2}
+--- !u!114 &7413666008391702455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668533559629828234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1e6360489101c4ab9cf2211db93794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScore
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerScore: {fileID: 11400000, guid: 96a2b44c201df974c81a6ad5136288fc, type: 2}
+  killCount:
+    m_InternalValue: 0
+  deathCount:
+    m_InternalValue: 0
+  maxLevel:
+    m_InternalValue: 0
+  finishLevel:
+    m_InternalValue: 0
+  rank:
+    m_InternalValue: 0
 --- !u!114 &4622178445958425396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5434,6 +5459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   ShowTopMostFoldoutHeaderGroup: 1
   status: {fileID: 5857056511951518487}
+  score: {fileID: 7413666008391702455}
 --- !u!114 &9000585345077933029
 MonoBehaviour:
   m_ObjectHideFlags: 0

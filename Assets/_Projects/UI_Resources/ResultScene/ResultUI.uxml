@@ -1,0 +1,32 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Projects/UI_Resources/DefaultSettings/DefaultUSS.uss?fileID=7433441132597879392&amp;guid=2abd62f70e737bb4a94f6e6c04e87a92&amp;type=3#DefaultUSS"/>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement style="width: 50%; flex-direction: column-reverse;">
+            <ui:Label text="2nd" name="RankLabel" style="font-size: 128px; -unity-text-align: middle-center; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); background-color: rgba(255, 255, 255, 0.8); margin-top: 0; margin-right: 256px; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-top-width: 4px; border-right-width: 4px; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-right-radius: 16px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="width: 50%;">
+            <ui:VisualElement style="flex-grow: 1; margin-left: 64px; margin-top: 64px;">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="倒した数" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                    <ui:Label text="99" name="KillCountLabel" class="score-label"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="やられた数" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                    <ui:Label text="99" name="DeathCountLabel" class="score-label"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="最大レベル" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                    <ui:Label text="99" name="MaxLevelLabel" class="score-label"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="終了時レベル" style="font-size: 80px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                    <ui:Label text="99" name="FinishLevelLabel" class="score-label"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
+                <ui:Button text="OK" class="button" style="display: none; align-self: center; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
+                <ui:Label text="ホストの操作を待っています…" name="WaitingTextLabel" style="-unity-text-align: upper-center; font-size: 60px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); margin-bottom: 64px;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
