@@ -14,11 +14,8 @@ public class PlayerScore : NetworkBehaviour
 
     void Awake()
     {
-        if (IsOwner)
-        {
-            // スコアの初期化
-            playerScore.Reset();
-        }
+        // スコアの初期化
+        playerScore.Reset();
     }
 
     void OnScoreChanged(int prevValue, int newValue)
