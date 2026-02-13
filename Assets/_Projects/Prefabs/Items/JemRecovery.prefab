@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JemRecovery
       objectReference: {fileID: 0}
+    - target: {fileID: 7936391006631646086, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2246268122
+      objectReference: {fileID: 0}
     - target: {fileID: 8884088592804979968, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
