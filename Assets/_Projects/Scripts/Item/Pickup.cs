@@ -4,19 +4,21 @@ using DG.Tweening;
 
 public abstract class Pickup : NetworkBehaviour
 {
-    [SerializeField] NetworkObject networkObject;
     bool hasPickedUp;
 
     public override void OnNetworkSpawn()
     {
         hasPickedUp = false;
         NetworkObject.DestroyWithScene = true;
-        transform.DOMoveY(transform.localScale.y / 2, 0.2f).SetEase(Ease.OutBounce);
+        transform.DOMoveY(transform.localScale.y / 2, 1f)
+            .SetEase(Ease.OutBounce)
+            .SetLink(gameObject);
     }
 
     public override void OnNetworkDespawn()
     {
         // ネットワークから切り離されたら、画面上からも隠す
+        transform.DOComplete();
         gameObject.SetActive(false);
     }
 
@@ -31,9 +33,8 @@ public abstract class Pickup : NetworkBehaviour
         if (other.CompareTag("Player"))
         {
             hasPickedUp = true;
-            Debug.Log("Picked Up!!");
             OnPickedUp();
-            networkObject.Despawn(false);
+            NetworkObject.Despawn();
         }
     }
 

@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118651719}
+  - component: {fileID: 118651720}
   m_Layer: 0
   m_Name: ItemPool
   m_TagString: Untagged
@@ -150,6 +151,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1993250938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &118651720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118651718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 426718482
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &220061773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   ShowTopMostFoldoutHeaderGroup: 1
-  timerLimit: 10
+  timerLimit: 180
   redThredhouldTime: 30
   gameUI: {fileID: 220061774}
 --- !u!114 &1162908851
@@ -1229,11 +1255,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   networkItemPrefab: {fileID: 7936391006631646086, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
   maxItemCount: 50
-  spawnInterval: 5
+  spawnInterval: 0.1
   spawnAreas:
   - center: {x: 0, y: 1, z: 0}
     radius: 20
     weight: 1
+  - center: {x: 0, y: 1, z: 0}
+    radius: 2
+    weight: 5
   itemParent: {fileID: 118651719}
 --- !u!114 &1162908852
 MonoBehaviour:
@@ -1252,7 +1281,6 @@ MonoBehaviour:
   - {fileID: -2835407228768735444, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
   - {fileID: 1442640931612320864, guid: fb32080cc3bbafc4da59e43e7c94e0c3, type: 3}
   - {fileID: 1654363784452544009, guid: 103fa0734fcd44241b78ee4948ecfe9d, type: 3}
-  poolSizePerPrefab: 10
 --- !u!1 &1184239917
 GameObject:
   m_ObjectHideFlags: 0

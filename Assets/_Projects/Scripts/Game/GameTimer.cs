@@ -28,8 +28,9 @@ public class GameTimer : NetworkBehaviour
 
     void Update()
     {
-        // endTimeが初期化されるまでは、何もしない
-        if (endTime.Value <= 0)
+        // endTimeが初期化されるまでは、何もしない。
+        // NetworkManagerが消えた時も同様
+        if (endTime.Value <= 0 || NetworkManager.Singleton == null)
         {
             return;
         }

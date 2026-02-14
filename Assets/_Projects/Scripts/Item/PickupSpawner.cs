@@ -21,12 +21,13 @@ public class PickupSpawner : NetworkBehaviour
     [SerializeField] int maxItemCount;
     [SerializeField] float spawnInterval;
     [SerializeField] List<SpawnArea> spawnAreas = new();
+    [SerializeField] Transform itemParent;
     readonly List<NetworkObject> activeItems = new();
     float spawnTimer = 0;
 
     public override void OnNetworkSpawn()
     {
-        // サーバー以外ではこのスクリプトの更新を無効にする
+        // サーバー以外ではスポーン処理を行わない
         if (!IsServer)
         {
             enabled = false;
@@ -38,23 +39,30 @@ public class PickupSpawner : NetworkBehaviour
 
     void Update()
     {
+        if (!IsServer || NetworkManager.Singleton == null)
+        {
+            return;
+        }
+
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer >= spawnInterval)
         {
             spawnTimer = 0;
-            TrySpawnItem();
+            SpawnItem();
         }
     }
 
-    private void TrySpawnItem()
+    /// <summary>
+    /// 最大数までアイテムを補充する処理
+    /// </summary>
+    void SpawnItem()
     {
         // リストから既に破壊された（拾われた）アイテムを除去
         activeItems.RemoveAll(item => item == null || !item.IsSpawned);
 
         // 足りない個数を計算する
-        int currentCount = activeItems.Count;
-        int itemsToSpawn = maxItemCount - currentCount;
+        int itemsToSpawn = maxItemCount - activeItems.Count;
 
         // 足りない分だけループして生成
         for (int i = 0; i < itemsToSpawn; ++i)
@@ -71,18 +79,25 @@ public class PickupSpawner : NetworkBehaviour
                 networkItemPrefab,
                 OwnerClientId,
                 true,
-                false,
-                false,
-                spawnPosition,
-                Quaternion.identity
+                position: spawnPosition,
+                rotation: Quaternion.identity
             );
+
+            if (!networkItem.TrySetParent(itemParent))
+            {
+                Debug.LogWarning("Could not set parent");
+            }
 
             // 管理リストに追加
             activeItems.Add(networkItem);
         }
     }
 
-    private SpawnArea GetRandomArea()
+    /// <summary>
+    /// ランダムなスポーンエリアを返す処理
+    /// </summary>
+    /// <returns>ランダムな球状の範囲</returns>
+    SpawnArea GetRandomArea()
     {
         // リスト内のエリアの重みの合計値を算出
         int totalWeight = 0;
@@ -100,7 +115,7 @@ public class PickupSpawner : NetworkBehaviour
         {
             currentWeight += area.Weight;
 
-            // 乱数が重みの合計値の中に入れば、そのアリアを返す
+            // 乱数が重みの合計値の中に入れば、そのエリアを返す
             if (random < currentWeight)
             {
                 return area;
@@ -111,12 +126,11 @@ public class PickupSpawner : NetworkBehaviour
         return spawnAreas[0];
     }
 
-    // エディタ上で範囲を見やすくするためのデバッグ表示
     private void OnDrawGizmos()
     {
         foreach (var zone in spawnAreas)
         {
-            Gizmos.color = new Color(0, 1, 0, 0.8f);
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
             Gizmos.DrawSphere(zone.Center, zone.Radius);
         }
     }

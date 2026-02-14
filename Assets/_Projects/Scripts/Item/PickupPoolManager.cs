@@ -8,14 +8,11 @@ public class PickupPoolManager : NetworkBehaviour
 
     [Header("Settings")]
     [SerializeField] Pickup[] pickupPrefabs;
-    [SerializeField] int poolSizePerPrefab = 10; // プレハブごとの初期数
-    [SerializeField] Transform itemParent;
-
     readonly Dictionary<uint, Queue<NetworkObject>> pickupPools = new();
-    readonly Dictionary<uint, GameObject> hashToPrefab = new();
 
     void Awake()
     {
+        // シングルトン設計
         if (Instance == null)
         {
             Instance = this;
@@ -28,27 +25,25 @@ public class PickupPoolManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // サーバー・クライアント両方でハンドラーを登録する必要がある
+        // サーバー・クライアント両方で各プレハブのハンドラーを登録
         foreach (var pickup in pickupPrefabs)
         {
             GameObject prefab = pickup.gameObject;
-            NetworkObject networkObject = prefab.GetComponent<NetworkObject>();
-            uint globalObjectIdHash = networkObject.PrefabIdHash;
-
-            if (!pickupPools.ContainsKey(globalObjectIdHash))
+            if (!prefab.TryGetComponent(out NetworkObject networkPrefab))
             {
-                pickupPools[globalObjectIdHash] = new Queue<NetworkObject>();
-                hashToPrefab[globalObjectIdHash] = prefab;
+                continue;
+            }
 
-                // NGOに「このプレハブの生成・破棄はこのクラス（内部ハンドラー）に任せて」と登録
-                NetworkManager.Singleton.PrefabHandler.AddHandler(networkObject, new PickupInstanceHandler(prefab, this));
+            uint hash = networkPrefab.PrefabIdHash;
+            if (!pickupPools.ContainsKey(hash))
+            {
+                pickupPools[hash] = new Queue<NetworkObject>();
 
-                // 事前生成 (Prewarm)
-                for (int i = 0; i < poolSizePerPrefab; i++)
-                {
-                    var obj = CreateNewInstance(prefab);
-                    ReturnToPool(globalObjectIdHash, obj);
-                }
+                // NGOに生成、破棄のハンドリングを登録
+                NetworkManager.Singleton.PrefabHandler.AddHandler(
+                    networkPrefab,
+                    new PickupInstanceHandler(prefab, this)
+                );
             }
         }
     }
@@ -58,28 +53,46 @@ public class PickupPoolManager : NetworkBehaviour
         // ハンドラーの解除
         foreach (var pickup in pickupPrefabs)
         {
-            if (NetworkManager.Singleton != null && NetworkManager.Singleton.PrefabHandler != null)
-            {
-                NetworkManager.Singleton.PrefabHandler.RemoveHandler(pickup.gameObject);
-            }
+            NetworkManager.Singleton.PrefabHandler.RemoveHandler(pickup.gameObject);
         }
     }
 
+    /// <summary>
+    /// プールの不足時に新しくオブジェクトを生成する処理
+    /// </summary>
+    /// <param name="prefab">生成するプレハブ</param>
+    /// <returns>生成したNetworkObjectのインスタンス</returns>
     NetworkObject CreateNewInstance(GameObject prefab)
     {
-        var obj = Instantiate(prefab, itemParent);
+        var obj = Instantiate(prefab);
         obj.SetActive(false);
-        return obj.GetComponent<NetworkObject>();
+        if (obj.TryGetComponent(out NetworkObject instance))
+        {
+            return instance;
+        }
+        return null;
     }
 
+    /// <summary>
+    /// オブジェクトプールから対象のオブジェクトを持ってくる処理
+    /// </summary>
+    /// <param name="prefab">生成したいプレハブ</param>
+    /// <param name="position">生成位置</param>
+    /// <param name="rotation">生成時の向き</param>
+    /// <returns>持ってきたNetworkObjectのインスタンス</returns>
     public NetworkObject GetFromPool(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        uint hash = prefab.GetComponent<NetworkObject>().PrefabIdHash;
+        if (!prefab.TryGetComponent(out NetworkObject component))
+        {
+            return null;
+        }
+
+        uint hash = component.PrefabIdHash;
         NetworkObject netObj;
 
-        if (pickupPools[hash].Count > 0)
+        if (pickupPools.TryGetValue(hash, out Queue<NetworkObject> pool) && pool.Count > 0)
         {
-            netObj = pickupPools[hash].Dequeue();
+            netObj = pool.Dequeue();
         }
         else
         {
@@ -88,19 +101,21 @@ public class PickupPoolManager : NetworkBehaviour
         }
 
         netObj.transform.SetPositionAndRotation(position, rotation);
-        netObj.gameObject.SetActive(true); // 表示をオンにする
+        netObj.gameObject.SetActive(true);
         return netObj;
     }
 
+    /// <summary>
+    /// 使い終えたオブジェクトをプールに返還する処理
+    /// </summary>
     public void ReturnToPool(uint hash, NetworkObject networkObject)
     {
-        networkObject.gameObject.SetActive(false); // 非表示にする
+        networkObject.gameObject.SetActive(false);
         pickupPools[hash].Enqueue(networkObject);
     }
 }
 
 // NGOの生成・破棄要求を受け取るための内部クラス
-// これにより「どのプレハブが呼ばれたか」を特定できる
 public class PickupInstanceHandler : INetworkPrefabInstanceHandler
 {
     readonly GameObject prefab;
@@ -118,7 +133,7 @@ public class PickupInstanceHandler : INetworkPrefabInstanceHandler
         return poolManager.GetFromPool(prefab, position, rotation);
     }
 
-    // networkObject.Despawn(false) が呼ばれた時に実行される
+    // networkObject.Despawn() が呼ばれた時に実行される
     public void Destroy(NetworkObject networkObject)
     {
         uint hash = networkObject.PrefabIdHash;
