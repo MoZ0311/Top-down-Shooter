@@ -44,7 +44,6 @@ public class PlayerHealth : NetworkBehaviour
                 }
             }
             gameObject.SetActive(false);
-            Debug.Log("死");
         }
     }
 }

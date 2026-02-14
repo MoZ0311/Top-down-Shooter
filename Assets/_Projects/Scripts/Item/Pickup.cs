@@ -4,13 +4,17 @@ using DG.Tweening;
 
 public abstract class Pickup : NetworkBehaviour
 {
+    [SerializeField] float moveDuration;
+    Transform cameraTransform;
     bool hasPickedUp;
+    const string PlayerTag = "Player";
 
     public override void OnNetworkSpawn()
     {
+        cameraTransform = Camera.main.transform;
         hasPickedUp = false;
         NetworkObject.DestroyWithScene = true;
-        transform.DOMoveY(transform.localScale.y / 2, 1f)
+        transform.DOMoveY(transform.localScale.y / 2, moveDuration)
             .SetEase(Ease.OutBounce)
             .SetLink(gameObject);
     }
@@ -30,10 +34,10 @@ public abstract class Pickup : NetworkBehaviour
             return;
         }
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(PlayerTag))
         {
             hasPickedUp = true;
-            OnPickedUp();
+            OnPickedUp(other);
             NetworkObject.Despawn();
         }
     }
@@ -41,8 +45,8 @@ public abstract class Pickup : NetworkBehaviour
     void LateUpdate()
     {
         // 常にカメラの正面を向かせる
-        transform.LookAt(transform.position + Camera.main.transform.forward);
+        transform.LookAt(transform.position + cameraTransform.forward);
     }
 
-    protected abstract void OnPickedUp();
+    protected abstract void OnPickedUp(Collider collider);
 }

@@ -4,6 +4,9 @@ public class PlayerStatus : MonoBehaviour
 {
     [Header("ParameterSO")]
     [SerializeField] PlayerParameterSO defaultParameter;    // 参照する初期値
+
+    [Header("Ref Level")]
+    [SerializeField] PlayerLevel playerLevel;               // 参照するレベル
     public float Health { get; private set; }               // 体力
     public float MoveSpeed { get; private set; }            // 移動速度
     public float AttackPower { get; private set; }          // 攻撃力
