@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerRespawn : NetworkBehaviour
 {
-    private static readonly WaitForSeconds waitForSeconds3 = new(3.0f);
+    private static readonly WaitForSeconds waitForSeconds = new(1.5f);
 
     [Header("Ref Health")]
     [SerializeField] PlayerHealth playerHealth;
@@ -20,7 +20,7 @@ public class PlayerRespawn : NetworkBehaviour
         // 死亡状態にする（クライアント全員に通知）
         SetActiveClientRpc(false);
 
-        yield return waitForSeconds3;
+        yield return waitForSeconds;
 
         // HPを回復させて復活（クライアント全員に通知）
         SetActiveClientRpc(true);

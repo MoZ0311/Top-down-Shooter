@@ -5165,6 +5165,7 @@ Transform:
   m_Children:
   - {fileID: 2297692148947929884}
   - {fileID: 8311956494475381612}
+  - {fileID: 2462234167961576019}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2203710092060421660
@@ -5448,6 +5449,7 @@ MonoBehaviour:
   playerScore: {fileID: 11400000, guid: 96a2b44c201df974c81a6ad5136288fc, type: 2}
   playerStatus: {fileID: 5857056511951518487}
   playerHealth: {fileID: 4622178445958425396}
+  playerUIManager: {fileID: 157653805074256395}
 --- !u!114 &5857056511951518487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5561,6 +5563,75 @@ MonoBehaviour:
   muzzle: {fileID: 8064630663020514160}
   status: {fileID: 5857056511951518487}
   muzzleFlash: {fileID: 796259910307469037}
+--- !u!1 &3719941659095571151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2462234167961576019}
+  - component: {fileID: 157653805074256395}
+  - component: {fileID: 7739246567424257022}
+  m_Layer: 5
+  m_Name: PlayerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2462234167961576019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719941659095571151}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3461111436869055948}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &157653805074256395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719941659095571151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53d4ffbf018ca7448f99330977766a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerUIManager
+  playerUI: {fileID: 7739246567424257022}
+--- !u!114 &7739246567424257022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719941659095571151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: a9bbe3842582feb4d8befb74e29a2ca3, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 704cfc89b8c6a0040a4b5f87f0e7d02a, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &3954349350822581839
 GameObject:
   m_ObjectHideFlags: 0
@@ -6075,7 +6146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02961c72743ccc14aa519458ce08b6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthGaugeManager
-  gameUI: {fileID: 5690904549863900353}
+  trackingUI: {fileID: 5690904549863900353}
   playerHealth: {fileID: 4622178445958425396}
 --- !u!114 &5690904549863900353
 MonoBehaviour:

@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class HealthGaugeManager : MonoBehaviour
 {
-    [SerializeField] UIDocument gameUI;
+    [SerializeField] UIDocument trackingUI;
     [SerializeField] PlayerHealth playerHealth;
     VisualElement fill;
     Label healthLabel;
@@ -23,7 +23,7 @@ public class HealthGaugeManager : MonoBehaviour
     void OnEnable()
     {
         // UI要素を検索/取得
-        var root = gameUI.rootVisualElement;
+        var root = trackingUI.rootVisualElement;
         fill = root.Q<VisualElement>(Fill);
         healthLabel = root.Q<Label>();
 

@@ -16,13 +16,39 @@ public class PlayerLevel : NetworkBehaviour
     [SerializeField] PlayerStatus playerStatus;
     [SerializeField] PlayerHealth playerHealth;
 
+    [Header("Scripts")]
+    [SerializeField] PlayerUIManager playerUIManager;
+
     readonly List<int> nextLevelExpList = new();
     public NetworkVariable<int> CurrentLevel { get; } = new(1);
-    int currentExp;
+    public NetworkVariable<int> CurrentExp { get; } = new(0);
 
     void Awake()
     {
         GenerateExpTable();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        // オーナーの時のみ、UI関連にアクセス
+        if (IsOwner)
+        {
+            playerUIManager.gameObject.SetActive(true);
+            playerUIManager.Initialize();
+        }
+
+        CurrentExp.OnValueChanged += OnExpChanged;
+        CurrentLevel.OnValueChanged += OnLevelChanged;
+
+        // 初期状態で一度更新
+        OnExpChanged(0, CurrentExp.Value);
+        OnLevelChanged(0, CurrentLevel.Value);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        CurrentExp.OnValueChanged -= OnExpChanged;
+        CurrentLevel.OnValueChanged -= OnLevelChanged;
     }
 
     /// <summary>
@@ -48,17 +74,52 @@ public class PlayerLevel : NetworkBehaviour
     }
 
     /// <summary>
+    /// 現在の経験値の進捗率を算出する
+    /// </summary>
+    float CalculateExpRatio()
+    {
+        // 最大レベルに達している場合はゲージを満タンにする
+        if (CurrentLevel.Value >= maxLevel)
+        {
+            return 1.0f;
+        }
+
+        // 現在のレベルで必要な経験値
+        float requiredExp = nextLevelExpList[CurrentLevel.Value];
+
+        // 0除算を防ぎつつ割合を計算
+        return requiredExp > 0 ? CurrentExp.Value / requiredExp : 0f;
+    }
+
+    /// <summary>
     /// 現在の経験値に基づき、レベルアップが必要か判定する
     /// </summary>
     void TryLevelUp()
     {
         // 現在のレベルが最大未満、かつ現在の経験値が必要量に達している間繰り返す
-        while (CurrentLevel.Value < maxLevel && currentExp >= nextLevelExpList[CurrentLevel.Value])
+        while (CurrentLevel.Value < maxLevel && CurrentExp.Value >= nextLevelExpList[CurrentLevel.Value])
         {
             // 必要分を消費してレベルアップ
-            currentExp -= nextLevelExpList[CurrentLevel.Value];
+            CurrentExp.Value -= nextLevelExpList[CurrentLevel.Value];
             CurrentLevel.Value++;
         }
+    }
+
+    void UpdatePlayerUI()
+    {
+        // オーナーのみUIを更新する
+        if (IsOwner)
+        {
+            playerUIManager.UpdatePlayerUI(CurrentLevel.Value, CalculateExpRatio());
+        }
+    }
+
+    /// <summary>
+    /// 経験値を更新し、UIに反映する
+    /// </summary>
+    void OnExpChanged(int prevValue, int newValue)
+    {
+        UpdatePlayerUI();
     }
 
     /// <summary>
@@ -82,9 +143,12 @@ public class PlayerLevel : NetworkBehaviour
             playerHealth.TakeDamage(-diff);
         }
 
-        // スコア更新は、Ownerのみが行える
         if (IsOwner)
         {
+            // UI更新
+            UpdatePlayerUI();
+
+            // スコア更新は、Ownerのみが行える
             playerScore.finishLevel = newValue;
             if (playerScore.maxLevel < newValue)
             {
@@ -95,25 +159,12 @@ public class PlayerLevel : NetworkBehaviour
 
     public void PickedExp()
     {
-        currentExp++;
+        CurrentExp.Value++;
         TryLevelUp();
     }
 
     public void LostExp()
     {
-        currentExp--;
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        CurrentLevel.OnValueChanged += OnLevelChanged;
-
-        // 初期状態で一度更新
-        OnLevelChanged(0, CurrentLevel.Value);
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        CurrentLevel.OnValueChanged -= OnLevelChanged;
+        CurrentExp.Value--;
     }
 }
