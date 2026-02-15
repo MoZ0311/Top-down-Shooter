@@ -101,5 +101,7 @@ public class BulletCollisionManager : NetworkBehaviour
             damageAmount = damage,
             lifeTime = 3.0f
         });
+
+        AudioPlayer.Instance.PlaySE("fire");
     }
 }

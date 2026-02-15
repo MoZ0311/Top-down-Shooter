@@ -60,6 +60,8 @@ public class ResultUIManager : NetworkBehaviour
         maxLevelLabel.text = playerScore.maxLevel.ToString();
         finishLevelLabel.text = playerScore.finishLevel.ToString();
         rankLabel.text = playerScore.rank.ToString() + Rank;
+
+        AudioPlayer.Instance.PlaySE("cheers");
     }
 
     public override void OnNetworkDespawn()

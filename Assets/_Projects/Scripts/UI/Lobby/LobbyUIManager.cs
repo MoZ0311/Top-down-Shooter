@@ -57,6 +57,7 @@ public class LobbyUIManager : NetworkBehaviour
     /// </summary>
     void OnClickedStart()
     {
+        AudioPlayer.Instance.PlaySE("button");
         NetworkManager.Singleton.SceneManager.LoadScene(GameScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 

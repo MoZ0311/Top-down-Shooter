@@ -33,6 +33,11 @@ public class PlayerHealth : NetworkBehaviour
         // HPを0以上最大値以下で変動させる
         CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value - damageAmount, 0, MaxHealth);
 
+        if (damageAmount >= 0)
+        {
+            AudioPlayer.Instance.PlaySE("hit");
+        }
+
         // HPが0以下になった時の処理
         if (CurrentHealth.Value <= 0)
         {
