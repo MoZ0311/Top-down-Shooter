@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
   ShowTopMostFoldoutHeaderGroup: 1
+  moveDuration: 1
+  exp: 1
 --- !u!135 &2500194631761166760
 SphereCollider:
   m_ObjectHideFlags: 0

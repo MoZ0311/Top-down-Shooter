@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2835407228768735444, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
+      propertyPath: exp
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1793092448463009150, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.4
@@ -63,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 1842693571058021047, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
       propertyPath: m_Name
       value: JemRare
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936391006631646086, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3116375053
       objectReference: {fileID: 0}
     - target: {fileID: 8884088592804979968, guid: 522659e88fb9f2c439b00000014adca6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

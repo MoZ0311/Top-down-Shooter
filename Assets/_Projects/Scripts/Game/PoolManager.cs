@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 public class PoolManager : MonoBehaviour
 {
     // シングルトン用のインスタンス
-    public static PoolManager Instance = null;
+    public static PoolManager Instance { get; private set; } = null;
 
     [Header("Prefab")]
     [SerializeField] BulletMovement bulletPrefab;   // 弾のプレハブ

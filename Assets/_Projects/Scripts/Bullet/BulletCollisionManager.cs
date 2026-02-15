@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BulletCollisionManager : NetworkBehaviour
 {
     // シングルトン用のインスタンス
-    public static BulletCollisionManager Instance = null;
+    public static BulletCollisionManager Instance { get; private set; } = null;
 
     [Header("Settings")]
     [SerializeField] LayerMask targetLayer; // 弾が接触できるレイヤー

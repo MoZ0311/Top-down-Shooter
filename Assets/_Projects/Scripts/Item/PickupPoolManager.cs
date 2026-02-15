@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class PickupPoolManager : NetworkBehaviour
 {
-    public static PickupPoolManager Instance = null;
+    // シングルトン用のインスタンス
+    public static PickupPoolManager Instance { get; private set; } = null;
 
     [Header("Settings")]
-    [SerializeField] Pickup[] pickupPrefabs;
+    [SerializeField] PickupItemSO pickupItem;
     readonly Dictionary<uint, Queue<NetworkObject>> pickupPools = new();
 
     void Awake()
@@ -26,7 +27,7 @@ public class PickupPoolManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         // サーバー・クライアント両方で各プレハブのハンドラーを登録
-        foreach (var pickup in pickupPrefabs)
+        foreach (var pickup in pickupItem.PickupItemList)
         {
             GameObject prefab = pickup.gameObject;
             if (!prefab.TryGetComponent(out NetworkObject networkPrefab))
@@ -51,7 +52,7 @@ public class PickupPoolManager : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         // ハンドラーの解除
-        foreach (var pickup in pickupPrefabs)
+        foreach (var pickup in pickupItem.PickupItemList)
         {
             NetworkManager.Singleton.PrefabHandler.RemoveHandler(pickup.gameObject);
         }

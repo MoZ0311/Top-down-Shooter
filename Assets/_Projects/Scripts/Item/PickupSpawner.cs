@@ -16,14 +16,29 @@ public struct SpawnArea
 
 public class PickupSpawner : NetworkBehaviour
 {
+    // シングルトン用のインスタンス
+    public static PickupSpawner Instance { get; private set; } = null;
+
     [Header("Settings")]
-    [SerializeField] NetworkObject networkItemPrefab;
+    [SerializeField] PickupItemSO pickupItem;
     [SerializeField] int maxItemCount;
     [SerializeField] float spawnInterval;
     [SerializeField] List<SpawnArea> spawnAreas = new();
     [SerializeField] Transform itemParent;
     readonly List<NetworkObject> activeItems = new();
     float spawnTimer = 0;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public override void OnNetworkSpawn()
     {
@@ -76,13 +91,14 @@ public class PickupSpawner : NetworkBehaviour
 
             // スポーン処理
             NetworkObject networkItem = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
-                networkItemPrefab,
+                pickupItem.PickupItemList[0],
                 OwnerClientId,
                 true,
                 position: spawnPosition,
                 rotation: Quaternion.identity
             );
 
+            // 親の設定
             if (!networkItem.TrySetParent(itemParent))
             {
                 Debug.LogWarning("Could not set parent");
@@ -90,6 +106,47 @@ public class PickupSpawner : NetworkBehaviour
 
             // 管理リストに追加
             activeItems.Add(networkItem);
+        }
+    }
+
+    /// <summary>
+    /// 指定した地点を中心に、アイテムの群れを即座に生成します。
+    /// </summary>
+    /// <param name="origin">中心座標</param>
+    /// <param name="range">散らばる半径</param>
+    /// <param name="count">生成する個数</param>
+    /// <param name="prefab">生成したいアイテムのNetworkObjectプレハブ</param>
+    public void SpawnBurst(Vector3 origin, float range, int count, NetworkObject prefab = null)
+    {
+        // サーバー以外では実行不可
+        if (!IsServer)
+        {
+            return;
+        }
+
+        for (int i = 0; i < count; ++i)
+        {
+            // 中心座標から指定範囲内のランダムな位置を計算
+            Vector2 randomCircle = Random.insideUnitCircle * range;
+            Vector3 spawnPosition = origin + new Vector3(randomCircle.x, 0, randomCircle.y);
+
+            // プレハブに指定がなければ、ノーマル経験値を発生させる
+            NetworkObject itemPrefab = prefab == null ? pickupItem.PickupItemList[0] : prefab;
+
+            // プールから取得してネットワークスポーン
+            NetworkObject networkItem = NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(
+                itemPrefab,
+                OwnerClientId,
+                true,
+                position: spawnPosition,
+                rotation: Quaternion.identity
+            );
+
+            // 親の設定
+            if (!networkItem.TrySetParent(itemParent))
+            {
+                Debug.LogWarning("Could not set parent");
+            }
         }
     }
 

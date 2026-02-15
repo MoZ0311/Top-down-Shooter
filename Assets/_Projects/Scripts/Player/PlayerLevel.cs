@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class PlayerLevel : NetworkBehaviour
 {
@@ -20,8 +21,15 @@ public class PlayerLevel : NetworkBehaviour
     [SerializeField] PlayerUIManager playerUIManager;
 
     readonly List<int> nextLevelExpList = new();
-    public NetworkVariable<int> CurrentLevel { get; } = new(1);
-    public NetworkVariable<int> CurrentExp { get; } = new(0);
+
+    readonly NetworkVariable<int> currentLevel = new(1);
+    public NetworkVariable<int> CurrentLevel
+    {
+        get => currentLevel;
+        set => currentLevel.Value = Mathf.Clamp(value.Value, 1, maxLevel);
+    }
+
+    readonly NetworkVariable<int> currentExp = new(0);
 
     void Awake()
     {
@@ -37,17 +45,17 @@ public class PlayerLevel : NetworkBehaviour
             playerUIManager.Initialize();
         }
 
-        CurrentExp.OnValueChanged += OnExpChanged;
+        currentExp.OnValueChanged += OnExpChanged;
         CurrentLevel.OnValueChanged += OnLevelChanged;
 
         // 初期状態で一度更新
-        OnExpChanged(0, CurrentExp.Value);
+        OnExpChanged(0, currentExp.Value);
         OnLevelChanged(0, CurrentLevel.Value);
     }
 
     public override void OnNetworkDespawn()
     {
-        CurrentExp.OnValueChanged -= OnExpChanged;
+        currentExp.OnValueChanged -= OnExpChanged;
         CurrentLevel.OnValueChanged -= OnLevelChanged;
     }
 
@@ -88,7 +96,7 @@ public class PlayerLevel : NetworkBehaviour
         float requiredExp = nextLevelExpList[CurrentLevel.Value];
 
         // 0除算を防ぎつつ割合を計算
-        return requiredExp > 0 ? CurrentExp.Value / requiredExp : 0f;
+        return requiredExp > 0 ? currentExp.Value / requiredExp : 0f;
     }
 
     /// <summary>
@@ -97,10 +105,10 @@ public class PlayerLevel : NetworkBehaviour
     void TryLevelUp()
     {
         // 現在のレベルが最大未満、かつ現在の経験値が必要量に達している間繰り返す
-        while (CurrentLevel.Value < maxLevel && CurrentExp.Value >= nextLevelExpList[CurrentLevel.Value])
+        while (CurrentLevel.Value < maxLevel && currentExp.Value >= nextLevelExpList[CurrentLevel.Value])
         {
             // 必要分を消費してレベルアップ
-            CurrentExp.Value -= nextLevelExpList[CurrentLevel.Value];
+            currentExp.Value -= nextLevelExpList[CurrentLevel.Value];
             CurrentLevel.Value++;
         }
     }
@@ -157,14 +165,9 @@ public class PlayerLevel : NetworkBehaviour
         }
     }
 
-    public void PickedExp()
+    public void PickedExp(int value)
     {
-        CurrentExp.Value++;
+        currentExp.Value += value;
         TryLevelUp();
-    }
-
-    public void LostExp()
-    {
-        CurrentExp.Value--;
     }
 }

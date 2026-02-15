@@ -6,6 +6,15 @@ public class PlayerRespawn : NetworkBehaviour
 {
     private static readonly WaitForSeconds waitForSeconds = new(1.5f);
 
+    [Header("Setting")]
+    [SerializeField] int dropItemCount;
+
+    [Header("PickupItemSO")]
+    [SerializeField] PickupItemSO pickupItem;
+
+    [Header("Ref Level")]
+    [SerializeField] PlayerLevel playerLevel;
+
     [Header("Ref Health")]
     [SerializeField] PlayerHealth playerHealth;
 
@@ -19,6 +28,19 @@ public class PlayerRespawn : NetworkBehaviour
     {
         // 死亡状態にする（クライアント全員に通知）
         SetActiveClientRpc(false);
+
+        // レベルダウン
+        playerLevel.CurrentLevel.Value = 1;
+
+        // 経験値をばらまく
+        Vector3 dropPosition = transform.position;
+        dropPosition.y = 1;
+        PickupSpawner.Instance.SpawnBurst(
+            dropPosition,
+            transform.localScale.x,
+            playerLevel.CurrentLevel.Value * dropItemCount,
+            pickupItem.PickupItemList[1]
+        );
 
         yield return waitForSeconds;
 
