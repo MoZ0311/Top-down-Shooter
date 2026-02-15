@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.Netcode;
-using System.Collections.Generic;
-using System.Linq;
 
 public class ResultUIManager : NetworkBehaviour
 {
@@ -25,6 +23,7 @@ public class ResultUIManager : NetworkBehaviour
     const string RankLabel = "RankLabel";
     const string WaitingTextLabel = "WaitingTextLabel";
     const string LobbyScene = "LobbyScene";
+    const string Rank = "位";
 
     void OnEnable()
     {
@@ -46,8 +45,13 @@ public class ResultUIManager : NetworkBehaviour
     {
         if (IsServer)
         {
+            // 待ちテキストを非表示
             waitingTextLabel.style.display = DisplayStyle.None;
+
+            // ボタン表示
             okButton.style.display = DisplayStyle.Flex;
+
+            // 押下時のイベント登録
             okButton.clicked += OnClickedOK;
         }
 
@@ -55,7 +59,7 @@ public class ResultUIManager : NetworkBehaviour
         deathCountLabel.text = playerScore.deathCount.ToString();
         maxLevelLabel.text = playerScore.maxLevel.ToString();
         finishLevelLabel.text = playerScore.finishLevel.ToString();
-        rankLabel.text = playerScore.rank.ToString() + "位";
+        rankLabel.text = playerScore.rank.ToString() + Rank;
     }
 
     public override void OnNetworkDespawn()

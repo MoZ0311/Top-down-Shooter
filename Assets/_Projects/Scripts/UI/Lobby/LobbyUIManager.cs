@@ -6,8 +6,11 @@ public class LobbyUIManager : NetworkBehaviour
 {
     [SerializeField] UIDocument lobbyUI;
     Label playerCountLabel;
+    Label waitingTextLabel;
     Button startButton;
     const int MinPlayerToStart = 2;
+    const string PlayerCountLabel = "PlayerCountLabel";
+    const string WaitingTextLabel = "WaitingTextLabel";
     const string GameScene = "GameScene";
     readonly NetworkVariable<int> playerCount = new(0);
 
@@ -15,7 +18,8 @@ public class LobbyUIManager : NetworkBehaviour
     {
         // UI要素の検索/取得
         var root = lobbyUI.rootVisualElement;
-        playerCountLabel = root.Q<Label>();
+        playerCountLabel = root.Q<Label>(PlayerCountLabel);
+        waitingTextLabel = root.Q<Label>(WaitingTextLabel);
         startButton = root.Q<Button>();
     }
 
@@ -61,6 +65,9 @@ public class LobbyUIManager : NetworkBehaviour
             // クライアントの接続時、離脱時にイベント登録
             NetworkManager.Singleton.OnClientConnectedCallback += UpdatePlayerCount;
             NetworkManager.Singleton.OnClientDisconnectCallback += UpdatePlayerCount;
+
+            // 待ちテキスト非表示
+            waitingTextLabel.style.display = DisplayStyle.None;
 
             // ボタン表示
             startButton.style.display = DisplayStyle.Flex;
