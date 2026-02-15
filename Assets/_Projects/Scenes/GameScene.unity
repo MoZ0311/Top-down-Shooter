@@ -1111,6 +1111,7 @@ GameObject:
   - component: {fileID: 1162908849}
   - component: {fileID: 1162908851}
   - component: {fileID: 1162908852}
+  - component: {fileID: 1162908853}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1206,7 +1207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   ShowTopMostFoldoutHeaderGroup: 1
-  timerLimit: 5
+  timerLimit: 10
   redThredhouldTime: 30
   gameUI: {fileID: 220061774}
 --- !u!114 &1162908851
@@ -1244,6 +1245,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemPoolManager
   ShowTopMostFoldoutHeaderGroup: 1
   pickupItem: {fileID: 11400000, guid: 830540279cb0166458f06877e6864a12, type: 2}
+--- !u!114 &1162908853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162908845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b95dba71f1afa44f8dfc9321bf55433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RankingManager
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerScore: {fileID: 11400000, guid: 96a2b44c201df974c81a6ad5136288fc, type: 2}
 --- !u!1 &1184239917
 GameObject:
   m_ObjectHideFlags: 0

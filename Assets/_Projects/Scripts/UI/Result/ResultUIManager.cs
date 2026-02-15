@@ -55,6 +55,7 @@ public class ResultUIManager : NetworkBehaviour
         deathCountLabel.text = playerScore.deathCount.ToString();
         maxLevelLabel.text = playerScore.maxLevel.ToString();
         finishLevelLabel.text = playerScore.finishLevel.ToString();
+        rankLabel.text = playerScore.rank.ToString() + "位";
     }
 
     public override void OnNetworkDespawn()

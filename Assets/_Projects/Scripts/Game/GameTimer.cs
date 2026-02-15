@@ -57,6 +57,7 @@ public class GameTimer : NetworkBehaviour
             // サーバー側からシーン遷移を行う
             if (IsServer)
             {
+                RankingManager.Instance.UpdateRanksServer();
                 NetworkManager.Singleton.SceneManager.LoadScene(ResultScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
             }
             hasFinishedGame = true;
