@@ -9,12 +9,6 @@ public class PlayerScore : NetworkBehaviour
     [HideInInspector] public NetworkVariable<int> killCount = new();
     [HideInInspector] public NetworkVariable<int> deathCount = new();
 
-    void Awake()
-    {
-        // スコアの初期化
-        playerScore.Reset();
-    }
-
     void OnScoreChanged(int prevValue, int newValue)
     {
         playerScore.killCount = killCount.Value;
@@ -25,6 +19,7 @@ public class PlayerScore : NetworkBehaviour
     {
         if (IsOwner)
         {
+            playerScore.Reset();
             killCount.OnValueChanged += OnScoreChanged;
             deathCount.OnValueChanged += OnScoreChanged;
         }
