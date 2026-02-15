@@ -4,9 +4,9 @@ using DG.Tweening;
 
 public abstract class Pickup : NetworkBehaviour
 {
-    [SerializeField] float moveDuration;
-    Transform cameraTransform;
-    bool hasPickedUp;
+    [SerializeField] float moveDuration;    // スポーン時の演出の長さ
+    Transform cameraTransform;              // ビルボードで参照するカメラのTransform
+    bool hasPickedUp;                       // 既に拾われているか
     const string PlayerTag = "Player";
 
     public override void OnNetworkSpawn()

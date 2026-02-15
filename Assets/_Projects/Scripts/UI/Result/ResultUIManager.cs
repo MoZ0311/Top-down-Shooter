@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.Netcode;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ResultUIManager : NetworkBehaviour
 {
@@ -22,8 +24,9 @@ public class ResultUIManager : NetworkBehaviour
     const string FinishLevelLabel = "FinishLevelLabel";
     const string RankLabel = "RankLabel";
     const string WaitingTextLabel = "WaitingTextLabel";
+    const string LobbyScene = "LobbyScene";
 
-    void Awake()
+    void OnEnable()
     {
         // カーソルを表示する
         UnityEngine.Cursor.visible = true;
@@ -39,11 +42,6 @@ public class ResultUIManager : NetworkBehaviour
         okButton = root.Q<Button>();
     }
 
-    void OnClickedOK()
-    {
-        NetworkManager.Singleton.SceneManager.LoadScene("LobbyScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
-    }
-
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -57,6 +55,7 @@ public class ResultUIManager : NetworkBehaviour
         deathCountLabel.text = playerScore.deathCount.ToString();
         maxLevelLabel.text = playerScore.maxLevel.ToString();
         finishLevelLabel.text = playerScore.finishLevel.ToString();
+        rankLabel.text = playerScore.rank.ToString() + "位";
     }
 
     public override void OnNetworkDespawn()
@@ -65,5 +64,10 @@ public class ResultUIManager : NetworkBehaviour
         {
             okButton.clicked -= OnClickedOK;
         }
+    }
+
+    void OnClickedOK()
+    {
+        NetworkManager.Singleton.SceneManager.LoadScene(LobbyScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 }

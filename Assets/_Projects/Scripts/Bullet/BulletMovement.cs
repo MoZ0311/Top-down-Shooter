@@ -3,7 +3,7 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] float lifeTime;
+    [SerializeField] float lifeTime;                // 弾の生存可能な時間
     [SerializeField] LayerMask targetLayer;         // 衝突判定を取るレイヤー
 
     [Header("Components")]

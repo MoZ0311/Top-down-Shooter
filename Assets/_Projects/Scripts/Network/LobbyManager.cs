@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 public class LobbyManager : MonoBehaviour
 {
-    [SerializeField] float waitTime = 15;
-    Lobby currentLobby;
+    [SerializeField] float waitTime;    // HeartBeatの間隔
+    Lobby currentLobby;                 // ロビー
     const string RelayKey = "RelayCode";
 
     async void Start()

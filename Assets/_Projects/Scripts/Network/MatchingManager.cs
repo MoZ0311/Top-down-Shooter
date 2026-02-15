@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 
 public class MatchingManager : MonoBehaviour
 {
-    [SerializeField] int maxConnections = 4;
-    [SerializeField] RelayManager relayManager;
-    [SerializeField] LobbyManager lobbyManager;
+    [SerializeField] int maxConnections;        // 最大接続人数
+    [SerializeField] RelayManager relayManager; // リレー管理用のスクリプト
+    [SerializeField] LobbyManager lobbyManager; // ロビー管理用のスクリプト
 
     void Awake()
     {
+        // シーンを跨いで存在できるように設定
         DontDestroyOnLoad(gameObject);
     }
 

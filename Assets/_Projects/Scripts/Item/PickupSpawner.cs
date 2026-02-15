@@ -20,16 +20,17 @@ public class PickupSpawner : NetworkBehaviour
     public static PickupSpawner Instance { get; private set; } = null;
 
     [Header("Settings")]
-    [SerializeField] PickupItemSO pickupItem;
-    [SerializeField] int maxItemCount;
-    [SerializeField] float spawnInterval;
-    [SerializeField] List<SpawnArea> spawnAreas = new();
-    [SerializeField] Transform itemParent;
-    readonly List<NetworkObject> activeItems = new();
-    float spawnTimer = 0;
+    [SerializeField] PickupItemSO pickupItem;               // アイテムのリストを持つSO
+    [SerializeField] int maxItemCount;                      // 通常スポーン時の最大数
+    [SerializeField] float spawnInterval;                   // スポーンの間隔
+    [SerializeField] List<SpawnArea> spawnAreas = new();    // 生成範囲のリスト
+    [SerializeField] Transform itemParent;                  // 生成したアイテムたちの親オブジェクト
+    readonly List<NetworkObject> activeItems = new();       // アクティブ状態のアイテム
+    float spawnTimer = 0;                                   // スポーン用のタイマー
 
     void Awake()
     {
+        // シングルトン設計
         if (Instance == null)
         {
             Instance = this;
@@ -54,6 +55,7 @@ public class PickupSpawner : NetworkBehaviour
 
     void Update()
     {
+        // サーバー外であったり、NetworkManagerが見つからなかったりすれば、早期return
         if (!IsServer || NetworkManager.Singleton == null)
         {
             return;

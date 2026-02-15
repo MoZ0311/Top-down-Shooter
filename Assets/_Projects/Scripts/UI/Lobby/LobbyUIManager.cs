@@ -11,7 +11,7 @@ public class LobbyUIManager : NetworkBehaviour
     const string GameScene = "GameScene";
     readonly NetworkVariable<int> playerCount = new(0);
 
-    void Awake()
+    void OnEnable()
     {
         // UI要素の検索/取得
         var root = lobbyUI.rootVisualElement;

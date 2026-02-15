@@ -13,14 +13,10 @@ public class TitleUIManager : MonoBehaviour
     const string ConnectingMessageLabel = "ConnectingMessageLabel";
     const string ConnectingText = "接続中…";
     const string FailedText = "接続に失敗しました";
-    void Awake()
-    {
-        var root = titleUI.rootVisualElement;
-        hostButton = root.Q<Button>(HostButton);
-        clientButton = root.Q<Button>(ClientButton);
-        connectingMessageLabel = root.Q<Label>(ConnectingMessageLabel);
-    }
 
+    /// <summary>
+    /// ホストとして開始(つくるボタン)したときの処理
+    /// </summary>
     async void OnClickedHostButton()
     {
         OnConnected();
@@ -30,6 +26,9 @@ public class TitleUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// クライアントとして開始(さがすボタン)したときの処理
+    /// </summary>
     async void OnClickedClientButton()
     {
         OnConnected();
@@ -39,6 +38,9 @@ public class TitleUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 接続時、UIへのアクセスを禁止する処理
+    /// </summary>
     void OnConnected()
     {
         connectingMessageLabel.style.display = DisplayStyle.Flex;
@@ -47,6 +49,9 @@ public class TitleUIManager : MonoBehaviour
         clientButton.SetEnabled(false);
     }
 
+    /// <summary>
+    /// 接続失敗時、UIへのアクセスを解禁する処理
+    /// </summary>
     void OnFailedConnection()
     {
         connectingMessageLabel.text = FailedText;
@@ -56,6 +61,12 @@ public class TitleUIManager : MonoBehaviour
 
     void OnEnable()
     {
+        // UI要素の検索/取得
+        var root = titleUI.rootVisualElement;
+        hostButton = root.Q<Button>(HostButton);
+        clientButton = root.Q<Button>(ClientButton);
+        connectingMessageLabel = root.Q<Label>(ConnectingMessageLabel);
+
         hostButton.clicked += OnClickedHostButton;
         clientButton.clicked += OnClickedClientButton;
     }

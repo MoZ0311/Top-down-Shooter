@@ -11,6 +11,24 @@ public class GameManager : NetworkBehaviour
     [Header("Settings")]
     [SerializeField] Transform[] spawnPositions;    // スポーン位置
 
+    public override void OnNetworkSpawn()
+    {
+        // プレイヤーのスポーン処理は、サーバーでのみ行う
+        if (IsServer)
+        {
+            // シーン遷移後のイベント追加
+            NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (IsServer)
+        {
+            NetworkManager.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
+        }
+    }
+
     /// <summary>
     /// シーン遷移後のプレイヤー生成処理
     /// </summary>
@@ -34,23 +52,5 @@ public class GameManager : NetworkBehaviour
         var spawnPosition = spawnPositions[index].position;
         NetworkObject playerObject = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
         playerObject.SpawnAsPlayerObject(clientID);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        // プレイヤーのスポーン処理は、サーバーでのみ行う
-        if (IsServer)
-        {
-            // シーン遷移後のイベント追加
-            NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
-        }
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        if (IsServer)
-        {
-            NetworkManager.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
-        }
     }
 }

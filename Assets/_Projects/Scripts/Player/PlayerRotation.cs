@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] float rotationSpeed;
-    [SerializeField] LayerMask targetLayers;
-    [SerializeField] Transform muzzle;
+    [SerializeField] float rotationSpeed;       // マウスへの追従回転速度
+    [SerializeField] LayerMask targetLayers;    // 照準できるレイヤー
+    [SerializeField] Transform muzzle;          // 銃口の位置
 
     public void HandleRotation(Vector2 mousePosition)
     {
