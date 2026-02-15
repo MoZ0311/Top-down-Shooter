@@ -49,7 +49,7 @@ MonoBehaviour:
   lifeTime: 3
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   trailRenderer: {fileID: 1182020854209818098}
 --- !u!1 &7552378232673891064
 GameObject:
