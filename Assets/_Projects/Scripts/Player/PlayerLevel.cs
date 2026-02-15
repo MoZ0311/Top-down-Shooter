@@ -12,6 +12,10 @@ public class PlayerLevel : NetworkBehaviour
     [Header("ScoreSO")]
     [SerializeField] PlayerScoreSO playerScore;
 
+    [Header("Ref Status")]
+    [SerializeField] PlayerStatus playerStatus;
+    [SerializeField] PlayerHealth playerHealth;
+
     readonly List<int> nextLevelExpList = new();
     public NetworkVariable<int> CurrentLevel { get; } = new(1);
     int currentExp;
@@ -62,13 +66,31 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnLevelChanged(int prevValue, int newValue)
     {
-        playerScore.finishLevel = newValue;
-        if (playerScore.maxLevel < newValue)
+        // 直前の最大HPを取得
+        float prevMaxHealth = playerStatus.Health;
+
+        // ステータスの再計算は全てのクライアントで実行される
+        playerStatus.UpdateStatus(newValue);
+
+        // サーバー側でHP最大値の変更に伴う処理を行う
+        if (IsServer)
         {
-            playerScore.maxLevel = newValue;
+            // レベルアップの伴うHP増加分を計算
+            float diff = playerStatus.Health - prevMaxHealth;
+
+            // 増加分を負のダメージ(回復)として与える
+            playerHealth.TakeDamage(-diff);
         }
 
-        transform.localScale = Vector3.one * (1 + CurrentLevel.Value / 10.0f);
+        // スコア更新は、Ownerのみが行える
+        if (IsOwner)
+        {
+            playerScore.finishLevel = newValue;
+            if (playerScore.maxLevel < newValue)
+            {
+                playerScore.maxLevel = newValue;
+            }
+        }
     }
 
     public void PickedExp()
@@ -84,10 +106,7 @@ public class PlayerLevel : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsOwner)
-        {
-            CurrentLevel.OnValueChanged += OnLevelChanged;
-        }
+        CurrentLevel.OnValueChanged += OnLevelChanged;
 
         // 初期状態で一度更新
         OnLevelChanged(0, CurrentLevel.Value);
@@ -95,9 +114,6 @@ public class PlayerLevel : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        if (IsOwner)
-        {
-            CurrentLevel.OnValueChanged -= OnLevelChanged;
-        }
+        CurrentLevel.OnValueChanged -= OnLevelChanged;
     }
 }

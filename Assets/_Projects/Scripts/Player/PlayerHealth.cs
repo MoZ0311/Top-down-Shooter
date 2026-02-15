@@ -9,6 +9,9 @@ public class PlayerHealth : NetworkBehaviour
     [Header("Ref Score")]
     [SerializeField] PlayerScore score;
 
+    [Header("Scripts")]
+    [SerializeField] PlayerRespawn playerRespawn;
+
     public float MaxHealth => status.Health;
     public NetworkVariable<float> CurrentHealth { get; } = new();
 
@@ -25,9 +28,12 @@ public class PlayerHealth : NetworkBehaviour
     /// </summary>
     /// <param name="damageAmount">ダメージ量</param>
     /// <param name="attackerID">弾の発射主のID</param>
-    public void TakeDamage(float damageAmount, ulong attackerID)
+    public void TakeDamage(float damageAmount, ulong attackerID = 0)
     {
-        CurrentHealth.Value -= damageAmount;
+        // HPを0以上最大値以下で変動させる
+        CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value - damageAmount, 0, MaxHealth);
+
+        // HPが0以下になった時の処理
         if (CurrentHealth.Value <= 0)
         {
             // 自身のデス数を増やす
@@ -43,7 +49,7 @@ public class PlayerHealth : NetworkBehaviour
                     attackerScore.killCount.Value++;
                 }
             }
-            gameObject.SetActive(false);
+            StartCoroutine(playerRespawn.RespawnSequence());
         }
     }
 }

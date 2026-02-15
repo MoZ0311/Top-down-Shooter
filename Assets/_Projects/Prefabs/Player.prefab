@@ -5134,10 +5134,11 @@ GameObject:
   - component: {fileID: 433139547000152491}
   - component: {fileID: 3261482043759231847}
   - component: {fileID: 5516260866301083895}
-  - component: {fileID: 5857056511951518487}
   - component: {fileID: 7413666008391702455}
   - component: {fileID: 7377882952524651341}
+  - component: {fileID: 5857056511951518487}
   - component: {fileID: 4622178445958425396}
+  - component: {fileID: 7657395899830933841}
   - component: {fileID: 9000585345077933029}
   - component: {fileID: 6350062861719173228}
   - component: {fileID: 4465895823274918086}
@@ -5178,7 +5179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1748000445
+  GlobalObjectIdHash: 3059226043
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -5391,6 +5392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   ShowTopMostFoldoutHeaderGroup: 1
   playerAnimation: {fileID: 5516260866301083895}
+  playerHealth: {fileID: 4622178445958425396}
   playerCamera: {fileID: 9000585345077933029}
   playerMovement: {fileID: 6350062861719173228}
   playerRotation: {fileID: 4465895823274918086}
@@ -5409,20 +5411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
   dampTime: 0.1
   animator: {fileID: 5261090577319137638}
---- !u!114 &5857056511951518487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3668533559629828234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a26045268f2c945b35e65ad8091618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
-  defaultParameter: {fileID: 11400000, guid: 95972bb61ead64e40855d5d3d0edf7a4, type: 2}
-  playerLevel: {fileID: 7377882952524651341}
 --- !u!114 &7413666008391702455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5454,10 +5442,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLevel
   ShowTopMostFoldoutHeaderGroup: 1
-  maxLevel: 20
+  maxLevel: 9
   baseExp: 5
   multiplier: 1.5
   playerScore: {fileID: 11400000, guid: 96a2b44c201df974c81a6ad5136288fc, type: 2}
+  playerStatus: {fileID: 5857056511951518487}
+  playerHealth: {fileID: 4622178445958425396}
+--- !u!114 &5857056511951518487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668533559629828234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a26045268f2c945b35e65ad8091618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  scaleGrowthRate: 0.2
+  healthGrowthRate: 1
+  moveSpeedGrowthRate: 1
+  attackPowerGrowthRate: 1
+  bulletSpeedGrowthRate: 0
+  fireRateGrowthRate: 0.1
+  reloadTimeGrowthRate: 0
+  defaultParameter: {fileID: 11400000, guid: 95972bb61ead64e40855d5d3d0edf7a4, type: 2}
 --- !u!114 &4622178445958425396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5473,6 +5483,25 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   status: {fileID: 5857056511951518487}
   score: {fileID: 7413666008391702455}
+  playerRespawn: {fileID: 7657395899830933841}
+--- !u!114 &7657395899830933841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668533559629828234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84173632b4c97b438f9fe499f17ed7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerHealth: {fileID: 4622178445958425396}
+  model: {fileID: 1488679891943461286}
+  trackingUI: {fileID: 7858490215831677551}
+  playerRigidbody: {fileID: 7058168512282946537}
+  playerCollider: {fileID: 5311448528682513380}
 --- !u!114 &9000585345077933029
 MonoBehaviour:
   m_ObjectHideFlags: 0

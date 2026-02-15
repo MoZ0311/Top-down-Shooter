@@ -6,6 +6,7 @@ public class PlayerController : NetworkBehaviour
 {
     [Header("Scripts")]
     [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] PlayerHealth playerHealth;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
@@ -27,7 +28,7 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
-        if (IsOwner)
+        if (IsOwner && playerHealth.CurrentHealth.Value > 0)
         {
             // クライアントのマウス座標を取得し、回転に適用
             Vector2 mousePosition = Mouse.current.position.ReadValue();
