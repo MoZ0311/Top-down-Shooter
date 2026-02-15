@@ -47,6 +47,9 @@ public class TitleUIManager : MonoBehaviour
         connectingMessageLabel.text = ConnectingText;
         hostButton.SetEnabled(false);
         clientButton.SetEnabled(false);
+
+        // クリック時の音を出す
+        AudioPlayer.Instance.PlaySE("button");
     }
 
     /// <summary>

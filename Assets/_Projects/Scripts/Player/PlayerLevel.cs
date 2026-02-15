@@ -127,6 +127,11 @@ public class PlayerLevel : NetworkBehaviour
     void OnExpChanged(int prevValue, int newValue)
     {
         UpdatePlayerUI();
+
+        if (IsOwner && prevValue != newValue)
+        {
+            AudioPlayer.Instance.PlaySE("exp");
+        }
     }
 
     /// <summary>
@@ -134,6 +139,11 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnLevelChanged(int prevValue, int newValue)
     {
+        if (prevValue < newValue && newValue != 1)
+        {
+            AudioPlayer.Instance.PlaySE("level");
+        }
+
         // 直前の最大HPを取得
         float prevMaxHealth = playerStatus.Health;
 

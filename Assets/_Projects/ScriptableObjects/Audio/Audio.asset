@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: Audio
   m_EditorClassIdentifier: Assembly-CSharp::AudioSO
   <AudioAssets>k__BackingField:
-  - <Tag>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-  - <Tag>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-  - <Tag>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-  - <Tag>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-  - <Tag>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
+  - <Tag>k__BackingField: field
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: 709abd11fe3a02141a470d51448cd581, type: 3}
+  - <Tag>k__BackingField: button
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: abf235c6dc9cbec4d981911fed856e24, type: 3}
+  - <Tag>k__BackingField: fire
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: 131940c37b7aaf04dab50e8e9b9e5d44, type: 3}
+  - <Tag>k__BackingField: exp
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: 019ba266ef260754991afae3b9092db0, type: 3}
+  - <Tag>k__BackingField: level
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: f610a32e559e71c4aaa147b74a739c2b, type: 3}
+  - <Tag>k__BackingField: hit
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: d785ee566c4d7674b8f95643294d4467, type: 3}
+  - <Tag>k__BackingField: cheers
+    <AudioClip>k__BackingField: {fileID: 8300000, guid: 7dc9ac463b95a7a4e8fe6583fb223623, type: 3}
