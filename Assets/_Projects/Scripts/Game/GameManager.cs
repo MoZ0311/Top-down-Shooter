@@ -6,10 +6,10 @@ using System.Collections.Generic;
 public class GameManager : NetworkBehaviour
 {
     [Header("Prefab")]
-    [SerializeField] NetworkObject playerPrefab;    // プレイヤーとして生成されるプレハブ
+    [SerializeField] NetworkObject playerPrefab;                    // プレイヤーとして生成されるプレハブ
 
     [Header("Settings")]
-    [SerializeField] Transform[] spawnPositions;    // スポーン位置
+    [SerializeField] Transform[] spawnPositions = new Transform[4]; // スポーン位置
 
     public override void OnNetworkSpawn()
     {

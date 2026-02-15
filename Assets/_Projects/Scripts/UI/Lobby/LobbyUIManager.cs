@@ -5,6 +5,9 @@ using Unity.Netcode;
 public class LobbyUIManager : NetworkBehaviour
 {
     [SerializeField] UIDocument lobbyUI;
+
+    [Header("Scripts")]
+    [SerializeField] LobbyPlayerManager lobbyPlayerManager;
     Label playerCountLabel;
     Label waitingTextLabel;
     Button startButton;
@@ -27,10 +30,12 @@ public class LobbyUIManager : NetworkBehaviour
     /// UI状態の更新処理
     /// </summary>
     /// <param name="playerCount">ロビーのプレイヤー数</param>
-    void UpdateUI(int playerCount)
+    void UpdatePlayerAndUI(int playerCount)
     {
         // プレイヤーの数を表示
         playerCountLabel.text = $"ロビー:{playerCount}/4";
+
+        lobbyPlayerManager.UpdatePlayerVisuals(playerCount);
 
         // 規定人数以上ならサーバー側でボタンを有効化
         if (IsServer)
@@ -58,7 +63,7 @@ public class LobbyUIManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         // 接続人数が変動したとき、UIも更新する
-        playerCount.OnValueChanged += (prevValue, newValue) => UpdateUI(newValue);
+        playerCount.OnValueChanged += (prevValue, newValue) => UpdatePlayerAndUI(newValue);
 
         if (IsServer)
         {
@@ -78,6 +83,9 @@ public class LobbyUIManager : NetworkBehaviour
             // サーバー接続後の状態でUIを更新
             UpdatePlayerCount(0);
         }
+
+        // 初期状態でプレイヤーのモデルだけ更新
+        lobbyPlayerManager.UpdatePlayerVisuals(playerCount.Value);
     }
 
     public override void OnNetworkDespawn()

@@ -229,14 +229,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139656194}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1059825354}
   - {fileID: 1813557023}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 376097692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &146483361
 GameObject:
@@ -460,6 +460,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1294335583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &376097691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376097692}
+  - component: {fileID: 376097693}
+  m_Layer: 0
+  m_Name: LobbyPlayers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &376097692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376097691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1296638279645835533}
+  - {fileID: 139656196}
+  - {fileID: 991887600}
+  - {fileID: 1667593502}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &376097693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376097691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8fe189a1a507f14990732e005869ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyPlayerManager
+  lobbyPlayers:
+  - {fileID: 1924520323525831607}
+  - {fileID: 139656194}
+  - {fileID: 991887598}
+  - {fileID: 1667593500}
 --- !u!1 &377870367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,14 +1142,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991887598}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1781128519}
   - {fileID: 1811640794}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 376097692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1056192232
 GameObject:
@@ -1915,14 +1968,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667593500}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1422887928}
   - {fileID: 848694400}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 376097692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1679319891
 GameObject:
@@ -2454,6 +2507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LobbyUIManager
   ShowTopMostFoldoutHeaderGroup: 1
   lobbyUI: {fileID: 2049941106}
+  lobbyPlayerManager: {fileID: 376097693}
 --- !u!114 &2049941108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,14 +2699,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924520323525831607}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2917446062869711996}
   - {fileID: 4809592845467835250}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 376097692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1748010049649940369
 Transform:
@@ -3322,7 +3376,4 @@ SceneRoots:
   - {fileID: 1232978688}
   - {fileID: 1932481954}
   - {fileID: 2049941105}
-  - {fileID: 1296638279645835533}
-  - {fileID: 139656196}
-  - {fileID: 991887600}
-  - {fileID: 1667593502}
+  - {fileID: 376097692}
