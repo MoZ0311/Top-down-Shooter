@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BulletCollisionManager : NetworkBehaviour
 {
     // シングルトン用のインスタンス
-    public static BulletCollisionManager Instance = null;
+    public static BulletCollisionManager Instance { get; private set; } = null;
 
     [Header("Settings")]
     [SerializeField] LayerMask targetLayer; // 弾が接触できるレイヤー
@@ -55,7 +55,7 @@ public class BulletCollisionManager : NetworkBehaviour
             if (Physics.Raycast(bullet.position, bullet.direction, out RaycastHit hit, moveDistance, targetLayer, QueryTriggerInteraction.Ignore))
             {
                 // TryGetComponentでHP管理スクリプト取得/アクセスを試みる
-                if (hit.collider.TryGetComponent<PlayerHealth>(out var playerHealth))
+                if (hit.collider.TryGetComponent(out PlayerHealth playerHealth))
                 {
                     // プレイヤーのダメージ処理呼び出し
                     playerHealth.TakeDamage(bullet.damageAmount, bullet.ownerID);

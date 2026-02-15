@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 public class PoolManager : MonoBehaviour
 {
     // シングルトン用のインスタンス
-    public static PoolManager Instance = null;
+    public static PoolManager Instance { get; private set; } = null;
 
     [Header("Prefab")]
     [SerializeField] BulletMovement bulletPrefab;   // 弾のプレハブ
@@ -90,17 +90,22 @@ public class PoolManager : MonoBehaviour
     /// <summary>
     /// 弾をプールから取り出して、初期化する処理
     /// </summary>
+    /// <param name="scale">大きさ</param>
     /// <param name="position">位置</param>
     /// <param name="rotation">向き</param>
     /// <param name="bulletSpeed">速度</param>
     /// <returns>初期化された弾のインスタンス</returns>
-    public BulletMovement GetBullet(Vector3 position, Quaternion rotation, float bulletSpeed)
+    public BulletMovement GetBullet(Vector3 scale, Vector3 position, Quaternion rotation, float bulletSpeed)
     {
         // プールから弾のインスタンスを取得
         BulletMovement bullet = BulletPool.Get();
 
         // 弾の初期設定
-        bullet.transform.SetPositionAndRotation(position, rotation);
+        bullet.transform.SetPositionAndRotation(position, rotation);        // 位置と向きを設定
+
+        Vector3 originScale = bulletPrefab.transform.localScale;
+        bullet.transform.localScale = Vector3.Scale(originScale, scale);    // 大きさを設定
+
         bullet.InitializeBullet(bulletSpeed);
         return bullet;
     }

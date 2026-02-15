@@ -50,7 +50,12 @@ public class PlayerShoot : NetworkBehaviour
     /// <param name="bulletSpeed">弾速</param>
     void ShootBullet(Vector3 muzzlePosition, Quaternion rotation, float bulletSpeed)
     {
-        PoolManager.Instance.GetBullet(muzzlePosition, rotation, bulletSpeed);
+        PoolManager.Instance.GetBullet(
+            transform.localScale,
+            muzzlePosition,
+            rotation,
+            bulletSpeed
+        );
     }
 
     /// <summary>
