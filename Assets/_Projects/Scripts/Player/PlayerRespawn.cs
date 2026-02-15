@@ -7,7 +7,7 @@ public class PlayerRespawn : NetworkBehaviour
     private static readonly WaitForSeconds waitForSeconds = new(1.5f);
 
     [Header("Setting")]
-    [SerializeField] int dropItemCount;
+    [SerializeField] int dropItemCount; // 一度にドロップするアイテムの数
 
     [Header("PickupItemSO")]
     [SerializeField] PickupItemSO pickupItem;

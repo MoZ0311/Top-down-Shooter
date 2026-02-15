@@ -4,7 +4,7 @@ using Unity.Netcode;
 public class PlayerShoot : NetworkBehaviour
 {
     [Header("Settings")]
-    [SerializeField] Transform muzzle;
+    [SerializeField] Transform muzzle;  // 銃口の位置
 
     [Header("Ref Status")]
     [SerializeField] PlayerStatus status;

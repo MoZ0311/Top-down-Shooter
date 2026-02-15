@@ -8,7 +8,7 @@ public class CrosshairMovement : MonoBehaviour
     VisualElement crosshair;
     const string Crosshair = "Crosshair";
 
-    void Awake()
+    void OnEnable()
     {
         // カーソルを非表示にする
         UnityEngine.Cursor.visible = false;

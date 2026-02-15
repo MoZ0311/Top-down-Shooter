@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   ShowTopMostFoldoutHeaderGroup: 1
-  timerLimit: 180
+  timerLimit: 5
   redThredhouldTime: 30
   gameUI: {fileID: 220061774}
 --- !u!114 &1162908851

@@ -8,8 +8,8 @@ public class PickupPoolManager : NetworkBehaviour
     public static PickupPoolManager Instance { get; private set; } = null;
 
     [Header("Settings")]
-    [SerializeField] PickupItemSO pickupItem;
-    readonly Dictionary<uint, Queue<NetworkObject>> pickupPools = new();
+    [SerializeField] PickupItemSO pickupItem;                               // アイテムのリストを持つSO
+    readonly Dictionary<uint, Queue<NetworkObject>> pickupPools = new();    // NetworkObject用の疑似プール
 
     void Awake()
     {

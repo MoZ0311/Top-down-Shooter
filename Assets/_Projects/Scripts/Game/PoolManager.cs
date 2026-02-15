@@ -22,7 +22,7 @@ public class PoolManager : MonoBehaviour
 
     void Awake()
     {
-        // シングルトン用
+        // シングルトン設計
         if (Instance == null)
         {
             Instance = this;
@@ -38,7 +38,10 @@ public class PoolManager : MonoBehaviour
 
     void Start()
     {
+        // 弾のプールを埋める
         Prewarm(BulletPool, defaultBulletCapacity);
+
+        // エフェクトのプールを埋める
         Prewarm(EffectPool, defaultEffectCapacity);
     }
 
