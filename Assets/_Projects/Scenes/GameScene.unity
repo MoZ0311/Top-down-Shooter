@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53d4ffbf018ca7448f99330977766a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUIManager
+  fadeDuration: 0
   playerUI: {fileID: 0}
 --- !u!1001 &225628429
 PrefabInstance:
@@ -3436,7 +3437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   ShowTopMostFoldoutHeaderGroup: 1
-  timerLimit: 10
+  timerLimit: 180
   redThredhouldTime: 30
   gameUI: {fileID: 220061774}
 --- !u!114 &1162908851
