@@ -48,7 +48,7 @@ public class TitleUIManager : MonoBehaviour
         hostButton.SetEnabled(false);
         clientButton.SetEnabled(false);
 
-        // クリック時の音を出す
+        // ボタンクリック時の音を出す
         AudioPlayer.Instance.PlaySE("button");
     }
 

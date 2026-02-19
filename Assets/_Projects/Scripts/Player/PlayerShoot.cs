@@ -22,6 +22,9 @@ public class PlayerShoot : NetworkBehaviour
 
         if (IsShooting && fireRateTimer <= 0)
         {
+            // 発射音を再生
+            AudioPlayer.Instance.PlaySE("fire");
+
             // マズルフラッシュのパーティクル再生
             muzzleFlash.Play();
 
@@ -94,6 +97,12 @@ public class PlayerShoot : NetworkBehaviour
         {
             return;
         }
+
+        // 発射音を再生
+        AudioPlayer.Instance.PlaySE("fire");
+
+        // マズルフラッシュのパーティクル再生
+        muzzleFlash.Play();
 
         // 自分以外のクライアントに、弾を生成させる
         ShootBullet(muzzlePosition, rotation, bulletSpeed);

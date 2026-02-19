@@ -139,7 +139,7 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnLevelChanged(int prevValue, int newValue)
     {
-        if (prevValue < newValue && newValue != 1)
+        if (IsOwner && prevValue < newValue && newValue != 1)
         {
             AudioPlayer.Instance.PlaySE("level");
         }

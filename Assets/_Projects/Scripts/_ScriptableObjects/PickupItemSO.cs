@@ -5,6 +5,5 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "PickupItemSO", menuName = "Scriptable Objects/PickupItemSO")]
 public class PickupItemSO : ScriptableObject
 {
-    [SerializeField] List<NetworkObject> pickupItemList = new();
-    public List<NetworkObject> PickupItemList => pickupItemList;
+    [field:SerializeField] public List<NetworkObject> PickupItemList { get; private set; } = new();
 }

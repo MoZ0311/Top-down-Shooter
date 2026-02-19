@@ -44,6 +44,11 @@ public abstract class Pickup : NetworkBehaviour
 
     void LateUpdate()
     {
+        if (cameraTransform == null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
+
         // 常にカメラの正面を向かせる
         transform.LookAt(transform.position + cameraTransform.forward);
     }
