@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8673467427726518152}
   - component: {fileID: 136504358978557618}
   - component: {fileID: 5306389897672956132}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &8673467427726518152
 Transform:
@@ -52,7 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -101,12 +101,12 @@ GameObject:
   - component: {fileID: 8569252801605220433}
   - component: {fileID: 6169618962925171157}
   - component: {fileID: 3026762509882715350}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &8569252801605220433
 Transform:
@@ -142,7 +142,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -191,12 +191,12 @@ GameObject:
   - component: {fileID: 3126401849315051952}
   - component: {fileID: 7171339945709140889}
   - component: {fileID: 6481066236338195488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &3126401849315051952
 Transform:
@@ -232,7 +232,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -281,12 +281,12 @@ GameObject:
   - component: {fileID: 3855086754385035298}
   - component: {fileID: 1480777347534627648}
   - component: {fileID: 6497935090308757758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &3855086754385035298
 Transform:
@@ -322,7 +322,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -370,12 +370,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2515339499977415129}
   - component: {fileID: 4385173691640949561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TreeWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2515339499977415129
 Transform:
@@ -388,7 +388,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3165149473518470282}
   - {fileID: 7404558971268773640}
@@ -426,12 +426,12 @@ GameObject:
   - component: {fileID: 6331990383939890979}
   - component: {fileID: 3365733497591336136}
   - component: {fileID: 3898044637425043238}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6331990383939890979
 Transform:
@@ -467,7 +467,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -516,12 +516,12 @@ GameObject:
   - component: {fileID: 6713920057048042556}
   - component: {fileID: 5976388373215526275}
   - component: {fileID: 1245372221892023433}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6713920057048042556
 Transform:
@@ -557,7 +557,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -606,12 +606,12 @@ GameObject:
   - component: {fileID: 230004674717396874}
   - component: {fileID: 328886596171986817}
   - component: {fileID: 7650664600001394139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &230004674717396874
 Transform:
@@ -647,7 +647,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -696,12 +696,12 @@ GameObject:
   - component: {fileID: 6336963190807458785}
   - component: {fileID: 6107280771997185335}
   - component: {fileID: 4794484712795197242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6336963190807458785
 Transform:
@@ -737,7 +737,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -786,12 +786,12 @@ GameObject:
   - component: {fileID: 4561638105599119654}
   - component: {fileID: 8716579041715684422}
   - component: {fileID: 8113623428462397585}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4561638105599119654
 Transform:
@@ -827,7 +827,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -876,12 +876,12 @@ GameObject:
   - component: {fileID: 932987721999150718}
   - component: {fileID: 329679626737300107}
   - component: {fileID: 2930847715396813197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &932987721999150718
 Transform:
@@ -917,7 +917,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -966,12 +966,12 @@ GameObject:
   - component: {fileID: 4243249844517277297}
   - component: {fileID: 3284019071715882484}
   - component: {fileID: 2238348519910899467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4243249844517277297
 Transform:
@@ -1007,7 +1007,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1056,12 +1056,12 @@ GameObject:
   - component: {fileID: 6218862961811643407}
   - component: {fileID: 2334542618312737229}
   - component: {fileID: 5604996986616558338}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6218862961811643407
 Transform:
@@ -1097,7 +1097,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1146,12 +1146,12 @@ GameObject:
   - component: {fileID: 303057123243402759}
   - component: {fileID: 3915488497753158391}
   - component: {fileID: 560487719804665213}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &303057123243402759
 Transform:
@@ -1187,7 +1187,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1236,12 +1236,12 @@ GameObject:
   - component: {fileID: 2281828517985010367}
   - component: {fileID: 8671908572348505579}
   - component: {fileID: 5902157838825407088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &2281828517985010367
 Transform:
@@ -1277,7 +1277,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1326,12 +1326,12 @@ GameObject:
   - component: {fileID: 4940436636562674769}
   - component: {fileID: 8370382293002796600}
   - component: {fileID: 6031990862111616961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4940436636562674769
 Transform:
@@ -1367,7 +1367,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1416,12 +1416,12 @@ GameObject:
   - component: {fileID: 5999721450417857132}
   - component: {fileID: 8468647372929641875}
   - component: {fileID: 9140227029305073787}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &5999721450417857132
 Transform:
@@ -1457,7 +1457,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1506,12 +1506,12 @@ GameObject:
   - component: {fileID: 7219231858279006099}
   - component: {fileID: 9220448511728377712}
   - component: {fileID: 6414635388766841842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &7219231858279006099
 Transform:
@@ -1547,7 +1547,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1596,12 +1596,12 @@ GameObject:
   - component: {fileID: 2919909744778884895}
   - component: {fileID: 8599762737488843822}
   - component: {fileID: 8429505231641663511}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &2919909744778884895
 Transform:
@@ -1637,7 +1637,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1686,12 +1686,12 @@ GameObject:
   - component: {fileID: 31027150737754945}
   - component: {fileID: 3082140040597195069}
   - component: {fileID: 723517411526571651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &31027150737754945
 Transform:
@@ -1727,7 +1727,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1776,12 +1776,12 @@ GameObject:
   - component: {fileID: 7448025501769716719}
   - component: {fileID: 8346073891408584017}
   - component: {fileID: 2076639173338962829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &7448025501769716719
 Transform:
@@ -1817,7 +1817,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1864,12 +1864,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3165149473518470282}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TreeLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3165149473518470282
 Transform:
@@ -1914,12 +1914,12 @@ GameObject:
   - component: {fileID: 7614915905339181560}
   - component: {fileID: 5670347727191595900}
   - component: {fileID: 1582835038228332123}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &7614915905339181560
 Transform:
@@ -1955,7 +1955,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2004,12 +2004,12 @@ GameObject:
   - component: {fileID: 2482630593692813446}
   - component: {fileID: 292360856023540167}
   - component: {fileID: 5435613044270107472}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &2482630593692813446
 Transform:
@@ -2045,7 +2045,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2094,12 +2094,12 @@ GameObject:
   - component: {fileID: 6974432424318246618}
   - component: {fileID: 6879241570498558687}
   - component: {fileID: 296029922294786482}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6974432424318246618
 Transform:
@@ -2135,7 +2135,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2184,12 +2184,12 @@ GameObject:
   - component: {fileID: 8260519359221206574}
   - component: {fileID: 7450045377967880386}
   - component: {fileID: 8218971350946167284}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &8260519359221206574
 Transform:
@@ -2225,7 +2225,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2274,12 +2274,12 @@ GameObject:
   - component: {fileID: 149297849381761481}
   - component: {fileID: 3774339607649320098}
   - component: {fileID: 2760738951095967496}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &149297849381761481
 Transform:
@@ -2315,7 +2315,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2362,12 +2362,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7404558971268773640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TreeLine (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7404558971268773640
 Transform:
@@ -2413,12 +2413,12 @@ GameObject:
   - component: {fileID: 6300489036429132377}
   - component: {fileID: 1551848842881513552}
   - component: {fileID: 6368265696842339958}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6300489036429132377
 Transform:
@@ -2454,7 +2454,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2503,12 +2503,12 @@ GameObject:
   - component: {fileID: 3376145843583051223}
   - component: {fileID: 2742960370613706787}
   - component: {fileID: 7392111218077392804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &3376145843583051223
 Transform:
@@ -2544,7 +2544,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2593,12 +2593,12 @@ GameObject:
   - component: {fileID: 8596129242456960375}
   - component: {fileID: 5915576633094754414}
   - component: {fileID: 4208261863042263280}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &8596129242456960375
 Transform:
@@ -2634,7 +2634,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2683,12 +2683,12 @@ GameObject:
   - component: {fileID: 6519663582853734422}
   - component: {fileID: 1345500541185250283}
   - component: {fileID: 250315120066150575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &6519663582853734422
 Transform:
@@ -2724,7 +2724,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2773,12 +2773,12 @@ GameObject:
   - component: {fileID: 4610638794344992358}
   - component: {fileID: 6056213059839532150}
   - component: {fileID: 1066492974265183412}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4610638794344992358
 Transform:
@@ -2814,7 +2814,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2863,12 +2863,12 @@ GameObject:
   - component: {fileID: 4099369890285008446}
   - component: {fileID: 4877541075839742669}
   - component: {fileID: 400960921010947615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4099369890285008446
 Transform:
@@ -2904,7 +2904,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2953,12 +2953,12 @@ GameObject:
   - component: {fileID: 5800055079154566639}
   - component: {fileID: 7026012585980397990}
   - component: {fileID: 716388061341002185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &5800055079154566639
 Transform:
@@ -2994,7 +2994,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3043,12 +3043,12 @@ GameObject:
   - component: {fileID: 8818237800644958367}
   - component: {fileID: 3939662471813937577}
   - component: {fileID: 7499596325133279010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &8818237800644958367
 Transform:
@@ -3084,7 +3084,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3133,12 +3133,12 @@ GameObject:
   - component: {fileID: 750348776644897578}
   - component: {fileID: 6604692535569376751}
   - component: {fileID: 8454696707793870951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &750348776644897578
 Transform:
@@ -3174,7 +3174,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3223,12 +3223,12 @@ GameObject:
   - component: {fileID: 4108662010114432126}
   - component: {fileID: 600101305628686559}
   - component: {fileID: 2384250464980158426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4108662010114432126
 Transform:
@@ -3264,7 +3264,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

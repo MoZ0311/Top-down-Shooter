@@ -21,6 +21,13 @@ public class PlayerHealth : NetworkBehaviour
         {
             CurrentHealth.Value = status.Health;
         }
+
+        CurrentHealth.OnValueChanged += PlayDamageSE;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        CurrentHealth.OnValueChanged -= PlayDamageSE;
     }
 
     /// <summary>
@@ -32,11 +39,6 @@ public class PlayerHealth : NetworkBehaviour
     {
         // HPを0以上最大値以下で変動させる
         CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value - damageAmount, 0, MaxHealth);
-
-        if (damageAmount >= 0)
-        {
-            AudioPlayer.Instance.PlaySE("hit");
-        }
 
         // HPが0以下になった時の処理
         if (CurrentHealth.Value <= 0)
@@ -55,6 +57,15 @@ public class PlayerHealth : NetworkBehaviour
                 }
             }
             StartCoroutine(playerRespawn.RespawnSequence());
+        }
+    }
+
+    void PlayDamageSE(float prevValue, float newValue)
+    {
+        // HPが減っている(ダメージ0含む)場合、SE再生
+        if (newValue <= prevValue)
+        {
+            AudioPlayer.Instance.PlaySE("hit");
         }
     }
 }

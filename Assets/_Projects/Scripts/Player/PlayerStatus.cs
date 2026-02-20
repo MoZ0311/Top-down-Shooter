@@ -2,15 +2,6 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] float scaleGrowthRate;
-    [SerializeField] float healthGrowthRate;
-    [SerializeField] float moveSpeedGrowthRate;
-    [SerializeField] float attackPowerGrowthRate;
-    [SerializeField] float bulletSpeedGrowthRate;
-    [SerializeField] float fireRateGrowthRate;
-    [SerializeField] float reloadTimeGrowthRate;
-
     [Header("ParameterSO")]
     [SerializeField] PlayerParameterSO defaultParameter;        // 参照する初期値
     public float Health { get; private set; }                   // 体力
@@ -26,13 +17,13 @@ public class PlayerStatus : MonoBehaviour
     public void UpdateStatus(int level)
     {
         // レベルアップに伴い、各ステータスを乗算して再計算
-        transform.localScale = Vector3.one * CalculateGrowth(scaleGrowthRate, level);
-        Health = defaultParameter.Health * CalculateGrowth(healthGrowthRate, level);
-        MoveSpeed = defaultParameter.MoveSpeed * CalculateGrowth(moveSpeedGrowthRate, level);
-        AttackPower = defaultParameter.AttackPower * CalculateGrowth(attackPowerGrowthRate, level);
-        BulletSpeed = defaultParameter.BulletSpeed * CalculateGrowth(bulletSpeedGrowthRate, level);
-        FireRate = defaultParameter.FireRate * CalculateGrowth(fireRateGrowthRate, level);
-        ReloadTime = defaultParameter.ReloadTime * CalculateGrowth(reloadTimeGrowthRate, level);
+        transform.localScale = Vector3.one * CalculateGrowth(defaultParameter.ScaleGrowthRate, level);
+        Health = defaultParameter.Health * CalculateGrowth(defaultParameter.HealthGrowthRate, level);
+        MoveSpeed = defaultParameter.MoveSpeed * CalculateGrowth(defaultParameter.MoveSpeedGrowthRate, level);
+        AttackPower = defaultParameter.AttackPower * CalculateGrowth(defaultParameter.AttackPowerGrowthRate, level);
+        BulletSpeed = defaultParameter.BulletSpeed * CalculateGrowth(defaultParameter.BulletSpeedGrowthRate, level);
+        FireRate = defaultParameter.FireRate * CalculateGrowth(defaultParameter.FireRateGrowthRate, level);
+        ReloadTime = defaultParameter.ReloadTime * CalculateGrowth(defaultParameter.ReloadTimeGrowthRate, level);
     }
 
     /// <summary>

@@ -61,6 +61,7 @@ public class ResultUIManager : NetworkBehaviour
         finishLevelLabel.text = playerScore.finishLevel.ToString();
         rankLabel.text = playerScore.rank.ToString() + Rank;
 
+        // 歓声のSE再生
         AudioPlayer.Instance.PlaySE("cheers");
     }
 

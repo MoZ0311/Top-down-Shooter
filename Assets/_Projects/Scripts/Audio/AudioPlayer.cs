@@ -60,7 +60,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     // SEの再生（重ねて再生可能）
-    public void PlaySE(string tag)
+    public void PlaySE(string tag, AudioSource audioSource = null)
     {
         AudioClip clip = GetAudioClip(tag);
         if (clip == null)
@@ -68,7 +68,9 @@ public class AudioPlayer : MonoBehaviour
             return;
         }
 
-        seSource.PlayOneShot(clip);
+        // 第2引数が渡されているかどうかで、再生するAudioSourceを切替
+        AudioSource targetAudioSource = audioSource == null ? seSource : audioSource;
+        targetAudioSource.PlayOneShot(clip);
     }
 
     // 辞書から素早くClipを取り出す
