@@ -25,6 +25,21 @@ public class PlayerRespawn : NetworkBehaviour
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] CapsuleCollider playerCollider;
 
+    public override void OnNetworkSpawn()
+    {
+        // 自分が操作するキャラクターが生成された瞬間だけ実行する
+        if (IsOwner)
+        {
+            // GameManagerから自身のIDを使ってスポーン位置を取得します
+            int index = (int)OwnerClientId % GameManager.Instance.SpawnPositions.Length;
+            Vector3 startPosition = GameManager.Instance.SpawnPositions[index].position;
+
+            // 初期位置へ確実にテレポートします
+            transform.position = startPosition;
+            Debug.Log("テレポート完了");
+        }
+    }
+
     public IEnumerator RespawnSequence()
     {
         // 死亡状態にする（クライアント全員に通知）
@@ -43,13 +58,19 @@ public class PlayerRespawn : NetworkBehaviour
             pickupItem.PickupItemList[1]
         );
 
-        TeleportClientRpc();
+        TeleportToRandomPosition();
 
         yield return new WaitForSecondsRealtime(respawnTime);
 
         // HPを回復させて復活（クライアント全員に通知）
         SetActiveClientRpc(true);
         playerHealth.TakeDamage(-playerHealth.MaxHealth);
+    }
+
+    void TeleportToRandomPosition()
+    {
+        int index = Random.Range(0, GameManager.Instance.SpawnPositions.Length);
+        TeleportClientRpc(GameManager.Instance.SpawnPositions[index].position);
     }
 
     /// <summary>
@@ -62,7 +83,7 @@ public class PlayerRespawn : NetworkBehaviour
         // 見た目と当たり判定を切り替える
         model.SetActive(isActive);
         trackingUI.SetActive(isActive);
-        playerRigidbody.useGravity = isActive;
+        playerRigidbody.isKinematic = !isActive;
         playerCollider.enabled = isActive;
     }
 
@@ -70,17 +91,11 @@ public class PlayerRespawn : NetworkBehaviour
     /// クライアント側でテレポートする処理
     /// </summary>
     [ClientRpc]
-    void TeleportClientRpc()
+    void TeleportClientRpc(Vector3 targetPosition)
     {
         if (IsOwner)
         {
-            int index = Random.Range(0, GameManager.Instance.SpawnPositions.Length);
-
-            clientNetworkTransform.Teleport(
-                GameManager.Instance.SpawnPositions[index].position,
-                Quaternion.identity,
-                transform.localScale
-            );
+            transform.position = targetPosition;
         }
     }
 }

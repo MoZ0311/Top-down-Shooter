@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Projects/UI_Resources/DefaultSettings/DefaultUSS.uss?fileID=7433441132597879392&amp;guid=2abd62f70e737bb4a94f6e6c04e87a92&amp;type=3#DefaultUSS"/>
     <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
         <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.8); border-top-right-radius: 64px; flex-direction: column;">
@@ -11,6 +12,9 @@
                 <ui:Label text="ツチノコ銃" style="-unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); color: rgb(255, 255, 255); font-size: 64px; -unity-text-align: middle-right; margin-right: 16px;"/>
                 <ui:VisualElement style="background-image: url(&quot;project://database/Assets/_Projects/Images/icon_tsuchinoko.png?fileID=2800000&amp;guid=b64ee42e45689434ab03595c6cb6b6af&amp;type=3#icon_tsuchinoko&quot;); width: 256px; height: 256px; margin-top: -64px; margin-bottom: -64px; margin-left: 16px; margin-right: 16px;"/>
             </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement>
+            <ui:Label text="WASD:移動 マウス操作:照準 左クリック:射撃" name="OperationLabel" style="-unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); font-size: 48px; margin-bottom: 32px; background-color: rgba(0, 0, 0, 0.8); color: rgb(255, 255, 255); border-top-left-radius: 40px; border-top-right-radius: 40px; border-bottom-right-radius: 40px; border-bottom-left-radius: 40px; align-self: center; padding-bottom: 16px; padding-top: 16px; padding-left: 32px; padding-right: 32px; transition-duration: 0.2s; transition-timing-function: ease-out; scale: 1 1;"/>
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="DamageEffect" style="flex-grow: 1; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgb(213, 0, 0); opacity: 0;"/>

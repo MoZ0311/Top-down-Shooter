@@ -11,6 +11,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
     [SerializeField] PlayerShoot playerShot;
+    [SerializeField] PlayerUIManager playerUI;
 
     Vector2 inputAxis;
 
@@ -42,6 +43,9 @@ public class PlayerController : NetworkBehaviour
 
             // 射撃制御
             playerShot.HandleShoot();
+
+            // UI制御
+            playerUI.UpdateOperationLabel(playerMovement.IsMoving);
         }
     }
 

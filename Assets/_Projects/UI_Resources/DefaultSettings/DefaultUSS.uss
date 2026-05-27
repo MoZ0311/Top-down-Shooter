@@ -1,3 +1,8 @@
+#OperationLabel.move {
+    translate: 0 248px;
+    scale: 0.5 1;
+}
+
 .button {
     width: 560px;
     height: 184px;

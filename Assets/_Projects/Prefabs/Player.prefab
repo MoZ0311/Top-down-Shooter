@@ -5398,6 +5398,7 @@ MonoBehaviour:
   playerMovement: {fileID: 6350062861719173228}
   playerRotation: {fileID: 4465895823274918086}
   playerShot: {fileID: 5258799665443843267}
+  playerUI: {fileID: 157653805074256395}
 --- !u!114 &5516260866301083895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5427,8 +5428,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   playerScore: {fileID: 11400000, guid: 96a2b44c201df974c81a6ad5136288fc, type: 2}
   killCount:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   deathCount:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
 --- !u!114 &7377882952524651341
 MonoBehaviour:
@@ -5462,13 +5469,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a26045268f2c945b35e65ad8091618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
-  scaleGrowthRate: 0.2
-  healthGrowthRate: 0.5
-  moveSpeedGrowthRate: 0.05
-  attackPowerGrowthRate: 0.4
-  bulletSpeedGrowthRate: 0.2
-  fireRateGrowthRate: 0.1
-  reloadTimeGrowthRate: 0
   defaultParameter: {fileID: 11400000, guid: 95972bb61ead64e40855d5d3d0edf7a4, type: 2}
 --- !u!114 &4622178445958425396
 MonoBehaviour:
@@ -5615,6 +5615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUIManager
   fadeDuration: 0
   playerUI: {fileID: 7739246567424257022}
+  displayInterval: 1
 --- !u!114 &7739246567424257022
 MonoBehaviour:
   m_ObjectHideFlags: 0
