@@ -238,6 +238,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1692969007}
   - {fileID: 693844263}
   - {fileID: 337908829}
   m_Father: {fileID: 0}
@@ -254,7 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a8c46946265ad45a018cb947e822bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchingManager
+  isOnline: 1
   maxConnections: 4
+  lanConnectionManager: {fileID: 1692969008}
   relayManager: {fileID: 693844264}
   lobbyManager: {fileID: 337908830}
 --- !u!1 &1411294873
@@ -509,6 +512,50 @@ MonoBehaviour:
   audios: {fileID: 11400000, guid: 2bb9d73938bc4d84f8eb6bfdaafddb8c, type: 2}
   bgmSource: {fileID: 1411294876}
   seSource: {fileID: 1411294877}
+--- !u!1 &1692969006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1692969007}
+  - component: {fileID: 1692969008}
+  m_Layer: 0
+  m_Name: LanConnectionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1692969007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692969006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006847743}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692969008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692969006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0421bf5300149c4a8a4afc927cef08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LanConnectionManager
 --- !u!1 &1763732864
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +613,7 @@ MonoBehaviour:
   ConnectionData:
     Address: 127.0.0.1
     Port: 7777
+    WebSocketPath: /
     ServerListenAddress: 127.0.0.1
     ClientBindPort: 0
   DebugSimulator:

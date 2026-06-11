@@ -15,6 +15,12 @@ public class GameManager : NetworkBehaviour
     [SerializeField] Transform[] spawnPositions = new Transform[4]; // スポーン位置
     public Transform[] SpawnPositions => spawnPositions;
 
+    [Header("Scripts")]
+    [SerializeField] GameTimer gameTimer;
+    [SerializeField] GameUIManager gameUIManager;
+    [SerializeField] CameraManager cameraManager;
+
+
     void Awake()
     {
         // シングルトン設計
@@ -36,6 +42,8 @@ public class GameManager : NetworkBehaviour
             // シーン遷移後のイベント追加
             NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
         }
+
+        Invoke(nameof(StartGame), 3.0f);
     }
 
     public override void OnNetworkDespawn()
@@ -70,5 +78,23 @@ public class GameManager : NetworkBehaviour
         NetworkObject playerObject = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         playerObject.SpawnAsPlayerObject(clientID);
         Debug.Log("生成完了");
+    }
+
+    /// <summary>
+    /// ゲームの開始処理
+    /// </summary>
+    public void StartGame()
+    {
+        gameUIManager.SwitchUI();
+        cameraManager.SwitchCamera(CameraMode.Player);
+        gameTimer.StartCountdown();        
+    }
+
+    /// <summary>
+    /// ゲームの終了処理
+    /// </summary>
+    public void FinishGame()
+    {
+        
     }
 }

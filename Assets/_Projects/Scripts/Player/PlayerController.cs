@@ -45,7 +45,8 @@ public class PlayerController : NetworkBehaviour
             playerShot.HandleShoot();
 
             // UI制御
-            playerUI.UpdateOperationLabel(playerMovement.IsMoving);
+            bool isOperating = playerMovement.IsMoving || playerShot.IsShooting;
+            playerUI.UpdateOperationLabel(isOperating);
         }
     }
 

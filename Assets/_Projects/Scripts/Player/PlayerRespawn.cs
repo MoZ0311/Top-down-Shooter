@@ -36,7 +36,7 @@ public class PlayerRespawn : NetworkBehaviour
 
             // 初期位置へ確実にテレポートします
             transform.position = startPosition;
-            Debug.Log("テレポート完了");
+            Debug.Log($"テレポート完了{transform.position}");
         }
     }
 

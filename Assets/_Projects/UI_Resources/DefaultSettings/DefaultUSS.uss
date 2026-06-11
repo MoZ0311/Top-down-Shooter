@@ -1,6 +1,5 @@
-#OperationLabel.move {
-    translate: 0 248px;
-    scale: 0.5 1;
+#OperationLabel.hidden {
+    scale: 0.7 0;
 }
 
 .button {

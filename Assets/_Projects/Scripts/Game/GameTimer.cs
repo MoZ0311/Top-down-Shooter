@@ -15,7 +15,7 @@ public class GameTimer : NetworkBehaviour
     readonly NetworkVariable<double> endTime = new(0);  // ゲームの終了時刻
     int displayTime;                                    // ラベルに表示する時間
     int prevDisplayTime;                                // ラベルに直前まで表示されていた時間
-    bool hasFinishedGame;
+    bool hasFinishedGame;                               // ゲームの終了フラグ
 
     const int UnitPerMinute = 60;                       // 一分の定義(秒)
     const string TimerLabelString = "TimerLabel";
@@ -26,16 +26,6 @@ public class GameTimer : NetworkBehaviour
         // UI要素の検索
         var root = gameUI.rootVisualElement;
         timerLabel = root.Q<Label>(TimerLabelString);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        if (IsServer)
-        {
-            // サーバー側で、終了時刻を設定
-            endTime.Value = NetworkManager.Singleton.ServerTime.Time + timerLimit;
-        }
-        hasFinishedGame = false;
     }
 
     void Update()
@@ -72,6 +62,21 @@ public class GameTimer : NetworkBehaviour
             prevDisplayTime = displayTime;
             UpdateTimerText(displayTime);
         }
+    }
+
+    /// <summary>
+    /// ゲーム終了に向けたカウントダウンの開始処理
+    /// </summary>
+    public void StartCountdown()
+    {
+        if (IsServer)
+        {
+            // サーバー側で、終了時刻を設定
+            endTime.Value = NetworkManager.Singleton.ServerTime.Time + timerLimit;
+        }
+        hasFinishedGame = false;
+
+        Debug.Log($"{endTime.Value} / {hasFinishedGame}");
     }
 
     /// <summary>

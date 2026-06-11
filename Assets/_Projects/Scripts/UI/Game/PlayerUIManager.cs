@@ -13,7 +13,7 @@ public class PlayerUIManager : MonoBehaviour
     const string OperationLabel = "OperationLabel";
     const string Fill = "Fill";
     const string LevelText = "Lv.";
-    const string Move = "move";
+    const string Hidden = "hidden";
     float timer;
 
     public void Initialize()
@@ -30,11 +30,11 @@ public class PlayerUIManager : MonoBehaviour
         if (isMoving)
         {
             timer = 0;
-            operationLabel.AddToClassList(Move);
+            operationLabel.AddToClassList(Hidden);
         }
         else if (timer > displayInterval)
         {
-            operationLabel.RemoveFromClassList(Move);
+            operationLabel.RemoveFromClassList(Hidden);
         }
         else
         {

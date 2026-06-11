@@ -12,7 +12,7 @@ public class PlayerShoot : NetworkBehaviour
     [Header("Components")]
     [SerializeField] ParticleSystem muzzleFlash;
 
-    public bool IsShooting { private get; set; }
+    public bool IsShooting { get; set; }
     float fireRateTimer;
 
     public void HandleShoot()
