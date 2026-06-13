@@ -29,6 +29,11 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
+        if (GameManager.Instance == null || !GameManager.Instance.CanPlayingGame)
+        {
+            return;
+        }
+        
         if (IsOwner && playerHealth.CurrentHealth.Value > 0)
         {
             // クライアントのマウス座標を取得し、回転に適用

@@ -16,6 +16,11 @@ public class PlayerUIManager : MonoBehaviour
     const string Hidden = "hidden";
     float timer;
 
+    void Awake()
+    {
+        playerUI.rootVisualElement.style.display = DisplayStyle.None;
+    }
+
     public void Initialize()
     {
         // UI要素の検索/取得
@@ -27,6 +32,8 @@ public class PlayerUIManager : MonoBehaviour
 
     public void UpdateOperationLabel(bool isMoving)
     {
+        playerUI.rootVisualElement.style.display = DisplayStyle.Flex;
+
         if (isMoving)
         {
             timer = 0;

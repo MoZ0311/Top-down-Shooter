@@ -12,6 +12,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] NetworkObject playerPrefab;                    // プレイヤーとして生成されるプレハブ
 
     [Header("Settings")]
+    [Min(0)][SerializeField] float openingDuration;                 // 開始時の演出の時間
     [SerializeField] Transform[] spawnPositions = new Transform[4]; // スポーン位置
     public Transform[] SpawnPositions => spawnPositions;
 
@@ -20,6 +21,9 @@ public class GameManager : NetworkBehaviour
     [SerializeField] GameUIManager gameUIManager;
     [SerializeField] CameraManager cameraManager;
 
+    public bool CanPlayingGame { get; private set; }                // プレイヤーが操作できるか
+
+    const string ResultScene = "ResultScene";
 
     void Awake()
     {
@@ -32,6 +36,8 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+
+        CanPlayingGame = false;
     }
 
     public override void OnNetworkSpawn()
@@ -43,7 +49,7 @@ public class GameManager : NetworkBehaviour
             NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
         }
 
-        Invoke(nameof(StartGame), 3.0f);
+        Invoke(nameof(StartGame), openingDuration);
     }
 
     public override void OnNetworkDespawn()
@@ -87,7 +93,10 @@ public class GameManager : NetworkBehaviour
     {
         gameUIManager.SwitchUI();
         cameraManager.SwitchCamera(CameraMode.Player);
-        gameTimer.StartCountdown();        
+        gameTimer.StartCountdown();   
+
+        // 操作可能フラグを立てる
+        CanPlayingGame = true;     
     }
 
     /// <summary>
@@ -95,6 +104,14 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void FinishGame()
     {
-        
+        // 操作可能フラグを折る
+        CanPlayingGame = false;
+
+        // サーバー側からシーン遷移を行う
+        if (IsServer)
+        {
+            RankingManager.Instance.UpdateRanksServer();
+            NetworkManager.Singleton.SceneManager.LoadScene(ResultScene, LoadSceneMode.Single);
+        }
     }
 }

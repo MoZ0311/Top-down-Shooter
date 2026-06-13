@@ -5,6 +5,8 @@ public class StageCamera : MonoBehaviour
     [Header("Settings")]
     [SerializeField] Vector3 centor;
     [SerializeField] float period;
+
+    const float Circle = 360;
     
     void Update()
     {
@@ -17,7 +19,7 @@ public class StageCamera : MonoBehaviour
         transform.RotateAround(
             centor,
             Vector3.up,
-            360 / period * Time.deltaTime
+            Circle / period * Time.deltaTime
         );
     }
 }
