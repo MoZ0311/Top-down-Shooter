@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankingUIManager
   gameUI: {fileID: 220061774}
   rankingElement: {fileID: 9197481963319205126, guid: 0c5be406934de9243b50e484fbf24282, type: 3}
-  spacing: 130
+  spacing: 112
 --- !u!1 &307465950
 GameObject:
   m_ObjectHideFlags: 0

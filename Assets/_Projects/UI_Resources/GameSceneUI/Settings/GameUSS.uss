@@ -3,7 +3,7 @@
 }
 
 .ranking-container {
-    width: 340px;
+    width: 304px;
     flex-grow: 1;
     align-self: flex-end;
 }

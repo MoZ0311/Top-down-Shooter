@@ -79,11 +79,10 @@ public class GameManager : NetworkBehaviour
     /// <param name="clientID">接続したクライアントのID</param>
     void SpawnPlayer(ulong clientID)
     {
-        // int index = (int)clientID % spawnPositions.Length;
-        // Vector3 spawnPosition = spawnPositions[index].position;
-        NetworkObject playerObject = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        playerObject.SpawnAsPlayerObject(clientID);
-        Debug.Log("生成完了");
+        int index = (int)clientID % spawnPositions.Length;
+        Vector3 spawnPosition = spawnPositions[index].position;
+        Instantiate(playerPrefab, spawnPosition, Quaternion.identity).SpawnAsPlayerObject(clientID);
+        
     }
 
     /// <summary>

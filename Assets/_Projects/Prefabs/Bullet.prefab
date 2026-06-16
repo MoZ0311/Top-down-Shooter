@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8417e8b08f507e54b93a47fa8f49b424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletManager
-  lifeTime: 3
+  lifeTime: 1
   targetLayer:
     serializedVersion: 2
     m_Bits: 192

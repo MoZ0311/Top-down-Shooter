@@ -25,21 +25,6 @@ public class PlayerRespawn : NetworkBehaviour
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] CapsuleCollider playerCollider;
 
-    public override void OnNetworkSpawn()
-    {
-        // 自分が操作するキャラクターが生成された瞬間だけ実行する
-        if (IsOwner)
-        {
-            // GameManagerから自身のIDを使ってスポーン位置を取得します
-            int index = (int)OwnerClientId % GameManager.Instance.SpawnPositions.Length;
-            Vector3 startPosition = GameManager.Instance.SpawnPositions[index].position;
-
-            // 初期位置へ確実にテレポートします
-            transform.position = startPosition;
-            Debug.Log($"テレポート完了{transform.position}");
-        }
-    }
-
     public IEnumerator RespawnSequence()
     {
         // 死亡状態にする（クライアント全員に通知）
