@@ -1,0 +1,9 @@
+#OperationLabel.hidden {
+    scale: 0.7 0;
+}
+
+.ranking-container {
+    width: 340px;
+    flex-grow: 1;
+    align-self: flex-end;
+}

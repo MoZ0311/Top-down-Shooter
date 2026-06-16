@@ -93,7 +93,12 @@ public class GameManager : NetworkBehaviour
     {
         gameUIManager.SwitchUI();
         cameraManager.SwitchCamera(CameraMode.Player);
-        gameTimer.StartCountdown();   
+        gameTimer.StartCountdown(); 
+
+        if (IsServer)
+        {
+            RankingManager.Instance.UpdateRankingServer();
+        }
 
         // 操作可能フラグを立てる
         CanPlayingGame = true;     
@@ -110,7 +115,7 @@ public class GameManager : NetworkBehaviour
         // サーバー側からシーン遷移を行う
         if (IsServer)
         {
-            RankingManager.Instance.UpdateRanksServer();
+            RankingManager.Instance.UpdateRankingServer();
             NetworkManager.Singleton.SceneManager.LoadScene(ResultScene, LoadSceneMode.Single);
         }
     }

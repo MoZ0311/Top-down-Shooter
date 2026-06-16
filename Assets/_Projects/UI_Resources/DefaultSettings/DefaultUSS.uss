@@ -1,7 +1,3 @@
-#OperationLabel.hidden {
-    scale: 0.7 0;
-}
-
 .button {
     width: 560px;
     height: 184px;
@@ -22,12 +18,4 @@
 
 .button:enabled:active {
     scale: 0.97;
-}
-
-.score-label {
-    font-size: 80px;
-    -unity-font-definition: url("project://database/Assets/_Projects/Fonts/MoralerspaceArgon-Regular.ttf?fileID=12800000&guid=2c67d41702d10384ba1e83e54c499d95&type=3#MoralerspaceArgon-Regular");
-    flex-grow: 1;
-    -unity-text-align: upper-right;
-    margin-right: 256px;
 }

@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Projects/UI_Resources/DefaultSettings/DefaultUSS.uss?fileID=7433441132597879392&amp;guid=2abd62f70e737bb4a94f6e6c04e87a92&amp;type=3#DefaultUSS"/>
+    <Style src="project://database/Assets/_Projects/UI_Resources/GameSceneUI/Settings/GameUSS.uss?fileID=7433441132597879392&amp;guid=8639a1f6b30c03b449cef06adee4156b&amp;type=3#GameUSS"/>
     <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
         <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.8); border-top-right-radius: 64px; flex-direction: column;">

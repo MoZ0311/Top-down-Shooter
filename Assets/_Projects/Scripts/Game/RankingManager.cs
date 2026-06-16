@@ -2,6 +2,20 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Linq;
 
+public struct PlayerRankData : INetworkSerializable
+{
+    public ulong clientId;
+    public int iconIndex;
+    public int level;
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref clientId);
+        serializer.SerializeValue(ref iconIndex);
+        serializer.SerializeValue(ref level);
+    }
+}
+
 public class RankingManager : NetworkBehaviour
 {
     // シングルトン用のインスタンス
@@ -9,6 +23,9 @@ public class RankingManager : NetworkBehaviour
 
     [Header("Ref ScoreSO")]
     [SerializeField] PlayerScoreSO playerScore;
+
+    [Header("Scripts")]
+    [SerializeField] RankingUIManager rankingUIManager;
 
     private void Awake()
     {
@@ -26,37 +43,34 @@ public class RankingManager : NetworkBehaviour
     /// <summary>
     /// サーバーから全クライアントのスコアを参照し、順位を書き込む処理
     /// </summary>
-    public void UpdateRanksServer()
+    public void UpdateRankingServer()
     {
         if (!IsServer)
         {
             return;
         }
 
-        // 1. 全プレイヤーの (ClientId, Level) を取得
-        var players = NetworkManager.Singleton.ConnectedClientsList
-            .Select(c => new {
-                Id = c.ClientId,
-                Level = c.PlayerObject.GetComponent<PlayerLevel>().CurrentLevel.Value
+        // 全プレイヤーの (ClientId, Level) を取得
+        var playersData = NetworkManager.Singleton.ConnectedClientsList
+            .Where(c => c.PlayerObject != null)
+            .Select(c => new PlayerRankData {
+                clientId = c.ClientId,
+                level = c.PlayerObject.GetComponent<PlayerLevel>().CurrentLevel.Value
             })
-            .OrderByDescending(p => p.Level) // レベル順にソート
-            .ToList();
+            .ToArray();
 
-        // 2. 順位を各プレイヤーに送信
-        for (int i = 0; i < players.Count; ++i)
-        {
-            int rank = i + 1;
-            // ClientRpcで特定のプレイヤーに順位を通知
-            NotifyRankClientRpc(rank, new ClientRpcParams {
-                Send = new ClientRpcSendParams { TargetClientIds = new[] { players[i].Id } }
-            });
-        }
+        // 各プレイヤーに送信
+        UpdateRankingClientRpc(playersData);
     }
 
     [ClientRpc]
-    private void NotifyRankClientRpc(int rank, ClientRpcParams rpcParams = default)
+    private void UpdateRankingClientRpc(PlayerRankData[] newRankingData)
     {
-        // 受け取った順位をSOに即座に反映
+        var sortedList = newRankingData.OrderByDescending(p => p.level).ToList();
+
+        int rank = sortedList.FindIndex(p => p.clientId == NetworkManager.Singleton.LocalClientId) + 1;
         playerScore.rank = rank;
+
+        rankingUIManager.UpdateRankingUI(newRankingData.ToList());
     }
 }

@@ -50,6 +50,11 @@ public class PlayerLevel : NetworkBehaviour
         // 初期状態で一度更新
         OnExpChanged(0, currentExp.Value);
         OnLevelChanged(0, CurrentLevel.Value);
+
+        if (IsServer)
+        {
+            //RankingManager.Instance.UpdateRankingServer();
+        }
     }
 
     public override void OnNetworkDespawn()
@@ -158,6 +163,9 @@ public class PlayerLevel : NetworkBehaviour
 
             // 増加分を負のダメージ(回復)として与える
             playerHealth.TakeDamage(-diff);
+
+            // レベル変動時の各種処理
+            RankingManager.Instance.UpdateRankingServer();
         }
 
         if (IsOwner)
