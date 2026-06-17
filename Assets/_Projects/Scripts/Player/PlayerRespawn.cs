@@ -25,8 +25,15 @@ public class PlayerRespawn : NetworkBehaviour
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] CapsuleCollider playerCollider;
 
+    int prevRespawnIndex;   // 直前のリスポーンポイントのインデックス
+
     public IEnumerator RespawnSequence()
     {
+        if (!IsServer)
+        {
+            yield break;
+        }
+
         // 死亡状態にする（クライアント全員に通知）
         SetActiveClientRpc(false);
 
@@ -43,18 +50,46 @@ public class PlayerRespawn : NetworkBehaviour
             pickupItem.PickupItemList[1]
         );
 
+        yield return null;
+
         TeleportToRandomPosition();
 
         yield return new WaitForSecondsRealtime(respawnTime);
 
         // HPを回復させて復活（クライアント全員に通知）
+        playerHealth.RestoreHealth();
         SetActiveClientRpc(true);
-        playerHealth.TakeDamage(-playerHealth.MaxHealth);
+        
+        // カメラも戻す
+        ResetCameraClientRpc();
     }
 
     void TeleportToRandomPosition()
     {
-        int index = Random.Range(0, GameManager.Instance.SpawnPositions.Length);
+        int length = GameManager.Instance.SpawnPositions.Length;
+    
+        // スポーンポイントが2つ以上ない場合は、スキップ処理ができないため通常の処理をする
+        if (length <= 1)
+        {
+            prevRespawnIndex = 0;
+            if (length == 1)
+            {
+                TeleportClientRpc(GameManager.Instance.SpawnPositions[0].position);
+            }
+            return;
+        }
+
+        // 総数 - 1の範囲でランダムな値を決める
+        int index = Random.Range(0, length - 1);
+
+        // 選ばれた値が「前回と同じかそれ以上」なら、1つずらして前回分をスキップする
+        if (index >= prevRespawnIndex)
+        {
+            index++;
+        }
+
+        // 次回のために現在のインデックスを保存
+        prevRespawnIndex = index;
         TeleportClientRpc(GameManager.Instance.SpawnPositions[index].position);
     }
 
@@ -81,6 +116,18 @@ public class PlayerRespawn : NetworkBehaviour
         if (IsOwner)
         {
             transform.position = targetPosition;
+        }
+    }
+
+    /// <summary>
+    /// クライアント側でカメラを戻す処理
+    /// </summary>
+    [ClientRpc]
+    void ResetCameraClientRpc()
+    {
+        if (IsOwner)
+        {
+            CameraManager.Instance.SwitchCamera(CameraMode.Player);
         }
     }
 }

@@ -12,10 +12,7 @@ public class PlayerCamera : MonoBehaviour
         // メインカメラの検索
         MainCamera = Camera.main;
 
-        // コンポーネント取得
-        CameraManager cameraManager = FindAnyObjectByType<CameraManager>();
-
         // 追従させる
-        cameraManager.PlayerCamera.Follow = transform;
+        CameraManager.Instance.PlayerCamera.Follow = transform;
     }
 }

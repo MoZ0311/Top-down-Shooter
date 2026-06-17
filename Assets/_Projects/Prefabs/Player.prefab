@@ -5518,7 +5518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
   ShowTopMostFoldoutHeaderGroup: 1
   dropItemCount: 5
-  respawnTime: 1.5
+  respawnTime: 5
   pickupItem: {fileID: 11400000, guid: 830540279cb0166458f06877e6864a12, type: 2}
   playerLevel: {fileID: 7377882952524651341}
   playerHealth: {fileID: 4622178445958425396}
