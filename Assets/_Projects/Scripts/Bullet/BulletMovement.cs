@@ -13,12 +13,17 @@ public class BulletMovement : MonoBehaviour
 
     void Update()
     {
+        // 残り時間を更新
+        remainingTime -= Time.deltaTime;
+        if (remainingTime <= 0)
+        {
+            // 時間切れで消滅
+            PoolManager.Instance.BulletPool.Release(this);
+            return;
+        }
+
         // 1fあたりの移動距離の算出
         float moveDistance = moveSpeed * Time.deltaTime;
-
-        // 位置と残り時間を更新
-        transform.position += transform.forward * moveDistance;
-        remainingTime -= Time.deltaTime;
 
         // 対象とするレイヤーにぶつかった時
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, moveDistance, targetLayer, QueryTriggerInteraction.Ignore))
@@ -31,12 +36,12 @@ public class BulletMovement : MonoBehaviour
 
             // 自身を消去
             PoolManager.Instance.BulletPool.Release(this);
+            return;
         }
-
-        if (remainingTime < 0)
+        else
         {
-            // 時間切れで消滅
-            PoolManager.Instance.BulletPool.Release(this);
+            // ぶつからなかったので、進む
+            transform.position += transform.forward * moveDistance;
         }
     }
 

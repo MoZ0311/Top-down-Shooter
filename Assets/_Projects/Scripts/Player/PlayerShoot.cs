@@ -11,6 +11,7 @@ public class PlayerShoot : NetworkBehaviour
 
     [Header("Components")]
     [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] AudioSource audioSource;
 
     public bool IsShooting { get; set; }
     float fireRateTimer;
@@ -22,11 +23,7 @@ public class PlayerShoot : NetworkBehaviour
 
         if (IsShooting && fireRateTimer <= 0)
         {
-            // 発射音を再生
-            AudioPlayer.Instance.PlaySE("fire");
-
-            // マズルフラッシュのパーティクル再生
-            muzzleFlash.Play();
+            PlayShootEffects();
 
             // ローカル側で即座に生成
             ShootBullet(muzzle.position, transform.rotation, status.BulletSpeed);
@@ -43,6 +40,15 @@ public class PlayerShoot : NetworkBehaviour
                 IsShooting = false;
             }
         }
+    }
+
+    void PlayShootEffects()
+    {
+        // 発射音を再生
+        AudioPlayer.Instance.PlaySE("fire", audioSource);
+
+        // マズルフラッシュのパーティクル再生
+        muzzleFlash.Play();
     }
 
     /// <summary>
@@ -98,12 +104,8 @@ public class PlayerShoot : NetworkBehaviour
             return;
         }
 
-        // 発射音を再生
-        AudioPlayer.Instance.PlaySE("fire");
-
-        // マズルフラッシュのパーティクル再生
-        muzzleFlash.Play();
-
+        PlayShootEffects();
+        
         // 自分以外のクライアントに、弾を生成させる
         ShootBullet(muzzlePosition, rotation, bulletSpeed);
     }
