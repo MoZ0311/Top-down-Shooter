@@ -19,7 +19,6 @@ public class GameManager : NetworkBehaviour
     [Header("Scripts")]
     [SerializeField] GameTimer gameTimer;
     [SerializeField] GameUIManager gameUIManager;
-    [SerializeField] CameraManager cameraManager;
 
     public bool CanPlayingGame { get; private set; }                // プレイヤーが操作できるか
 
@@ -91,7 +90,7 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         gameUIManager.SwitchUI();
-        cameraManager.SwitchCamera(CameraMode.Player);
+        CameraManager.Instance.SwitchCamera(CameraMode.Player);
         gameTimer.StartCountdown(); 
 
         if (IsServer)

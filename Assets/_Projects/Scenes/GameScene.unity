@@ -1500,7 +1500,7 @@ GameObject:
   - component: {fileID: 785394323}
   - component: {fileID: 785394322}
   - component: {fileID: 785394321}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2083,7 +2083,7 @@ GameObject:
   - component: {fileID: 914954082}
   - component: {fileID: 914954081}
   - component: {fileID: 914954086}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2680,7 +2680,6 @@ MonoBehaviour:
   - {fileID: 658959997}
   gameTimer: {fileID: 1162908850}
   gameUIManager: {fileID: 1088060537}
-  cameraManager: {fileID: 613065567}
 --- !u!114 &1162908849
 MonoBehaviour:
   m_ObjectHideFlags: 0
