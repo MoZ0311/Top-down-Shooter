@@ -129,8 +129,8 @@ public class PlayerHealth : NetworkBehaviour
 
     void PlayDamageEffect(float prevValue, float newValue)
     {
-        // HPが減っている場合、エフェクト再生
-        if (newValue < prevValue)
+        // オーナーかつHPが減っている場合、エフェクト再生
+        if (IsOwner && newValue < prevValue)
         {
             damageEffect.PlayDamageEffect();
         }
