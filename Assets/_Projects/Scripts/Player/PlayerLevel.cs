@@ -131,12 +131,13 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnExpChanged(int prevValue, int newValue)
     {
-        UpdatePlayerUI();
-
-        if (IsOwner && prevValue != newValue)
+        // オーナーかつ、経験値が増えた時
+        if (IsOwner && prevValue < newValue)
         {
             AudioPlayer.Instance.PlaySE("exp");
         }
+
+        UpdatePlayerUI();
     }
 
     /// <summary>
@@ -144,8 +145,10 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnLevelChanged(int prevValue, int newValue)
     {
+        // オーナーかつ、レベルが1より大きくなった時
         if (IsOwner && prevValue < newValue && newValue != 1)
         {
+            // レベルアップSEの再生
             AudioPlayer.Instance.PlaySE("level");
         }
 

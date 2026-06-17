@@ -5,6 +5,7 @@ public class PlayerShoot : NetworkBehaviour
 {
     [Header("Settings")]
     [SerializeField] Transform muzzle;  // 銃口の位置
+    [Min(0)][SerializeField] float randomPitchRange;
 
     [Header("Ref Status")]
     [SerializeField] PlayerStatus status;
@@ -44,7 +45,10 @@ public class PlayerShoot : NetworkBehaviour
 
     void PlayShootEffects()
     {
-        // 発射音を再生
+        // 発射音をピッチをずらしながら再生
+        float min = 1 - randomPitchRange;
+        float max = 1 + randomPitchRange;
+        audioSource.pitch = Random.Range(min, max);
         AudioPlayer.Instance.PlaySE("fire", audioSource);
 
         // マズルフラッシュのパーティクル再生

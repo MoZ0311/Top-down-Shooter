@@ -6,12 +6,16 @@ public class BulletEffect : MonoBehaviour
     [Header("ImpulseSettings")]
     [SerializeField] CinemachineImpulseSource impulseSource;
     [SerializeField] float force;
-    [SerializeField] float screenRatio;
+    [Min(0)][SerializeField] float screenRatio;
+
+    [Header("Components")]
+    [SerializeField] AudioSource audioSource;
 
     void OnEnable()
     {
         if (IsPointInCameraView())
         {
+            AudioPlayer.Instance.PlaySE("hit", audioSource);
             impulseSource.GenerateImpulse(force);
         }
     }
@@ -27,9 +31,12 @@ public class BulletEffect : MonoBehaviour
         // ワールド座標をビューポート座標に変換
         Vector3 viewportPoint = Camera.main.WorldToViewportPoint(transform.position);
 
-        // XとYが0〜1の間、かつZが0より大きい（カメラの前方）かチェック
-        bool isInX = viewportPoint.x >= 1 - screenRatio && viewportPoint.x <= screenRatio;
-        bool isInY = viewportPoint.y >= 1 - screenRatio && viewportPoint.y <= screenRatio;
+        // XとYが指定した値の間、かつカメラの前方にあるかチェック
+        float min = 1 - screenRatio;
+        float max = screenRatio;
+
+        bool isInX = (min <= viewportPoint.x) && (viewportPoint.x <= max);
+        bool isInY = (min <= viewportPoint.y) && (viewportPoint.y <= max);
         bool isFront = viewportPoint.z > 0;
 
         // すべてを満たしていれば画面内（true）
