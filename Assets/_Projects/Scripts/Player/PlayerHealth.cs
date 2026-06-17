@@ -12,6 +12,8 @@ public class PlayerHealth : NetworkBehaviour
     [Header("Scripts")]
     [SerializeField] PlayerRespawn playerRespawn;
 
+    DamageEffect damageEffect;
+
     public float MaxHealth => status.Health;
     public NetworkVariable<float> CurrentHealth { get; } = new();
 
@@ -24,12 +26,17 @@ public class PlayerHealth : NetworkBehaviour
             CurrentHealth.Value = status.Health;
         }
 
-        CurrentHealth.OnValueChanged += PlayDamageSE;
+        if (FindAnyObjectByType<DamageEffect>().TryGetComponent(out DamageEffect component))
+        {
+            damageEffect = component;
+        }
+
+        CurrentHealth.OnValueChanged += PlayDamageEffect;
     }
 
     public override void OnNetworkDespawn()
     {
-        CurrentHealth.OnValueChanged -= PlayDamageSE;
+        CurrentHealth.OnValueChanged -= PlayDamageEffect;
     }
 
     /// <summary>
@@ -120,12 +127,12 @@ public class PlayerHealth : NetworkBehaviour
         CameraManager.Instance.SwitchCamera(CameraMode.Kill);
     }
 
-    void PlayDamageSE(float prevValue, float newValue)
+    void PlayDamageEffect(float prevValue, float newValue)
     {
-        // HPが減っている場合、SE再生
+        // HPが減っている場合、エフェクト再生
         if (newValue < prevValue)
         {
-            AudioPlayer.Instance.PlaySE("hit");
+            damageEffect.PlayDamageEffect();
         }
     }
 }
