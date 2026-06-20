@@ -646,7 +646,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
+  CustomBlends: {fileID: 11400000, guid: ae5b82ccd2f07f24a9709e591714ba61, type: 2}
 --- !u!81 &330585549
 AudioListener:
   m_ObjectHideFlags: 0

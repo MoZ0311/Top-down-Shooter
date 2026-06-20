@@ -41,7 +41,6 @@ public class PlayerLevel : NetworkBehaviour
         if (IsOwner)
         {
             playerUIManager.gameObject.SetActive(true);
-            playerUIManager.Initialize();
         }
 
         currentExp.OnValueChanged += OnExpChanged;
@@ -50,11 +49,6 @@ public class PlayerLevel : NetworkBehaviour
         // 初期状態で一度更新
         OnExpChanged(0, currentExp.Value);
         OnLevelChanged(0, CurrentLevel.Value);
-
-        if (IsServer)
-        {
-            //RankingManager.Instance.UpdateRankingServer();
-        }
     }
 
     public override void OnNetworkDespawn()

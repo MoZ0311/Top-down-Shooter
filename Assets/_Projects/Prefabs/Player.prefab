@@ -5525,7 +5525,8 @@ MonoBehaviour:
   playerHealth: {fileID: 4622178445958425396}
   clientNetworkTransform: {fileID: 6223391031887819690}
   model: {fileID: 1488679891943461286}
-  trackingUI: {fileID: 7858490215831677551}
+  trackingUI: {fileID: 5690904549863900353}
+  playerUI: {fileID: 7739246567424257022}
   playerRigidbody: {fileID: 7058168512282946537}
   playerCollider: {fileID: 5311448528682513380}
 --- !u!114 &9000585345077933029
@@ -5634,7 +5635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53d4ffbf018ca7448f99330977766a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUIManager
-  fadeDuration: 0
   playerUI: {fileID: 7739246567424257022}
   displayInterval: 1
 --- !u!114 &7739246567424257022

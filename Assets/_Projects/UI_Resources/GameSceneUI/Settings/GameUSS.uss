@@ -7,3 +7,11 @@
     flex-grow: 1;
     align-self: flex-end;
 }
+
+.ranking-element {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.ranking-element.is-local {
+    background-color: rgba(255, 179, 0, 0.8);
+}

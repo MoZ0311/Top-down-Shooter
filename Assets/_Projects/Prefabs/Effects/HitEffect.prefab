@@ -51,7 +51,6 @@ MonoBehaviour:
   impulseSource: {fileID: 3661071090529909535}
   force: 0.1
   screenRatio: 1.1
-  randomPitchRange: 0.1
   audioSource: {fileID: 6234837851903580111}
 --- !u!114 &3661071090529909535
 MonoBehaviour:
@@ -4932,7 +4931,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 8
-  MaxDistance: 13
+  MaxDistance: 14.5
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

@@ -3,7 +3,6 @@ using UnityEngine.UIElements;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    [SerializeField] float fadeDuration;
     [SerializeField] UIDocument playerUI;
     [SerializeField] float displayInterval;
     Label levelLabel;
@@ -16,15 +15,10 @@ public class PlayerUIManager : MonoBehaviour
     const string Hidden = "hidden";
     float timer;
 
-    void Awake()
+    void OnEnable()
     {
-        playerUI.rootVisualElement.style.display = DisplayStyle.None;
-    }
-
-    public void Initialize()
-    {
-        // UI要素の検索/取得
         var root = playerUI.rootVisualElement;
+        root.style.display = DisplayStyle.None;
         levelLabel = root.Q<Label>(LevelLabel);
         operationLabel = root.Q<Label>(OperationLabel);
         fill = root.Q<VisualElement>(Fill);

@@ -25,6 +25,8 @@ public class RankingUIManager : MonoBehaviour
     const string RankingContainer = "RankingContainer";
     const string RankingElement = "RankingElement";
 
+    const string IsLocal = "is-local";
+
     void OnEnable()
     {
         var root = gameUI.rootVisualElement;
@@ -67,6 +69,17 @@ public class RankingUIManager : MonoBehaviour
             // Labelコンポーネントのテキストを更新
             rankingItemList[i].item.Q<Label>().text = $"Lv.{rankDataList[i].level}";
             rankingItemList[i].level = rankDataList[i].level;
+
+            // 自分のUIデータかどうか参照
+            ulong localID = NetworkManager.Singleton.LocalClientId;
+            if (rankDataList[i].clientId == localID)
+            {
+                rankingItemList[i].item.AddToClassList(IsLocal);
+            }
+            else
+            {
+                rankingItemList[i].item.RemoveFromClassList(IsLocal);
+            }
         }
 
         // 更新されたデータに基づいてソート＆アニメーション

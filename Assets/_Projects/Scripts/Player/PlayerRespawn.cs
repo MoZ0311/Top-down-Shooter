@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using Unity.Multiplayer.Center.NetcodeForGameObjectsExample;
+using UnityEngine.UIElements;
 
 public class PlayerRespawn : NetworkBehaviour
 {
@@ -21,7 +22,8 @@ public class PlayerRespawn : NetworkBehaviour
     [Header("Components")]
     [SerializeField] ClientNetworkTransform clientNetworkTransform;
     [SerializeField] GameObject model;
-    [SerializeField] GameObject trackingUI;
+    [SerializeField] UIDocument trackingUI;
+    [SerializeField] UIDocument playerUI;
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] CapsuleCollider playerCollider;
 
@@ -102,9 +104,17 @@ public class PlayerRespawn : NetworkBehaviour
     {
         // 見た目と当たり判定を切り替える
         model.SetActive(isActive);
-        trackingUI.SetActive(isActive);
         playerRigidbody.isKinematic = !isActive;
         playerCollider.enabled = isActive;
+
+        DisplayStyle displayStyle = isActive ? DisplayStyle.Flex : DisplayStyle.None;
+        trackingUI.rootVisualElement.style.display = displayStyle;
+
+        // オーナーであれば、UIも消す
+        if (IsOwner)
+        {
+            playerUI.gameObject.SetActive(isActive);
+        }
     }
 
     /// <summary>
@@ -115,7 +125,17 @@ public class PlayerRespawn : NetworkBehaviour
     {
         if (IsOwner)
         {
-            transform.position = targetPosition;
+            //transform.position = targetPosition;
+
+            if (clientNetworkTransform != null)
+            {
+                clientNetworkTransform.Teleport(targetPosition, transform.rotation, transform.localScale);
+            }
+            else
+            {
+                // 万が一コンポーネントが参照できない場合のフォールバック
+                transform.position = targetPosition;
+            }
         }
     }
 
