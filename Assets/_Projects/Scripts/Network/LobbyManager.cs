@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 public class LobbyManager : MonoBehaviour
 {
-    [SerializeField] float waitTime;    // HeartBeatの間隔
-    Lobby currentLobby;                 // ロビー
+    [SerializeField] float waitTime;        // HeartBeatの間隔
+    Lobby currentLobby;                     // ロビー
+    Coroutine heartbeatCoroutine = null;    // ハートビートコルーチンの格納先
     const string RelayKey = "RelayCode";
 
     async void Start()
@@ -39,7 +40,7 @@ public class LobbyManager : MonoBehaviour
                 }
             };
             currentLobby = await LobbyService.Instance.CreateLobbyAsync("MyRoom", maxPlayers, options);
-            StartCoroutine(HeartbeatLobby(currentLobby.Id, waitTime));
+            heartbeatCoroutine = StartCoroutine(HeartbeatLobby(currentLobby.Id, waitTime));
             return true;
         }
         catch (LobbyServiceException e)
@@ -79,6 +80,52 @@ public class LobbyManager : MonoBehaviour
         {
             LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
             yield return delay;
+        }
+    }
+
+    /// <summary>
+    /// ロビーから退出、またはロビーを削除する処理
+    /// </summary>
+    public async Task LeaveLobby()
+    {
+        if (currentLobby == null)
+        {
+            return;
+        }
+
+        // ハートビートを停止
+        StopHeartbeat();
+
+        try
+        {
+            if (currentLobby.HostId == AuthenticationService.Instance.PlayerId)
+            {
+                // 自分がホスト（ロビー作成者）の場合、ロビー自体を削除する
+                await LobbyService.Instance.DeleteLobbyAsync(currentLobby.Id);
+            }
+            else
+            {
+                // 自分がゲスト（参加者）の場合、ロビーから退出する
+                string myPlayerId = AuthenticationService.Instance.PlayerId;
+                await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, myPlayerId);
+            }
+            currentLobby = null;
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogError(e);
+        }
+    }
+
+    /// <summary>
+    /// ロビーのハートビートを停止する処理
+    /// </summary>
+    void StopHeartbeat()
+    {
+        if (heartbeatCoroutine != null)
+        {
+            StopCoroutine(heartbeatCoroutine);
+            heartbeatCoroutine = null;
         }
     }
 }

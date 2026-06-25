@@ -22,8 +22,8 @@ public class PlayerRespawn : NetworkBehaviour
     [Header("Components")]
     [SerializeField] ClientNetworkTransform clientNetworkTransform;
     [SerializeField] GameObject model;
-    [SerializeField] UIDocument trackingUI;
-    [SerializeField] UIDocument playerUI;
+    [SerializeField] PanelRenderer trackingUI;
+    [SerializeField] PanelRenderer playerUI;
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] CapsuleCollider playerCollider;
 
@@ -61,7 +61,7 @@ public class PlayerRespawn : NetworkBehaviour
         // HPを回復させて復活（クライアント全員に通知）
         playerHealth.RestoreHealth();
         SetActiveClientRpc(true);
-        
+
         // カメラも戻す
         ResetCameraClientRpc();
     }
@@ -69,7 +69,7 @@ public class PlayerRespawn : NetworkBehaviour
     void TeleportToRandomPosition()
     {
         int length = GameManager.Instance.SpawnPositions.Length;
-    
+
         // スポーンポイントが2つ以上ない場合は、スキップ処理ができないため通常の処理をする
         if (length <= 1)
         {
@@ -107,8 +107,7 @@ public class PlayerRespawn : NetworkBehaviour
         playerRigidbody.isKinematic = !isActive;
         playerCollider.enabled = isActive;
 
-        DisplayStyle displayStyle = isActive ? DisplayStyle.Flex : DisplayStyle.None;
-        trackingUI.rootVisualElement.style.display = displayStyle;
+        trackingUI.enabled = isActive;
 
         // オーナーであれば、UIも消す
         if (IsOwner)

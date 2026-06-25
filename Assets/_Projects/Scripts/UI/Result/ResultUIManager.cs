@@ -5,7 +5,7 @@ using Unity.Netcode;
 public class ResultUIManager : NetworkBehaviour
 {
     [Header("Components")]
-    [SerializeField] UIDocument resultUI;
+    [SerializeField] PanelRenderer resultUI;
 
     [Header("Ref Score")]
     [SerializeField] PlayerScoreSO playerScore;
@@ -25,13 +25,16 @@ public class ResultUIManager : NetworkBehaviour
     const string LobbyScene = "LobbyScene";
     const string Rank = "位";
 
-    void OnEnable()
+    void Awake()
     {
-        // カーソルを表示する
-        UnityEngine.Cursor.visible = true;
+        resultUI.RegisterUIReloadCallback(OnUIReload);
+    }
 
-        // 各UI要素の取得
-        var root = resultUI.rootVisualElement;
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
         killCountLabel = root.Q<Label>(KillCountLabel);
         deathCountLabel = root.Q<Label>(DeathCountLabel);
         maxLevelLabel = root.Q<Label>(MaxLevelLabel);
@@ -39,10 +42,7 @@ public class ResultUIManager : NetworkBehaviour
         rankLabel = root.Q<Label>(RankLabel);
         waitingTextLabel = root.Q<Label>(WaitingTextLabel);
         okButton = root.Q<Button>();
-    }
 
-    public override void OnNetworkSpawn()
-    {
         if (IsServer)
         {
             // 待ちテキストを非表示
@@ -65,8 +65,16 @@ public class ResultUIManager : NetworkBehaviour
         AudioPlayer.Instance.PlaySE("cheers");
     }
 
+    void OnEnable()
+    {
+        // カーソルを表示する
+        UnityEngine.Cursor.visible = true;
+    }
+
     public override void OnNetworkDespawn()
     {
+        resultUI.UnregisterUIReloadCallback(OnUIReload);
+
         if (IsServer)
         {
             okButton.clicked -= OnClickedOK;

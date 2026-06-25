@@ -11,7 +11,7 @@ public enum CameraMode
 public class CameraManager : MonoBehaviour
 {
     // シングルトン用のインスタンス
-    public static CameraManager Instance { get; private set; }
+    public static CameraManager Instance { get; private set; } = null;
 
     [Header("Cameras")]
     [field:SerializeField] public CinemachineCamera OverviewCamera { get; private set;}
@@ -45,7 +45,7 @@ public class CameraManager : MonoBehaviour
             case CameraMode.Player:
                 PlayerCamera.Priority = 1;
                 break;
-                
+
             case CameraMode.Kill:
                 KillCamera.Priority = 1;
                 break;

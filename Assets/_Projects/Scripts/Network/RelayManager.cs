@@ -18,7 +18,9 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+            // (maxConnections - 1)で接続クライアント数を算出
+            int clientsCount = maxConnections - 1;
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(clientsCount);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetHostRelayData(

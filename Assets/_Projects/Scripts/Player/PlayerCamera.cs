@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public static Camera MainCamera { get; private set; }
+    public static Camera MainCamera { get; private set; } = null;
 
     /// <summary>
     /// Cinemachineカメラが自身を追従するように設定

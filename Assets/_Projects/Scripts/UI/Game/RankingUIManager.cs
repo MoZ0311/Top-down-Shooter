@@ -7,7 +7,7 @@ using Unity.Netcode;
 public class RankingUIManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] UIDocument gameUI;
+    [SerializeField] PanelRenderer gameUI;
     [SerializeField] VisualTreeAsset rankingElement;
 
     [Header("Settings")]
@@ -21,17 +21,34 @@ public class RankingUIManager : MonoBehaviour
         public int level;
     }
     readonly List<RankingItem> rankingItemList = new();
+    int uiVersion;
 
     const string RankingContainer = "RankingContainer";
     const string RankingElement = "RankingElement";
-
     const string IsLocal = "is-local";
 
-    void OnEnable()
+    void Awake()
     {
-        var root = gameUI.rootVisualElement;
-        rankingContainer = root.Q<VisualElement>(RankingContainer);
+        gameUI.RegisterUIReloadCallback(OnUIReload);
+    }
 
+    void OnDestroy()
+    {
+        gameUI.UnregisterUIReloadCallback(OnUIReload);
+    }
+
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
+        if (uiVersion == version)
+        {
+            return;
+        }
+        uiVersion = version;
+
+        rankingContainer = root.Q<VisualElement>(RankingContainer);
         InitializeRankingUI();
     }
 

@@ -1,4 +1,6 @@
 using UnityEngine;
+using Unity.Netcode;
+using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
 public class MatchingManager : MonoBehaviour
@@ -9,10 +11,21 @@ public class MatchingManager : MonoBehaviour
     [SerializeField] RelayManager relayManager; // リレー管理用のスクリプト
     [SerializeField] LobbyManager lobbyManager; // ロビー管理用のスクリプト
 
+    const string TitleSceneString = "TitleScene";
+
+    public static MatchingManager Instance { get; private set; } = null;
+
     void Awake()
     {
-        // シーンを跨いで存在できるように設定
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -43,5 +56,26 @@ public class MatchingManager : MonoBehaviour
         }
 
         return lanConnectionManager.StartClient();
+    }
+
+    /// <summary>
+    /// ボタンから呼び出す、マッチ切断＆タイトル帰還処理
+    /// </summary>
+    public async void LeaveMatchAndReturnToTitle()
+    {
+        // オンライン時はLobbyの退出/削除を待つ
+        if (isOnline)
+        {
+            await lobbyManager.LeaveLobby();
+        }
+
+        // Netcode for GameObjects の通信を終了
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+
+        // タイトルシーンへ遷移
+        SceneManager.LoadScene(TitleSceneString);
     }
 }

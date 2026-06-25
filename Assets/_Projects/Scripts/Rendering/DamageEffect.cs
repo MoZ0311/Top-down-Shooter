@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 
 public class DamageEffect : MonoBehaviour
 {
-    [SerializeField] Volume damageVolume; 
+    [SerializeField] Volume damageVolume;
     [SerializeField] float fadeDuration;
 
     float currentTimer;

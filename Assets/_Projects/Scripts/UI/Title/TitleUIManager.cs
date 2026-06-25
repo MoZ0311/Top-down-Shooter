@@ -3,21 +3,56 @@ using UnityEngine.UIElements;
 
 public class TitleUIManager : MonoBehaviour
 {
-    [SerializeField] UIDocument titleUI;
-    [SerializeField] MatchingManager matchingManager;
+    [SerializeField] PanelRenderer titleUI;
+    MatchingManager matchingManager;
     Button hostButton;
     Button clientButton;
     Label connectingMessageLabel;
+    int uiVersion;
     const string HostButton = "HostButton";
     const string ClientButton = "ClientButton";
     const string ConnectingMessageLabel = "ConnectingMessageLabel";
     const string ConnectingText = "接続中…";
     const string FailedText = "接続に失敗しました";
 
+    void Awake()
+    {
+        titleUI.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    void Start()
+    {
+        matchingManager = FindAnyObjectByType<MatchingManager>();
+    }
+
+    void OnDestroy()
+    {
+        titleUI.UnregisterUIReloadCallback(OnUIReload);
+    }
+
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
+        if (uiVersion == version)
+        {
+            return;
+        }
+        uiVersion = version;
+
+        hostButton = root.Q<Button>(HostButton);
+        clientButton = root.Q<Button>(ClientButton);
+        connectingMessageLabel = root.Q<Label>(ConnectingMessageLabel);
+
+        hostButton.RegisterCallback<ClickEvent>(OnClickedHostButton);
+        clientButton.RegisterCallback<ClickEvent>(OnClickedClientButton);
+    }
+
     /// <summary>
     /// ホストとして開始(つくるボタン)したときの処理
     /// </summary>
-    async void OnClickedHostButton()
+    async void OnClickedHostButton(ClickEvent evt)
     {
         OnConnected();
         if (!await matchingManager.StartHost())
@@ -29,7 +64,7 @@ public class TitleUIManager : MonoBehaviour
     /// <summary>
     /// クライアントとして開始(さがすボタン)したときの処理
     /// </summary>
-    async void OnClickedClientButton()
+    async void OnClickedClientButton(ClickEvent evt)
     {
         OnConnected();
         if (!await matchingManager.StartClient())
@@ -60,23 +95,5 @@ public class TitleUIManager : MonoBehaviour
         connectingMessageLabel.text = FailedText;
         hostButton.SetEnabled(true);
         clientButton.SetEnabled(true);
-    }
-
-    void OnEnable()
-    {
-        // UI要素の検索/取得
-        var root = titleUI.rootVisualElement;
-        hostButton = root.Q<Button>(HostButton);
-        clientButton = root.Q<Button>(ClientButton);
-        connectingMessageLabel = root.Q<Label>(ConnectingMessageLabel);
-
-        hostButton.clicked += OnClickedHostButton;
-        clientButton.clicked += OnClickedClientButton;
-    }
-
-    void OnDisable()
-    {
-        hostButton.clicked -= OnClickedHostButton;
-        clientButton.clicked -= OnClickedClientButton;
     }
 }

@@ -5525,8 +5525,8 @@ MonoBehaviour:
   playerHealth: {fileID: 4622178445958425396}
   clientNetworkTransform: {fileID: 6223391031887819690}
   model: {fileID: 1488679891943461286}
-  trackingUI: {fileID: 5690904549863900353}
-  playerUI: {fileID: 7739246567424257022}
+  trackingUI: {fileID: 3037017482505948019}
+  playerUI: {fileID: 1689251687470401663}
   playerRigidbody: {fileID: 7058168512282946537}
   playerCollider: {fileID: 5311448528682513380}
 --- !u!114 &9000585345077933029
@@ -5600,7 +5600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2462234167961576019}
   - component: {fileID: 157653805074256395}
-  - component: {fileID: 7739246567424257022}
+  - component: {fileID: 1689251687470401663}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -5635,31 +5635,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53d4ffbf018ca7448f99330977766a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUIManager
-  playerUI: {fileID: 7739246567424257022}
+  playerUI: {fileID: 1689251687470401663}
   displayInterval: 1
---- !u!114 &7739246567424257022
-MonoBehaviour:
+--- !u!1931382934 &1689251687470401663
+PanelRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3719941659095571151}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: a9bbe3842582feb4d8befb74e29a2ca3, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 704cfc89b8c6a0040a4b5f87f0e7d02a, type: 3}
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Position: 0
+  m_MaskInteraction: 0
+  serializedVersion: 1
+  m_PanelSettings: {fileID: 11400000, guid: a9bbe3842582feb4d8befb74e29a2ca3, type: 2}
+  sourceAsset: {fileID: 9197481963319205126, guid: 704cfc89b8c6a0040a4b5f87f0e7d02a, type: 3}
+  m_ParentUI: {fileID: 0}
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
   m_PivotReferenceSize: 0
   m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
+  m_Position: 0
 --- !u!1 &3954349350822581839
 GameObject:
   m_ObjectHideFlags: 0
@@ -6256,7 +6291,7 @@ GameObject:
   - component: {fileID: 8311956494475381612}
   - component: {fileID: 9139201608444992318}
   - component: {fileID: 1142276539869490526}
-  - component: {fileID: 5690904549863900353}
+  - component: {fileID: 3037017482505948019}
   m_Layer: 6
   m_Name: TrackingUI
   m_TagString: Untagged
@@ -6303,31 +6338,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02961c72743ccc14aa519458ce08b6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthGaugeManager
-  trackingUI: {fileID: 5690904549863900353}
+  trackingUI: {fileID: 3037017482505948019}
   playerHealth: {fileID: 4622178445958425396}
---- !u!114 &5690904549863900353
-MonoBehaviour:
+--- !u!1931382934 &3037017482505948019
+PanelRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7858490215831677551}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: cd787840dbaecb848bc7d4cbe7fbe104, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: d32974ddfe21653408aa8e82ba809b5c, type: 3}
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Position: 0
+  m_MaskInteraction: 0
+  serializedVersion: 1
+  m_PanelSettings: {fileID: 11400000, guid: cd787840dbaecb848bc7d4cbe7fbe104, type: 2}
+  sourceAsset: {fileID: 9197481963319205126, guid: d32974ddfe21653408aa8e82ba809b5c, type: 3}
+  m_ParentUI: {fileID: 0}
   m_WorldSpaceSizeMode: 0
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
   m_PivotReferenceSize: 1
   m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
+  m_Position: 0
 --- !u!1 &7978164934894824676
 GameObject:
   m_ObjectHideFlags: 0

@@ -81,7 +81,6 @@ public class GameManager : NetworkBehaviour
         int index = (int)clientID % spawnPositions.Length;
         Vector3 spawnPosition = spawnPositions[index].position;
         Instantiate(playerPrefab, spawnPosition, Quaternion.identity).SpawnAsPlayerObject(clientID);
-        
     }
 
     /// <summary>
@@ -91,7 +90,7 @@ public class GameManager : NetworkBehaviour
     {
         gameUIManager.SwitchUI();
         CameraManager.Instance.SwitchCamera(CameraMode.Player);
-        gameTimer.StartCountdown(); 
+        gameTimer.StartCountdown();
 
         if (IsServer)
         {
@@ -99,7 +98,7 @@ public class GameManager : NetworkBehaviour
         }
 
         // 操作可能フラグを立てる
-        CanPlayingGame = true;     
+        CanPlayingGame = true;
     }
 
     /// <summary>

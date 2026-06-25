@@ -7,14 +7,14 @@ public class StageCamera : MonoBehaviour
     [SerializeField] float period;
 
     const float Circle = 360;
-    
+
     void Update()
     {
         if (period <= 0)
         {
             return;
         }
-        
+
         // 中心点centerの周りを、軸axisで、period周期で円運動
         transform.RotateAround(
             centor,

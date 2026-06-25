@@ -1,30 +1,17 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using Unity.Netcode;
 
 public class GameTimer : NetworkBehaviour
 {
     [Header("Settings")]
     [SerializeField] int timerLimit;                    // 制限時間(秒)
-    [SerializeField] int redThredhouldTime;             // タイマーを赤色にする閾値
 
-    [Header("Components")]
-    [SerializeField] UIDocument gameUI;                 // 参照するゲーム画面のUIDocument
+    [Header("Scripts")]
+    [SerializeField] GameUIManager gameUIManager;       // ゲームUIの管理クラス
 
-    Label timerLabel;                                   // 残り時間を表示するラベル
     readonly NetworkVariable<double> endTime = new(0);  // ゲームの終了時刻
     int displayTime;                                    // ラベルに表示する時間
     int prevDisplayTime;                                // ラベルに直前まで表示されていた時間
-
-    const int UnitPerMinute = 60;                       // 一分の定義(秒)
-    const string TimerLabelString = "TimerLabel";
-
-    void OnEnable()
-    {
-        // UI要素の検索
-        var root = gameUI.rootVisualElement;
-        timerLabel = root.Q<Label>(TimerLabelString);
-    }
 
     void Update()
     {
@@ -51,7 +38,7 @@ public class GameTimer : NetworkBehaviour
         if (displayTime != prevDisplayTime)
         {
             prevDisplayTime = displayTime;
-            UpdateTimerText(displayTime);
+            gameUIManager.UpdateTimerText(displayTime);
         }
     }
 
@@ -65,22 +52,5 @@ public class GameTimer : NetworkBehaviour
             // サーバー側で、終了時刻を設定
             endTime.Value = NetworkManager.Singleton.ServerTime.Time + timerLimit;
         }
-    }
-
-    /// <summary>
-    /// タイマーUIの更新処理
-    /// </summary>
-    /// <param name="time">現在の残り時間(秒)</param>
-    void UpdateTimerText(int time)
-    {
-        // タイマー描画用のフォントの色を設定(閾値以下: 赤色 / それ以外: 白色)
-        timerLabel.style.color = displayTime <= redThredhouldTime ? Color.red : Color.white;
-
-        // タイマーの分と秒を算出
-        int min = time / UnitPerMinute;
-        int sec = time % UnitPerMinute;
-
-        // Labelに反映
-        timerLabel.text = $"{min:00}:{sec:00}";
     }
 }

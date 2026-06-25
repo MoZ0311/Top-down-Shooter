@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    [SerializeField] UIDocument playerUI;
+    [SerializeField] PanelRenderer playerUI;
     [SerializeField] float displayInterval;
     Label levelLabel;
     Label operationLabel;
@@ -14,20 +14,39 @@ public class PlayerUIManager : MonoBehaviour
     const string LevelText = "Lv.";
     const string Hidden = "hidden";
     float timer;
+    int uiVersion;
 
-    void OnEnable()
+    void Awake()
     {
-        var root = playerUI.rootVisualElement;
-        root.style.display = DisplayStyle.None;
+        playerUI.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    void OnDestroy()
+    {
+        playerUI.UnregisterUIReloadCallback(OnUIReload);
+    }
+
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
+        if (uiVersion == version)
+        {
+            return;
+        }
+        uiVersion = version;
+
         levelLabel = root.Q<Label>(LevelLabel);
         operationLabel = root.Q<Label>(OperationLabel);
         fill = root.Q<VisualElement>(Fill);
+
+        playerUI.enabled = false;
     }
 
     public void UpdateOperationLabel(bool isMoving)
     {
-        playerUI.rootVisualElement.style.display = DisplayStyle.Flex;
-
+        playerUI.enabled = true;
         if (isMoving)
         {
             timer = 0;
@@ -45,6 +64,8 @@ public class PlayerUIManager : MonoBehaviour
 
     public void UpdatePlayerUI(int level, float expRatio)
     {
+        if (levelLabel == null || fill == null) return;
+
         levelLabel.text = LevelText + level;
         fill.style.flexGrow = expRatio;
     }

@@ -4,18 +4,66 @@ using UnityEngine.UIElements;
 public class GameUIManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] UIDocument overviewUI;
-    [SerializeField] UIDocument gameUI;
+    [SerializeField] PanelRenderer overviewUI;
+    [SerializeField] PanelRenderer gameUI;
+
+    [Header("Settings")]
+    [SerializeField] int redThredhouldTime;             // タイマーを赤色にする閾値
+
+    public VisualElement CrossHair { get; private set; }
+    Label timerLabel;                                   // 残り時間を表示するラベル
+    int uiVersion;
+    const int UnitPerMinute = 60;                       // 一分の定義(秒)
+    const string Crosshair = "Crosshair";
+    const string TimerLabelString = "TimerLabel";
 
     void Awake()
     {
-        overviewUI.rootVisualElement.style.display = DisplayStyle.Flex;
-        gameUI.rootVisualElement.style.display = DisplayStyle.None;
+        gameUI.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    void OnDestroy()
+    {
+        gameUI.UnregisterUIReloadCallback(OnUIReload);
     }
 
     public void SwitchUI()
     {
-        overviewUI.rootVisualElement.style.display = DisplayStyle.None;
-        gameUI.rootVisualElement.style.display = DisplayStyle.Flex;
+        overviewUI.enabled = false;
+        gameUI.enabled = true;
+    }
+
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
+        if (uiVersion == version)
+        {
+            return;
+        }
+        uiVersion = version;
+
+        CrossHair = root.Q<VisualElement>(Crosshair);
+        timerLabel = root.Q<Label>(TimerLabelString);
+
+        gameUI.enabled = false;
+    }
+
+    /// <summary>
+    /// タイマーUIの更新処理
+    /// </summary>
+    /// <param name="time">現在の残り時間(秒)</param>
+    public void UpdateTimerText(int time)
+    {
+        // タイマー描画用のフォントの色を設定(閾値以下: 赤色 / それ以外: 白色)
+        timerLabel.style.color = time <= redThredhouldTime ? Color.red : Color.white;
+
+        // タイマーの分と秒を算出
+        int min = time / UnitPerMinute;
+        int sec = time % UnitPerMinute;
+
+        // Labelに反映
+        timerLabel.text = $"{min:00}:{sec:00}";
     }
 }
