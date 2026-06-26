@@ -7,6 +7,7 @@
             <ui:Button text="つくる" name="HostButton" class="button" style="-unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
             <ui:Button text="さがす" name="ClientButton" class="button" style="-unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;);"/>
         </ui:VisualElement>
+        <ui:Button text="ゲーム終了" name="ExitButton" class="button" style="position: absolute; right: 0; bottom: 0; width: 256px; height: 92px; font-size: 40px; margin-bottom: 32px; margin-right: 32px;"/>
         <ui:Label text="接続中…" name="ConnectingMessageLabel" style="-unity-font-style: normal; font-size: 56px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); display: none; position: absolute; -unity-text-align: upper-right; bottom: 0; margin-left: 40px; margin-bottom: 40px; left: 0;"/>
     </ui:VisualElement>
 </ui:UXML>

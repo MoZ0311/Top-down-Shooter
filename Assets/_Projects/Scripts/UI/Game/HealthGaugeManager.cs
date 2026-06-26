@@ -9,23 +9,15 @@ public class HealthGaugeManager : MonoBehaviour
     Label healthLabel;
     const string Fill = "Fill";
 
-    void Awake()
-    {
-        trackingUI.RegisterUIReloadCallback(OnUIReload);
-    }
-
-    void OnDestroy()
-    {
-        trackingUI.UnregisterUIReloadCallback(OnUIReload);
-    }
-
     void OnEnable()
     {
+        trackingUI.RegisterUIReloadCallback(OnUIReload);
         playerHealth.CurrentHealth.OnValueChanged += OnHealthChanged;
     }
 
     void OnDisable()
     {
+        trackingUI.UnregisterUIReloadCallback(OnUIReload);
         playerHealth.CurrentHealth.OnValueChanged -= OnHealthChanged;
     }
 

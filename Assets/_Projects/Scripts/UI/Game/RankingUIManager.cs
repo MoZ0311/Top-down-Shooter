@@ -27,12 +27,12 @@ public class RankingUIManager : MonoBehaviour
     const string RankingElement = "RankingElement";
     const string IsLocal = "is-local";
 
-    void Awake()
+    void OnEnable()
     {
         gameUI.RegisterUIReloadCallback(OnUIReload);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         gameUI.UnregisterUIReloadCallback(OnUIReload);
     }

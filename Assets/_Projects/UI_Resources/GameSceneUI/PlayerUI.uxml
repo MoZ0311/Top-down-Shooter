@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Projects/UI_Resources/GameSceneUI/Settings/GameUSS.uss?fileID=7433441132597879392&amp;guid=8639a1f6b30c03b449cef06adee4156b&amp;type=3#GameUSS"/>
-    <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
+    <ui:VisualElement name="RootElement" style="flex-grow: 1; flex-direction: column-reverse; display: none;">
         <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.8); border-top-right-radius: 64px; flex-direction: column;">
                 <ui:Label text="Lv.1" name="LevelLabel" style="font-size: 48px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); color: rgb(255, 255, 255); margin-left: 16px; -unity-text-align: middle-left; margin-top: 8px;"/>

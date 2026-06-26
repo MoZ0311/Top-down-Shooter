@@ -37,12 +37,6 @@ public class PlayerLevel : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // オーナーの時のみ、UI関連にアクセス
-        if (IsOwner)
-        {
-            playerUIManager.gameObject.SetActive(true);
-        }
-
         currentExp.OnValueChanged += OnExpChanged;
         CurrentLevel.OnValueChanged += OnLevelChanged;
 

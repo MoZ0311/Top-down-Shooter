@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,15 +8,17 @@ public class TitleUIManager : MonoBehaviour
     MatchingManager matchingManager;
     Button hostButton;
     Button clientButton;
+    Button exitButton;
     Label connectingMessageLabel;
     int uiVersion;
     const string HostButton = "HostButton";
     const string ClientButton = "ClientButton";
+    const string ExitButton = "ExitButton";
     const string ConnectingMessageLabel = "ConnectingMessageLabel";
     const string ConnectingText = "接続中…";
     const string FailedText = "接続に失敗しました";
 
-    void Awake()
+    void OnEnable()
     {
         titleUI.RegisterUIReloadCallback(OnUIReload);
     }
@@ -25,7 +28,7 @@ public class TitleUIManager : MonoBehaviour
         matchingManager = FindAnyObjectByType<MatchingManager>();
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         titleUI.UnregisterUIReloadCallback(OnUIReload);
     }
@@ -43,10 +46,12 @@ public class TitleUIManager : MonoBehaviour
 
         hostButton = root.Q<Button>(HostButton);
         clientButton = root.Q<Button>(ClientButton);
+        exitButton = root.Q<Button>(ExitButton);
         connectingMessageLabel = root.Q<Label>(ConnectingMessageLabel);
 
         hostButton.RegisterCallback<ClickEvent>(OnClickedHostButton);
         clientButton.RegisterCallback<ClickEvent>(OnClickedClientButton);
+        exitButton.RegisterCallback<ClickEvent>(OnClickedExitButton);
     }
 
     /// <summary>
@@ -71,6 +76,18 @@ public class TitleUIManager : MonoBehaviour
         {
             OnFailedConnection();
         }
+    }
+
+    /// <summary>
+    /// ゲーム終了ボタンを押したときの処理
+    /// </summary>
+    void OnClickedExitButton(ClickEvent evt)
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 
     /// <summary>

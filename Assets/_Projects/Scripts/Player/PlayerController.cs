@@ -33,9 +33,10 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-        
+
         if (IsOwner && playerHealth.CurrentHealth.Value > 0)
         {
+            playerUI.DisplayPlayerUI();
             // クライアントのマウス座標を取得し、回転に適用
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             playerRotation.HandleRotation(mousePosition);

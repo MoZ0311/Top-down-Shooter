@@ -25,9 +25,17 @@ public class ResultUIManager : NetworkBehaviour
     const string LobbyScene = "LobbyScene";
     const string Rank = "位";
 
-    void Awake()
+    void OnEnable()
     {
         resultUI.RegisterUIReloadCallback(OnUIReload);
+
+        // カーソルを表示する
+        UnityEngine.Cursor.visible = true;
+    }
+
+    void OnDisable()
+    {
+        resultUI.UnregisterUIReloadCallback(OnUIReload);
     }
 
     /// <summary>
@@ -52,7 +60,7 @@ public class ResultUIManager : NetworkBehaviour
             okButton.style.display = DisplayStyle.Flex;
 
             // 押下時のイベント登録
-            okButton.clicked += OnClickedOK;
+            okButton.RegisterCallback<ClickEvent>(OnClickedOK);
         }
 
         killCountLabel.text = playerScore.killCount.ToString();
@@ -65,23 +73,7 @@ public class ResultUIManager : NetworkBehaviour
         AudioPlayer.Instance.PlaySE("cheers");
     }
 
-    void OnEnable()
-    {
-        // カーソルを表示する
-        UnityEngine.Cursor.visible = true;
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        resultUI.UnregisterUIReloadCallback(OnUIReload);
-
-        if (IsServer)
-        {
-            okButton.clicked -= OnClickedOK;
-        }
-    }
-
-    void OnClickedOK()
+    void OnClickedOK(ClickEvent evt)
     {
         NetworkManager.Singleton.SceneManager.LoadScene(LobbyScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }

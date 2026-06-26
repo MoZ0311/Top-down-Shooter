@@ -106,13 +106,12 @@ public class PlayerRespawn : NetworkBehaviour
         model.SetActive(isActive);
         playerRigidbody.isKinematic = !isActive;
         playerCollider.enabled = isActive;
-
         trackingUI.enabled = isActive;
 
         // オーナーであれば、UIも消す
         if (IsOwner)
         {
-            playerUI.gameObject.SetActive(isActive);
+            playerUI.enabled = isActive;
         }
     }
 

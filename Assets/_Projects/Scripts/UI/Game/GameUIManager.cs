@@ -11,18 +11,20 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] int redThredhouldTime;             // タイマーを赤色にする閾値
 
     public VisualElement CrossHair { get; private set; }
+    VisualElement rootElement;
     Label timerLabel;                                   // 残り時間を表示するラベル
     int uiVersion;
     const int UnitPerMinute = 60;                       // 一分の定義(秒)
     const string Crosshair = "Crosshair";
+    const string RootElement = "RootElement";
     const string TimerLabelString = "TimerLabel";
 
-    void Awake()
+    void OnEnable()
     {
         gameUI.RegisterUIReloadCallback(OnUIReload);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         gameUI.UnregisterUIReloadCallback(OnUIReload);
     }
@@ -30,7 +32,7 @@ public class GameUIManager : MonoBehaviour
     public void SwitchUI()
     {
         overviewUI.enabled = false;
-        gameUI.enabled = true;
+        rootElement.style.display = DisplayStyle.Flex;
     }
 
     /// <summary>
@@ -45,9 +47,8 @@ public class GameUIManager : MonoBehaviour
         uiVersion = version;
 
         CrossHair = root.Q<VisualElement>(Crosshair);
+        rootElement = root.Q<VisualElement>(RootElement);
         timerLabel = root.Q<Label>(TimerLabelString);
-
-        gameUI.enabled = false;
     }
 
     /// <summary>

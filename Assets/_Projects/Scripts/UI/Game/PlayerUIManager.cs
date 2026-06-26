@@ -5,23 +5,25 @@ public class PlayerUIManager : MonoBehaviour
 {
     [SerializeField] PanelRenderer playerUI;
     [SerializeField] float displayInterval;
+    VisualElement rootElement;
+    VisualElement fill;
     Label levelLabel;
     Label operationLabel;
-    VisualElement fill;
+    const string RootElement = "RootElement";
+    const string Fill = "Fill";
     const string LevelLabel = "LevelLabel";
     const string OperationLabel = "OperationLabel";
-    const string Fill = "Fill";
     const string LevelText = "Lv.";
     const string Hidden = "hidden";
     float timer;
     int uiVersion;
 
-    void Awake()
+    void OnEnable()
     {
         playerUI.RegisterUIReloadCallback(OnUIReload);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         playerUI.UnregisterUIReloadCallback(OnUIReload);
     }
@@ -37,16 +39,22 @@ public class PlayerUIManager : MonoBehaviour
         }
         uiVersion = version;
 
+        rootElement = root.Q<VisualElement>(RootElement);
+        fill = root.Q<VisualElement>(Fill);
         levelLabel = root.Q<Label>(LevelLabel);
         operationLabel = root.Q<Label>(OperationLabel);
-        fill = root.Q<VisualElement>(Fill);
+    }
 
-        playerUI.enabled = false;
+    public void DisplayPlayerUI()
+    {
+        if (rootElement != null)
+        {
+            rootElement.style.display = DisplayStyle.Flex;
+        }
     }
 
     public void UpdateOperationLabel(bool isMoving)
     {
-        playerUI.enabled = true;
         if (isMoving)
         {
             timer = 0;

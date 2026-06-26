@@ -14,6 +14,7 @@ public class LobbyUIManager : NetworkBehaviour
     Button leaveButton;
     int uiVersion;
     const int MinPlayerToStart = 2;
+    const int MaxPlayerCount = 4;
     const string PlayerCountLabel = "PlayerCountLabel";
     const string WaitingTextLabel = "WaitingTextLabel";
     const string GameScene = "GameScene";
@@ -21,9 +22,14 @@ public class LobbyUIManager : NetworkBehaviour
     const string LeaveButton = "LeaveButton";
     readonly NetworkVariable<int> playerCount = new(0);
 
-    void Awake()
+    void OnEnable()
     {
         lobbyUI.RegisterUIReloadCallback(OnUIReload);
+    }
+
+    void OnDisable()
+    {
+        lobbyUI.UnregisterUIReloadCallback(OnUIReload);
     }
 
     /// <summary>
@@ -52,10 +58,9 @@ public class LobbyUIManager : NetworkBehaviour
 
             // ボタン表示
             startButton.style.display = DisplayStyle.Flex;
-
-            // サーバー接続後の状態でUIを更新
-            UpdatePlayerCount(0);
         }
+
+        UpdatePlayerAndUI(playerCount.Value);
     }
 
     /// <summary>
@@ -64,15 +69,20 @@ public class LobbyUIManager : NetworkBehaviour
     /// <param name="playerCount">ロビーのプレイヤー数</param>
     void UpdatePlayerAndUI(int playerCount)
     {
-        // プレイヤーの数を表示
-        playerCountLabel.text = $"ロビー:{playerCount}/4";
-
+        Debug.Log("Update Player & UI");
         lobbyPlayerManager.UpdatePlayerVisuals(playerCount);
+
+        // プレイヤーの数を表示
+        if (playerCountLabel == null)
+        {
+            return;
+        }
+        playerCountLabel.text = $"ロビー:{playerCount}/{MaxPlayerCount}";
 
         // 規定人数以上ならサーバー側でボタンを有効化
         if (IsServer)
         {
-            startButton.enabledSelf = playerCount >= MinPlayerToStart;
+            startButton.SetEnabled(playerCount >= MinPlayerToStart);
         }
     }
 
@@ -81,7 +91,10 @@ public class LobbyUIManager : NetworkBehaviour
     /// </summary>
     void UpdatePlayerCount(ulong clientID)
     {
-        playerCount.Value = NetworkManager.Singleton.ConnectedClients.Count;
+        if (IsServer)
+        {
+            playerCount.Value = NetworkManager.Singleton.ConnectedClients.Count;
+        }
     }
 
     /// <summary>
@@ -109,28 +122,36 @@ public class LobbyUIManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // 接続人数が変動したとき、UIも更新する
-        playerCount.OnValueChanged += (prevValue, newValue) => UpdatePlayerAndUI(newValue);
+        // 接続人数が変動したときのイベント登録
+        playerCount.OnValueChanged += OnPlayerCountChanged;
 
         if (IsServer)
         {
             // クライアントの接続時、離脱時にイベント登録
             NetworkManager.Singleton.OnClientConnectedCallback += UpdatePlayerCount;
             NetworkManager.Singleton.OnClientDisconnectCallback += UpdatePlayerCount;
+
+            // サーバー接続後の状態でUIを更新
+            UpdatePlayerCount(0);
         }
 
-        // 初期状態でプレイヤーのモデルだけ更新
+        // 初期状態でプレイヤーのモデルとUI更新
         lobbyPlayerManager.UpdatePlayerVisuals(playerCount.Value);
     }
 
     public override void OnNetworkDespawn()
     {
-        lobbyUI.UnregisterUIReloadCallback(OnUIReload);
-
         if (IsServer)
         {
             NetworkManager.Singleton.OnClientConnectedCallback -= UpdatePlayerCount;
             NetworkManager.Singleton.OnClientDisconnectCallback -= UpdatePlayerCount;
         }
+
+        playerCount.OnValueChanged -= OnPlayerCountChanged;
+    }
+
+    void OnPlayerCountChanged(int prevValue, int newValue)
+    {
+        UpdatePlayerAndUI(newValue);
     }
 }
