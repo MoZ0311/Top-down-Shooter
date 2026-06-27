@@ -69,7 +69,6 @@ public class LobbyUIManager : NetworkBehaviour
     /// <param name="playerCount">ロビーのプレイヤー数</param>
     void UpdatePlayerAndUI(int playerCount)
     {
-        Debug.Log("Update Player & UI");
         lobbyPlayerManager.UpdatePlayerVisuals(playerCount);
 
         // プレイヤーの数を表示

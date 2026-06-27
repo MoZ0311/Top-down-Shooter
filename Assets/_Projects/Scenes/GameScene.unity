@@ -1493,6 +1493,8 @@ MonoBehaviour:
   <OverviewCamera>k__BackingField: {fileID: 1349630476}
   <PlayerCamera>k__BackingField: {fileID: 1300532745}
   <KillCamera>k__BackingField: {fileID: 1184239919}
+  sensitivity: 0.7
+  playerFollowZoom: {fileID: 1300532747}
 --- !u!1 &658959996
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,6 +3127,7 @@ GameObject:
   - component: {fileID: 1300532743}
   - component: {fileID: 1300532745}
   - component: {fileID: 1300532744}
+  - component: {fileID: 1300532747}
   - component: {fileID: 1300532746}
   m_Layer: 0
   m_Name: PlayerCamera
@@ -3234,6 +3237,21 @@ MonoBehaviour:
     FrequencyGain: 1
     Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &1300532747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300532742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollowZoom
+  Width: 3.5
+  Damping: 0.5
+  FovRange: {x: 3, y: 60}
 --- !u!1001 &1303232321
 PrefabInstance:
   m_ObjectHideFlags: 0

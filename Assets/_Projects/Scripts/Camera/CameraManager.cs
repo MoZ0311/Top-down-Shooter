@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using System;
 
 public enum CameraMode
 {
@@ -13,10 +14,18 @@ public class CameraManager : MonoBehaviour
     // シングルトン用のインスタンス
     public static CameraManager Instance { get; private set; } = null;
 
-    [Header("Cameras")]
+    // [Header("Cameras")]
     [field:SerializeField] public CinemachineCamera OverviewCamera { get; private set;}
     [field:SerializeField] public CinemachineCamera PlayerCamera { get; private set;}
     [field:SerializeField] public CinemachineCamera KillCamera { get; private set;}
+
+    [Header("Settings")]
+    [SerializeField] float sensitivity;
+
+    [Header("Components")]
+    [SerializeField] CinemachineFollowZoom playerFollowZoom;
+
+    float initialWidth;
 
     void Awake()
     {
@@ -28,6 +37,23 @@ public class CameraManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        initialWidth = playerFollowZoom.Width;
+    }
+
+    void Update()
+    {
+        if (PlayerCamera.Follow == null)
+        {
+            return;
+        }
+        float playerScale = PlayerCamera.Follow.transform.localScale.x;
+
+        float zoomMultiplier = 1 + (playerScale - 1) * sensitivity;
+        playerFollowZoom.Width = initialWidth * zoomMultiplier;
     }
 
     public void SwitchCamera(CameraMode mode)

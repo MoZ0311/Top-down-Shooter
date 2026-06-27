@@ -39,7 +39,7 @@ public class RelayManager : MonoBehaviour
         }
         catch (RelayServiceException e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
         return null;
     }
@@ -68,7 +68,7 @@ public class RelayManager : MonoBehaviour
         }
         catch (RelayServiceException e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
         return false;
     }
