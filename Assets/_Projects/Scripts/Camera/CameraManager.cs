@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
     // シングルトン用のインスタンス
     public static CameraManager Instance { get; private set; } = null;
 
-    // [Header("Cameras")]
+    [field:Header("Cameras")]
     [field:SerializeField] public CinemachineCamera OverviewCamera { get; private set;}
     [field:SerializeField] public CinemachineCamera PlayerCamera { get; private set;}
     [field:SerializeField] public CinemachineCamera KillCamera { get; private set;}

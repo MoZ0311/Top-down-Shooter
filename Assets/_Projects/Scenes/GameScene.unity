@@ -466,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankingUIManager
   gameUI: {fileID: 220061778}
   rankingElement: {fileID: 9197481963319205126, guid: 0c5be406934de9243b50e484fbf24282, type: 3}
-  spacing: 112
+  spacing: 120
 --- !u!1931382934 &220061778
 PanelRenderer:
   m_ObjectHideFlags: 0
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   <OverviewCamera>k__BackingField: {fileID: 1349630476}
   <PlayerCamera>k__BackingField: {fileID: 1300532745}
   <KillCamera>k__BackingField: {fileID: 1184239919}
-  sensitivity: 0.7
+  sensitivity: 0.6
   playerFollowZoom: {fileID: 1300532747}
 --- !u!1 &658959996
 GameObject:
@@ -3249,8 +3249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollowZoom
-  Width: 3.5
-  Damping: 0.5
+  Width: 4
+  Damping: 1
   FovRange: {x: 3, y: 60}
 --- !u!1001 &1303232321
 PrefabInstance:

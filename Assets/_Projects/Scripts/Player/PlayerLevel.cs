@@ -9,6 +9,9 @@ public class PlayerLevel : NetworkBehaviour
     [SerializeField] float baseExp;     // Lv1→2に必要な経験値
     [SerializeField] float multiplier;  // 増加倍率 (n倍)
 
+    [Header("Components")]
+    [SerializeField] ParticleSystem growEffect;
+
     [Header("ScoreSO")]
     [SerializeField] PlayerScoreSO playerScore;
 
@@ -133,11 +136,17 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnLevelChanged(int prevValue, int newValue)
     {
-        // オーナーかつ、レベルが1より大きくなった時
-        if (IsOwner && prevValue < newValue && newValue != 1)
+        // レベルが1より大きくなった時
+        if (prevValue < newValue && newValue != 1)
         {
-            // レベルアップSEの再生
-            AudioPlayer.Instance.PlaySE("level");
+            // レベルアップエフェクトの再生
+            growEffect.Play();
+
+            // レベルアップSEの再生はオーナーのみ
+            if (IsOwner)
+            {
+                AudioPlayer.Instance.PlaySE("level");
+            }
         }
 
         // 直前の最大HPを取得
