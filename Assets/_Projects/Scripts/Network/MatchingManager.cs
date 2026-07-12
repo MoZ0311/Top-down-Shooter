@@ -2,6 +2,8 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using Unity.Services.Core;
+using Unity.Services.Authentication;
 
 public class MatchingManager : MonoBehaviour
 {
@@ -25,6 +27,28 @@ public class MatchingManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    async void Start()
+    {
+        await UnityServices.InitializeAsync();
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            // 起動時の引数に「-profile プロファイル名」が含まれていたら、そのプロファイルに切り替える
+            string[] args = System.Environment.GetCommandLineArgs();
+            for (int i = 0; i < args.Length; ++i)
+            {
+                if (args[i] == "-profile" && i + 1 < args.Length)
+                {
+                    string profileName = args[i + 1];
+                    AuthenticationService.Instance.SwitchProfile(profileName);
+                    break;
+                }
+            }
+
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
     }
 
