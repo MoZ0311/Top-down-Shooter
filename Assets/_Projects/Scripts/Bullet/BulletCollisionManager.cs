@@ -99,7 +99,7 @@ public class BulletCollisionManager : NetworkBehaviour
             direction = dir,
             moveSpeed = speed,
             damageAmount = damage,
-            lifeTime = 3.0f
+            lifeTime = 1.0f
         });
     }
 }

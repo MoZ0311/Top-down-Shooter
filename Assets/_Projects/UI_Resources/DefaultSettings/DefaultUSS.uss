@@ -9,6 +9,7 @@
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     border-color: rgba(0, 0, 0, 0.2);
+    -unity-font-definition: url("project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&guid=703d191922f74cc47ae5ea0b683c5c3d&type=3#Mamelon-3.5-Hi-Regular");
 }
 
 .button:enabled:hover {
@@ -18,12 +19,4 @@
 
 .button:enabled:active {
     scale: 0.97;
-}
-
-.score-label {
-    font-size: 80px;
-    -unity-font-definition: url("project://database/Assets/_Projects/Fonts/MoralerspaceArgon-Regular.ttf?fileID=12800000&guid=2c67d41702d10384ba1e83e54c499d95&type=3#MoralerspaceArgon-Regular");
-    flex-grow: 1;
-    -unity-text-align: upper-right;
-    margin-right: 256px;
 }

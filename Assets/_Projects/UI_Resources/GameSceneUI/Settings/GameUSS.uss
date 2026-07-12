@@ -1,0 +1,18 @@
+#OperationLabel.hidden {
+    scale: 0.7 0;
+}
+
+.ranking-container {
+    width: 304px;
+    flex-grow: 1;
+    align-self: flex-end;
+    top: 88px;
+}
+
+.ranking-element {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.ranking-element.is-local {
+    background-color: rgba(255, 179, 0, 0.8);
+}

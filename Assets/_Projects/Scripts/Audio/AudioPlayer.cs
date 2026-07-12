@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class AudioPlayer : MonoBehaviour
 {
     // シングルトン用のインスタンス
-    public static AudioPlayer Instance { get; private set; }
+    public static AudioPlayer Instance { get; private set; } = null;
 
     [Header("Audio Resources")]
     [SerializeField] AudioSO audios;

@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Projects/UI_Resources/ResultScene/ResultUSS.uss?fileID=7433441132597879392&amp;guid=24287fceac729414889044b32112c494&amp;type=3#ResultUSS"/>
     <Style src="project://database/Assets/_Projects/UI_Resources/DefaultSettings/DefaultUSS.uss?fileID=7433441132597879392&amp;guid=2abd62f70e737bb4a94f6e6c04e87a92&amp;type=3#DefaultUSS"/>
     <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement style="width: 50%; flex-direction: column-reverse;">

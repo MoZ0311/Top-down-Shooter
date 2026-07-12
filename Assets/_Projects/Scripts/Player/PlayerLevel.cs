@@ -9,6 +9,9 @@ public class PlayerLevel : NetworkBehaviour
     [SerializeField] float baseExp;     // Lv1→2に必要な経験値
     [SerializeField] float multiplier;  // 増加倍率 (n倍)
 
+    [Header("Components")]
+    [SerializeField] ParticleSystem growEffect;
+
     [Header("ScoreSO")]
     [SerializeField] PlayerScoreSO playerScore;
 
@@ -37,13 +40,6 @@ public class PlayerLevel : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // オーナーの時のみ、UI関連にアクセス
-        if (IsOwner)
-        {
-            playerUIManager.gameObject.SetActive(true);
-            playerUIManager.Initialize();
-        }
-
         currentExp.OnValueChanged += OnExpChanged;
         CurrentLevel.OnValueChanged += OnLevelChanged;
 
@@ -126,12 +122,13 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnExpChanged(int prevValue, int newValue)
     {
-        UpdatePlayerUI();
-
-        if (IsOwner && prevValue != newValue)
+        // オーナーかつ、経験値が増えた時
+        if (IsOwner && prevValue < newValue)
         {
             AudioPlayer.Instance.PlaySE("exp");
         }
+
+        UpdatePlayerUI();
     }
 
     /// <summary>
@@ -139,9 +136,17 @@ public class PlayerLevel : NetworkBehaviour
     /// </summary>
     void OnLevelChanged(int prevValue, int newValue)
     {
-        if (IsOwner && prevValue < newValue && newValue != 1)
+        // レベルが1より大きくなった時
+        if (prevValue < newValue && newValue != 1)
         {
-            AudioPlayer.Instance.PlaySE("level");
+            // レベルアップエフェクトの再生
+            growEffect.Play();
+
+            // レベルアップSEの再生はオーナーのみ
+            if (IsOwner)
+            {
+                AudioPlayer.Instance.PlaySE("level");
+            }
         }
 
         // 直前の最大HPを取得
@@ -158,6 +163,9 @@ public class PlayerLevel : NetworkBehaviour
 
             // 増加分を負のダメージ(回復)として与える
             playerHealth.TakeDamage(-diff);
+
+            // レベル変動時の各種処理
+            RankingManager.Instance.UpdateRankingServer();
         }
 
         if (IsOwner)

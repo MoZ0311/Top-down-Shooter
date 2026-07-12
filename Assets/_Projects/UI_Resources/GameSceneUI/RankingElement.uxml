@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Projects/UI_Resources/GameSceneUI/Settings/GameUSS.uss?fileID=7433441132597879392&amp;guid=8639a1f6b30c03b449cef06adee4156b&amp;type=3#GameUSS"/>
+    <ui:VisualElement class="ranking-container">
+        <ui:VisualElement name="RankingElement" class="ranking-element" style="width: 100%; height: 104px; position: absolute; transition-property: top; transition-duration: 0.3s; transition-timing-function: ease-in-out; flex-direction: row; justify-content: space-between; align-items: stretch; border-top-left-radius: 52px; border-bottom-left-radius: 52px; padding-top: 0; padding-right: 16px; padding-bottom: 0; padding-left: 0; top: 0;">
+            <ui:VisualElement name="CharacterIcon" style="background-image: url(&quot;project://database/Assets/_Projects/Images/icon_hunter.png?fileID=2800000&amp;guid=7eb1f80a998f9d24588e3a7e1a6be34d&amp;type=3#icon_hunter&quot;); margin-left: 0; flex-grow: 1; aspect-ratio: 1; background-size: 180% 180%;"/>
+            <ui:Label text="Lv.9" name="LevelLabel" style="color: rgb(255, 255, 255); -unity-text-align: middle-right; font-size: 72px; -unity-font-definition: url(&quot;project://database/Assets/_Projects/Fonts/Mamelon-3.5-Hi-Regular.otf?fileID=12800000&amp;guid=703d191922f74cc47ae5ea0b683c5c3d&amp;type=3#Mamelon-3.5-Hi-Regular&quot;); -unity-font-style: normal; margin-right: 24px;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

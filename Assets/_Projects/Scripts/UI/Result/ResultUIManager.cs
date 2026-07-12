@@ -5,7 +5,7 @@ using Unity.Netcode;
 public class ResultUIManager : NetworkBehaviour
 {
     [Header("Components")]
-    [SerializeField] UIDocument resultUI;
+    [SerializeField] PanelRenderer resultUI;
 
     [Header("Ref Score")]
     [SerializeField] PlayerScoreSO playerScore;
@@ -27,11 +27,22 @@ public class ResultUIManager : NetworkBehaviour
 
     void OnEnable()
     {
+        resultUI.RegisterUIReloadCallback(OnUIReload);
+
         // カーソルを表示する
         UnityEngine.Cursor.visible = true;
+    }
 
-        // 各UI要素の取得
-        var root = resultUI.rootVisualElement;
+    void OnDisable()
+    {
+        resultUI.UnregisterUIReloadCallback(OnUIReload);
+    }
+
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
         killCountLabel = root.Q<Label>(KillCountLabel);
         deathCountLabel = root.Q<Label>(DeathCountLabel);
         maxLevelLabel = root.Q<Label>(MaxLevelLabel);
@@ -39,10 +50,7 @@ public class ResultUIManager : NetworkBehaviour
         rankLabel = root.Q<Label>(RankLabel);
         waitingTextLabel = root.Q<Label>(WaitingTextLabel);
         okButton = root.Q<Button>();
-    }
 
-    public override void OnNetworkSpawn()
-    {
         if (IsServer)
         {
             // 待ちテキストを非表示
@@ -52,7 +60,7 @@ public class ResultUIManager : NetworkBehaviour
             okButton.style.display = DisplayStyle.Flex;
 
             // 押下時のイベント登録
-            okButton.clicked += OnClickedOK;
+            okButton.RegisterCallback<ClickEvent>(OnClickedOK);
         }
 
         killCountLabel.text = playerScore.killCount.ToString();
@@ -65,15 +73,7 @@ public class ResultUIManager : NetworkBehaviour
         AudioPlayer.Instance.PlaySE("cheers");
     }
 
-    public override void OnNetworkDespawn()
-    {
-        if (IsServer)
-        {
-            okButton.clicked -= OnClickedOK;
-        }
-    }
-
-    void OnClickedOK()
+    void OnClickedOK(ClickEvent evt)
     {
         NetworkManager.Singleton.SceneManager.LoadScene(LobbyScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }

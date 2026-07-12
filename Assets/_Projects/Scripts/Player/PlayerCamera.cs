@@ -1,10 +1,8 @@
 using UnityEngine;
-using Unity.Cinemachine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public static Camera MainCamera { get; private set; }
-    CinemachineCamera playerCamera;
+    public static Camera MainCamera { get; private set; } = null;
 
     /// <summary>
     /// Cinemachineカメラが自身を追従するように設定
@@ -14,10 +12,7 @@ public class PlayerCamera : MonoBehaviour
         // メインカメラの検索
         MainCamera = Camera.main;
 
-        // コンポーネント取得
-        playerCamera = FindAnyObjectByType<CinemachineCamera>();
-
         // 追従させる
-        playerCamera.Follow = transform;
+        CameraManager.Instance.PlayerCamera.Follow = transform;
     }
 }

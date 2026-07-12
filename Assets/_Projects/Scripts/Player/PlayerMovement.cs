@@ -9,6 +9,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody playerRigidbody;
     Vector3 playerVelocity;
 
+    public bool IsMoving
+    {
+        get => playerVelocity != Vector3.zero;
+    }
+
     public void HandleMovement(Vector2 inputAxis)
     {
         // 入力がなければ、早期return
@@ -37,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void ApplyMovement()
     {
-        playerRigidbody.linearVelocity = new(playerVelocity.x, playerRigidbody.linearVelocity.y, playerVelocity.z);
+        if (!playerRigidbody.isKinematic)
+        {
+            playerRigidbody.linearVelocity = new(playerVelocity.x, playerRigidbody.linearVelocity.y, playerVelocity.z);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerRotation playerRotation;
     [SerializeField] PlayerShoot playerShot;
+    [SerializeField] PlayerUIManager playerUI;
 
     Vector2 inputAxis;
 
@@ -28,8 +29,14 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
+        if (GameManager.Instance == null || !GameManager.Instance.CanPlayingGame)
+        {
+            return;
+        }
+
         if (IsOwner && playerHealth.CurrentHealth.Value > 0)
         {
+            playerUI.DisplayPlayerUI();
             // クライアントのマウス座標を取得し、回転に適用
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             playerRotation.HandleRotation(mousePosition);
@@ -42,6 +49,10 @@ public class PlayerController : NetworkBehaviour
 
             // 射撃制御
             playerShot.HandleShoot();
+
+            // UI制御
+            bool isOperating = playerMovement.IsMoving || playerShot.IsShooting;
+            playerUI.UpdateOperationLabel(isOperating);
         }
     }
 

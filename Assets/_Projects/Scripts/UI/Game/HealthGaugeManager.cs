@@ -3,11 +3,32 @@ using UnityEngine.UIElements;
 
 public class HealthGaugeManager : MonoBehaviour
 {
-    [SerializeField] UIDocument trackingUI;
+    [SerializeField] PanelRenderer trackingUI;
     [SerializeField] PlayerHealth playerHealth;
     VisualElement fill;
     Label healthLabel;
     const string Fill = "Fill";
+
+    void OnEnable()
+    {
+        trackingUI.RegisterUIReloadCallback(OnUIReload);
+        playerHealth.CurrentHealth.OnValueChanged += OnHealthChanged;
+    }
+
+    void OnDisable()
+    {
+        trackingUI.UnregisterUIReloadCallback(OnUIReload);
+        playerHealth.CurrentHealth.OnValueChanged -= OnHealthChanged;
+    }
+
+    /// <summary>
+    /// UIを再構成するコールバック
+    /// </summary>
+    void OnUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+    {
+        fill = root.Q<VisualElement>(Fill);
+        healthLabel = root.Q<Label>();
+    }
 
     void OnHealthChanged(float prevValue, float newValue)
     {
@@ -16,22 +37,8 @@ public class HealthGaugeManager : MonoBehaviour
 
     void UpdateHealthGauge(float currentHealth)
     {
+        if (fill == null || healthLabel == null) return;
         fill.style.flexGrow = currentHealth / playerHealth.MaxHealth;
         healthLabel.text = currentHealth.ToString();
-    }
-
-    void OnEnable()
-    {
-        // UI要素を検索/取得
-        var root = trackingUI.rootVisualElement;
-        fill = root.Q<VisualElement>(Fill);
-        healthLabel = root.Q<Label>();
-
-        playerHealth.CurrentHealth.OnValueChanged += OnHealthChanged;
-    }
-
-    void OnDisable()
-    {
-        playerHealth.CurrentHealth.OnValueChanged -= OnHealthChanged;
     }
 }

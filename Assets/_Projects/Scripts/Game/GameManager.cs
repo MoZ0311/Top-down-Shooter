@@ -12,8 +12,17 @@ public class GameManager : NetworkBehaviour
     [SerializeField] NetworkObject playerPrefab;                    // プレイヤーとして生成されるプレハブ
 
     [Header("Settings")]
+    [Min(0)][SerializeField] float openingDuration;                 // 開始時の演出の時間
     [SerializeField] Transform[] spawnPositions = new Transform[4]; // スポーン位置
     public Transform[] SpawnPositions => spawnPositions;
+
+    [Header("Scripts")]
+    [SerializeField] GameTimer gameTimer;
+    [SerializeField] GameUIManager gameUIManager;
+
+    public bool CanPlayingGame { get; private set; }                // プレイヤーが操作できるか
+
+    const string ResultScene = "ResultScene";
 
     void Awake()
     {
@@ -26,6 +35,8 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+
+        CanPlayingGame = false;
     }
 
     public override void OnNetworkSpawn()
@@ -36,6 +47,8 @@ public class GameManager : NetworkBehaviour
             // シーン遷移後のイベント追加
             NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
         }
+
+        Invoke(nameof(StartGame), openingDuration);
     }
 
     public override void OnNetworkDespawn()
@@ -67,7 +80,40 @@ public class GameManager : NetworkBehaviour
     {
         int index = (int)clientID % spawnPositions.Length;
         Vector3 spawnPosition = spawnPositions[index].position;
-        NetworkObject playerObject = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        playerObject.SpawnAsPlayerObject(clientID);
+        Instantiate(playerPrefab, spawnPosition, Quaternion.identity).SpawnAsPlayerObject(clientID);
+    }
+
+    /// <summary>
+    /// ゲームの開始処理
+    /// </summary>
+    public void StartGame()
+    {
+        gameUIManager.SwitchUI();
+        CameraManager.Instance.SwitchCamera(CameraMode.Player);
+        gameTimer.StartCountdown();
+
+        if (IsServer)
+        {
+            RankingManager.Instance.UpdateRankingServer();
+        }
+
+        // 操作可能フラグを立てる
+        CanPlayingGame = true;
+    }
+
+    /// <summary>
+    /// ゲームの終了処理
+    /// </summary>
+    public void FinishGame()
+    {
+        // 操作可能フラグを折る
+        CanPlayingGame = false;
+
+        // サーバー側からシーン遷移を行う
+        if (IsServer)
+        {
+            RankingManager.Instance.UpdateRankingServer();
+            NetworkManager.Singleton.SceneManager.LoadScene(ResultScene, LoadSceneMode.Single);
+        }
     }
 }

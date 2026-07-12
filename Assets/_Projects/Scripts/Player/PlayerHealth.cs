@@ -12,8 +12,12 @@ public class PlayerHealth : NetworkBehaviour
     [Header("Scripts")]
     [SerializeField] PlayerRespawn playerRespawn;
 
+    DamageEffect damageEffect;
+
     public float MaxHealth => status.Health;
     public NetworkVariable<float> CurrentHealth { get; } = new();
+
+    const ulong InvalidID = ulong.MaxValue;
 
     public override void OnNetworkSpawn()
     {
@@ -22,12 +26,17 @@ public class PlayerHealth : NetworkBehaviour
             CurrentHealth.Value = status.Health;
         }
 
-        CurrentHealth.OnValueChanged += PlayDamageSE;
+        if (FindAnyObjectByType<DamageEffect>().TryGetComponent(out DamageEffect component))
+        {
+            damageEffect = component;
+        }
+
+        CurrentHealth.OnValueChanged += PlayDamageEffect;
     }
 
     public override void OnNetworkDespawn()
     {
-        CurrentHealth.OnValueChanged -= PlayDamageSE;
+        CurrentHealth.OnValueChanged -= PlayDamageEffect;
     }
 
     /// <summary>
@@ -35,8 +44,19 @@ public class PlayerHealth : NetworkBehaviour
     /// </summary>
     /// <param name="damageAmount">ダメージ量</param>
     /// <param name="attackerID">弾の発射主のID</param>
-    public void TakeDamage(float damageAmount, ulong attackerID = 0)
+    public void TakeDamage(float damageAmount, ulong attackerID = InvalidID)
     {
+        // 念のため、ダメージ変動をサーバーでのみ行うことを保証
+        if (!IsServer)
+        {
+            return;
+        }
+
+        if (CurrentHealth.Value <= 0)
+        {
+            return;
+        }
+
         // HPを0以上最大値以下で変動させる
         CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value - damageAmount, 0, MaxHealth);
 
@@ -46,8 +66,11 @@ public class PlayerHealth : NetworkBehaviour
             // 自身のデス数を増やす
             score.deathCount.Value++;
 
+            // 攻撃者のオブジェクトID
+            ulong attackerNetworkObjectId = default;
+
             // 弾に渡されたIDを使って、攻撃者を検索
-            if (NetworkManager.Singleton.ConnectedClients.TryGetValue(attackerID, out var client))
+            if (attackerID != InvalidID && NetworkManager.Singleton.ConnectedClients.TryGetValue(attackerID, out var client))
             {
                 // 攻撃者のスコアにアクセス
                 if (client.PlayerObject.TryGetComponent(out PlayerScore attackerScore))
@@ -55,17 +78,61 @@ public class PlayerHealth : NetworkBehaviour
                     // 攻撃者のキル数を増やす
                     attackerScore.killCount.Value++;
                 }
+
+                // 攻撃者のNetworkObjectにアクセス
+                if (client.PlayerObject.TryGetComponent(out NetworkObject networkObject))
+                {
+                    attackerNetworkObjectId = networkObject.NetworkObjectId;
+                }
             }
+            SwitchKillCameraClientRpc(attackerNetworkObjectId);
             StartCoroutine(playerRespawn.RespawnSequence());
         }
     }
 
-    void PlayDamageSE(float prevValue, float newValue)
+    /// <summary>
+    /// リスポーン時に、最大体力に戻す処理
+    /// </summary>
+    public void RestoreHealth()
     {
-        // HPが減っている(ダメージ0含む)場合、SE再生
-        if (newValue <= prevValue)
+        if (!IsServer)
         {
-            AudioPlayer.Instance.PlaySE("hit");
+            return;
+        }
+
+        CurrentHealth.Value = MaxHealth;
+    }
+
+    /// <summary>
+    /// 死亡したプレイヤーの画面でのみ実行されるキルカメラ演出
+    /// </summary>
+    [ClientRpc]
+    void SwitchKillCameraClientRpc(ulong killerID)
+    {
+        if (!IsOwner)
+        {
+            return;
+        }
+
+        if (killerID == default)
+        {
+            Debug.LogError("不明なIDに撃破されました");
+            return;
+        }
+
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(killerID, out var netObj))
+        {
+            CameraManager.Instance.KillCamera.Follow = netObj.transform;
+        }
+        CameraManager.Instance.SwitchCamera(CameraMode.Kill);
+    }
+
+    void PlayDamageEffect(float prevValue, float newValue)
+    {
+        // オーナーかつHPが減っている場合、エフェクト再生
+        if (IsOwner && newValue < prevValue)
+        {
+            damageEffect.PlayDamageEffect();
         }
     }
 }
